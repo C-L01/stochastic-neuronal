@@ -1,7 +1,67 @@
 {
     // LaTeX Workshop Settings
     "latex-workshop.formatting.latex": "tex-fmt",
-    "latex-workshop.latex.outDir": "%DIR_W32%\\temp",
+    "latex-workshop.latex.outDir": "%DIR%/temp",
+    "latex-workshop.intellisense.citation.backend": "biblatex",
+
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex -> biber -> pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "biber",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xelatex -> biber -> xelatex*2",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ".//;./tex//;"
+            }
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ".//;./tex//;"
+            }
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "--output-directory=%OUTDIR%",
+                "%DOCFILE%"
+            ]
+        }
+    ],
 
     // LaTeX-specific Editor Settings
     "[latex]": {
