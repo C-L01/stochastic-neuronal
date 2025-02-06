@@ -1,0 +1,208 @@
+\ProvidesPackage{macros}
+
+\RequirePackage{amsmath,amssymb,amsthm,mathtools,bbm}
+
+%%% Renew commands
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall \,}
+
+\let\oldexist\exists
+\renewcommand{\exists}{\oldexist \,}
+
+\newcommand\existu{\oldexist! \,}
+
+\newcommand{\eps}{\varepsilon}
+\let\oldepsilon\epsilon
+\renewcommand{\epsilon}{\eps}    % varepsilon looks better imo
+
+
+%%%%%%%%%%% New macros %%%%%%%%%%%
+
+% Delimiters
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\Enorm{\lvert}{\rvert}       % Euclidean norm, which is sometimes ||.||_2 and sometimes |.|
+% \DeclarePairedDelimiterXPP\Enorm[1]{}\lVert\rVert{_2}{#1}       % Euclidean norm, which is sometimes ||.||_2 and sometimes |.|
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\br{\lparen}{\rparen}
+\DeclarePairedDelimiter\sbr{[}{]}
+\DeclarePairedDelimiter\cbr{\{}{\}}
+\DeclarePairedDelimiter\abr{\langle}{\rangle}
+
+\newcommand{\eqdef}{\overset{\mathrm{def}}{=}}
+
+\renewcommand{\iff}{\Longleftrightarrow}
+
+\newcommand*{\ul}[1]{\mkern%
+1.5mu\underline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand*{\ol}[1]{\mkern%
+1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand*{\bm}[1]{\mathbf{#1}}
+
+\newcommand*{\diff}{\mathop{}\!d}        % differential
+
+
+%%% Letters %%%
+
+% Blackboard
+\newcommand*{\bN}{\mathbb{N}}             % natural numbers
+\newcommand*{\bZ}{\mathbb{Z}}             % integers
+\newcommand*{\bQ}{\mathbb{Q}}             % rationals
+\newcommand*{\bR}{\mathbb{R}}             % reals
+\newcommand*{\bC}{\mathbb{C}}             % complex numbers
+\newcommand*{\bP}{\mathbb{P}}             % probability measure
+
+% Calligraphic
+\newcommand*{\cF}{\mathcal{F}}           % common sigma algebra
+\newcommand*{\cG}{\mathcal{G}}           % common sigma algebra
+\newcommand*{\cB}{\mathcal{B}}           % Borel sigma algebra
+\newcommand*{\cT}{\mathcal{T}}
+\newcommand*{\cN}{\mathcal{N}}
+\newcommand*{\cS}{\mathcal{S}}
+\newcommand*{\cX}{\mathcal{X}}
+\newcommand*{\cP}{\mathcal{P}}
+\newcommand*{\cK}{\mathcal{K}}
+\newcommand*{\cD}{\mathcal{D}}
+\newcommand*{\cJ}{\mathcal{J}}
+
+% Mathscript
+\newcommand{\msP}{\mathscr{P}}
+
+% Shortcuts
+\newcommand{\Sob}{W^{1,p}(\Omega)}       % shortcut for standard Sobolev space
+\newcommand\lawmu{m}                     % the law of the empirical measure mu
+\newcommand\potspace{\bR}                % the space in which the potentials live
+\newcommand\jtarg{J}                     % the jump target
+
+
+\newcommand*{\iid}{\overset{\mathclap{\tiny\mbox{i.i.d.}}}{\:\sim\:}}
+\newcommand{\inprod}[2]{\abr{#1, #2}}
+
+% Operators
+\DeclareMathOperator{\sgn}{sgn}         % sign function
+\DeclareMathOperator{\card}{card}       % cardinality of sets
+\DeclareMathOperator{\dist}{dist}       % distance function
+\DeclareMathOperator{\graph}{graph}     % graph of function
+\DeclareMathOperator{\epi}{epi}         % epigraph of function
+\DeclareMathOperator{\lsc}{lsc}         % l.s.c. envelope
+\DeclareMathOperator{\Int}{Int}         % interior of set
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator{\1}{\mathbbm{1}}       % indicator function
+\DeclareMathOperator{\Id}{Id}               % identity operator
+\DeclareMathOperator{\lspan}{span}          % linear span
+\DeclareMathOperator{\supp}{supp}           % support
+\DeclareMathOperator{\BLin}{\mathscr{B}}    % bounded linear map
+\DeclareMathOperator{\Range}{\mathscr{R}}   % range
+\DeclareMathOperator{\Null}{\mathscr{N}}    % null space
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\Tr}{Tr}                   % trace operator
+\DeclareMathOperator{\diam}{diam}               % diameter
+\DeclareMathOperator{\dcup}{\mathbin{\dot{\cup}}} % disjoint union
+
+% Trigonometric functions
+\DeclareMathOperator*{\arsinh}{arsinh}
+
+% Weak convergence
+\newcommand{\wto}{\rightharpoonup}
+\newcommand{\wsto}{\overset{w^{*}}{\wto}}
+
+%% Probability Distributions
+\DeclareMathOperator{\Bern}{Bern}
+\DeclareMathOperator{\Binom}{Binom}
+\DeclareMathOperator{\Poi}{Poi}
+\DeclareMathOperator{\Unif}{Unif}
+\DeclareMathOperator{\ExpDistr}{Exp}
+
+%% Delimiters
+% Taken from the mathtools package documentation
+\newcommand\SetSymbol[1][]{%
+\nonscript\:#1\vert
+\allowbreak
+\nonscript\:
+\mathopen{}}    % can be useful to refer to this outside \Set
+\providecommand\given{}
+\DeclarePairedDelimiterX\Set[1]\{\}{%
+\renewcommand\given{\SetSymbol[\delimsize]}
+#1
+}
+
+\DeclarePairedDelimiter\Card\lvert\rvert        % set cardinality
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						     Probability, Expectation, Variance   		                	      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\Probio}[1]{\mathbb{P}\left(#1 \thickspace \mathrm{i.o.}\right)}	%	Probability of argument happening infinitely often, argument is event
+
+\providecommand\given{}
+
+\DeclarePairedDelimiterXPP\Prob[1]{\mathbb{P}}(){}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#1}
+
+\DeclarePairedDelimiterXPP\Exp[2]{\mathbb{E}_{#1}}(){}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#2}
+
+\DeclarePairedDelimiterXPP\Var[2]{\operatorname{Var}_{#1}}(){}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									  Probabilistic limits and equalities				      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\plim}{\overset{\bbP}{\rightarrow}}			%	Convergence in probability
+\newcommand{\dlim}{\overset{d}{\rightarrow}}				%	Convergence in distribution
+\newcommand{\aslim}{\overset{\mathrm{a.s.}}{\rightarrow}}	%	Almost sure convergence
+\newcommand{\llim}{\overset{L^1}{\rightarrow}}			%	L1 convergence
+
+\newcommand{\deq}{\stackrel{d}{=}}				%	Equality in distribution
+
+\newcommand{\dtv}[2]{d_\mathrm{TV}\left(#1,#2\right)}  % Total variation distance
+\newcommand{\relentropy}[2]{\mathscr{H}\left(#1\mid#2\right)}  % Relative entropy
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									    	Indicators  									      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ind}[1]{\mathbbm{1}_{\left\{#1\right\}}}	%	Command for indicator where argument is a condition
+\newcommand{\indE}[1]{\mathbbm{1}_{#1}}					%	Command for indicator where the argument is an event 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									  Asymptotic relations 									      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bigO}[1]{O\left(#1\right)}				%	Big O notation
+\newcommand{\smallO}[1]{o\left(#1\right)}			%	Small o notation
+\newcommand{\bigT}[1]{\Theta\left(#1\right)}		%	Theta notation
+
+
+%%% Theorems
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]    % numbered by section
+% \newtheorem{assumption}[definition]{Assumption} % same count as definition
+% \newtheorem{notation}[definition]{Notation}     % same count as definition
+\newtheorem{example}{Example}[section]          % numbered by section
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]         % numbered by section
+\newtheorem{corollary}{Corollary}[theorem]     % numbered by theorem
+\newtheorem{proposition}{Proposition}[section] % same count as theorem
+\newtheorem{lemma}{Lemma}[section]             % same count as theorem
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]           % numbered by section
+
+% Tell zref-clever how to reference these
+% \AddToHook{env/lemma/begin}{%
+% \zcsetup{countertype={lemma=theorem}}}

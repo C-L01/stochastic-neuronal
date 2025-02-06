@@ -1,0 +1,32 @@
+%%% Old MP-solution construction that fails because generator maps to B(R^N) instead of C_0(R^N)
+
+\begin{definition}
+    An operator $L$ on (a subset of) $C_0(\potspace^N)$ is said to satisfy the \textit{positive maximum principle} if for all $\varphi \in D(L)$, $\hat{\bm{x}} \in \potspace^N$ with $\sup_{\bm{x}\in\potspace^N} \varphi(\bm{x}) = \varphi(\hat{\bm{x}}) \geq 0$ we have $L \varphi(\hat{\bm{x}}) \leq 0$.
+\end{definition}
+
+\begin{lemma}\label{lem:pos-max}
+    For any $\lambda > 0$, $N \in \bN$, the linear operator $L^{\lambda, N}$ satisfies the positive maximum principle.
+\end{lemma}
+\begin{proof}
+    Because $D_L \subset C^1(\potspace^N)$, $\varphi(\hat{\bm{x}}) = \sup_{\bm{x}\in\potspace^N} \varphi(\bm{x})$ implies that $\partial_{x^i} \varphi(\hat{\bm{x}}) = 0$ for all $i\in\{1,\dots,N\}$.
+    Therefore,
+    \begin{equation}
+        L^{\lambda, N}\varphi (\hat{\bm{x}}) = \int_{\potspace^N} \underbrace{\br{\varphi(\bm{y}) - \varphi(\hat{\bm{x}})}}_{\leq 0} \lambda \kappa(\hat{\bm{x}}, \odif{\bm{y}})
+        \leq 0.
+    \end{equation}
+\end{proof}
+
+\bigskip
+
+\begin{theorem}\label{thm:mart-problem-sol}
+Let $\lambda > 0$, $N \in \bN$, and let $\nu \in \cP(\potspace^N)$ be an initial condition.
+Then the martingale problem for $(L^{\lambda, N}, \nu)$ has a solution. That means that there exists a a probability measure $P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])$ such that for the stochastic process $D_{\potspace^N}[0,T] \ni \omega \mapsto \bm{X}(t,\omega) \coloneqq \omega_t$ defined on $(D_{\potspace^N}[0,T], \cF \coloneqq \mathscr{S}_{\potspace^N}, P^{\lambda, N})$ and each $\varphi \in D(L^{\lambda, N})$,
+\begin{equation}\label{eq:M-def}
+    M_t^{\lambda, N}[\varphi]
+    \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}
+\end{equation}
+is a martingale w.r.t. the filtration $\cF_t \coloneqq \cF_t^\bm{X}$.
+\end{theorem}
+\begin{proof}
+    Because $D(L^{\lambda, N}) = C^1(\potspace^N) \cap C_0(\potspace^N)$ is dense in $C_0(\potspace^N)$ under the uniform norm, and $L^{\lambda, N}$ satisfies the assumptions of Theorem 3.8 (EK), this follows from \zcref{lem:pos-max} combined with Theorem 5.4 (EK) and the remark below it.
+\end{proof}

@@ -1,0 +1,48 @@
+\usepackage[utf8]{inputenc}
+
+\usepackage[english]{babel}
+\usepackage[shortlabels]{enumitem}
+\usepackage[margin=1.8cm,a4paper]{geometry}
+
+\usepackage[T1]{fontenc}        % for certain special characters
+\frenchspacing                  % to avoid longer spaces after periods, which looks weird with abbreviations
+\usepackage{mathrsfs}           % adds Raph Smith's Formal Script font (\mathscr)
+
+\usepackage[official]{eurosym}
+
+\usepackage{listings,minted}
+\usepackage[breakable]{tcolorbox}
+\usepackage{xcolor,graphicx,float,csquotes,subcaption}
+\usepackage{amsmath,amsthm,amssymb,esint,mathtools,stmaryrd}
+
+\mathtoolsset{showonlyrefs=true,showmanualtags=true}  % number equations only if referenced with eqref (not ref!) in text
+
+\usepackage{aligned-overset}    % to properly use \overset in align environments, write \overset{thing-to-be-overset}&{= or similar}
+
+\usepackage{mleftright}         % prevent unwanted spacing when using \left\right
+\mleftright                     % overwrite \left and \right with \mleft and \mright respectively, can be undone with \mleftrightrestore (possibly locally in a group)
+
+\usepackage[upright=false]{derivative}    % for shortcut (partial) derivatives
+
+
+%%% Bibliography
+\usepackage[
+backend=biber,
+style=numeric,
+url=false
+]{biblatex}
+\addbibresource{references.bib}
+
+%%% Referencing packages
+\usepackage[% pagebackref=true,                 % incompatible with biblatex
+            colorlinks=true,
+            linkcolor=gray,
+            bookmarks=true,
+            filecolor=gray,
+            urlcolor=gray,
+            citecolor=gray
+           ]{hyperref} % Make links clickable and generate bookmarks (so you can easily click through in acroread)
+
+\usepackage{zref-clever}                        % zref-clever > cleveref > autoref (ordered by my preference)
+\zcsetup{typeset=both,nosort,comp,cap,nameinlink=false}
+\zcRefTypeSetup{equation}{Name-sg=,name-sg=}    % remove the name from the typeref for equations

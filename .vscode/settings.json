@@ -1,0 +1,16 @@
+{
+    // LaTeX Workshop Settings
+    "latex-workshop.formatting.latex": "tex-fmt",
+    "latex-workshop.latex.outDir": "%DIR_W32%\\temp",
+
+    // LaTeX-specific Editor Settings
+    "[latex]": {
+        "editor.formatOnSave": true,                // Auto-formats when saving
+        "editor.defaultFormatter": "James-Yu.latex-workshop",
+        "editor.detectIndentation": false,          // Disables auto-indent detection
+        "editor.insertSpaces": true,                // Uses spaces instead of tabs
+        "editor.tabSize": 2,                        // Sets tab width to 2
+        "editor.wordWrap": "bounded",               // Wraps text
+        "editor.wordWrapColumn": 92                 // Wraps text at column 92
+    },
+}
