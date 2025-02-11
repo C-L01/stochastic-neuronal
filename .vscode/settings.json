@@ -1,9 +1,10 @@
 {
     // LaTeX Workshop Settings
-    "latex-workshop.formatting.latex": "tex-fmt",
+    "latex-workshop.formatting.latex": "latexindent",
     "latex-workshop.latex.outDir": "%DIR%/temp",
     "latex-workshop.intellisense.citation.backend": "biblatex",
 
+    // LaTeX Workshop Recipes and Tools
     "latex-workshop.latex.recipes": [
         {
             "name": "pdflatex -> biber -> pdflatex*2",
@@ -36,7 +37,7 @@
                 "%DOC%"
             ],
             "env": {
-                "TEXINPUTS": ".//;./tex//;"
+                "TEXINPUTS": "./tex//;"
             }
         },
         {
@@ -50,7 +51,7 @@
                 "%DOC%"
             ],
             "env": {
-                "TEXINPUTS": ".//;./tex//;"
+                "TEXINPUTS": "./tex//;"
             }
         },
         {
