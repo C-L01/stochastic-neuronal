@@ -1,0 +1,120 @@
+\section{Connection to empirical measure}
+
+\noindent For \(\psi \in C^1(\potspace)\), we now define
+\begin{equation}\label{eq:hat-M-derivation-start}
+  \begin{split}
+    \widehat{M}_t^{\lambda, N}[\psi] \coloneqq
+    M_t^{\lambda, N}\sbr*{\frac{1}{N} \bigoplus_{i=1}^N \psi}
+     & = \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) - \int_0^t L^{\lambda, N} \br*{\frac{1}{N}\bigoplus_{i=1}^N \psi} (\bm{X}_r) \odif{r} \\
+     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
+    - \int_0^t \sum_{i=1}^N b(X_{r}^i) \cdot \frac{1}{N} \partial_{x} \psi(X_{r}^i) \odif{r}                                                                               \\
+    % &\quad - \int_0^t \sum_{i=1}^N \int_\potspace \frac{1}{N} \br*{ \psi(y) + \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r}^j) - \sum_{j=1}^N \psi(X_{r}^j) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) \odif{r} \\
+     & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
+     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
+    - \int_0^t \int_\potspace b(x) \partial_{x} \psi(x) \mu_r^{\lambda, N}(\odif{x}) \odif{r}                                                                              \\
+     & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
+    %
+    % &= \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) \\
+    % &\quad - \int_0^t \frac{1}{N} \sum_{i=1}^N \br*{ b(X_{r}^i) \partial_{x} \psi(X_{r}^i) - \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) } \odif{r}
+  \end{split}
+\end{equation}
+Here we used the empirical measure $\mu^{\lambda,N}$, which is defined as
+\begin{equation}
+  \br{ t \mapsto \mu_t^{\lambda, N} \coloneqq \Theta_N(\bm{X})_t = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i} } \in D_{\cP(\potspace)}[0,T]
+\end{equation}
+where
+\begin{equation}
+  \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; (x_\cdot^1,\dots,x_\cdot^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x_\cdot^i}.
+\end{equation}
+If we assume $\omega^{ij} = \frac{\omega}{N}$, we get
+\begin{equation}\label{eq:kappa-to-mean-kappa}
+  \begin{split}
+    % &\frac{1}{N} \sum_{i=1}^N \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) \\
+    % &= \frac{1}{N} \sum_{i=1}^N \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \br{ \indE{[V_F,+\infty)}(X_{r}^i) \delta_{V_R}(\odif{y}) + \indE{(-\infty,V_F)}(X_{r}^i) \delta_{X_{r}^i + \sum_{j=1}^N \omega^{ij} \indE{[V_F,+\infty)}(X_{r}^j)}(\odif{y}) } \\
+    % &= \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
+    % + \br*{ \psi(X_{r}^i + \frac{1}{N} \sum_{j=1}^N \omega \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) } \\
+    % &= \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
+    % + \br*{ \psi(X_{r}^i + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) } \\
+    % &= \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
+    % + \br*{ \psi(x + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^{\lambda, N}(\odif{x}) \\
+    % &= \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) \mu_{r}^{\lambda, N}(\odif{x}).
+    %
+    % \frac{1}{N} \kappa(\bm{X}_r,\odif{\bm{y}}) &= \frac{1}{N}\sum_{i=1}^N \delta_{\bm{\jtarg}^i(\bm{X}_r)}(\odif{\bm{y}}) \\
+    % &?=? \int_\potspace \underbrace{\br*{ \indE{[V_F,+\infty)}(x) \delta_{V_R}(\odif{y^i}) + \indE{(-\infty,V_F)}(x) \delta_{x + \omega \mu_r^{\lambda, N}([V_F,+\infty))}(\odif{y^i}) }}_{\eqqcolon \ol{\kappa}_r(x, \odif{y^i})} \mu_{r}^{\lambda, N}(\odif{x})
+    %
+     & \int_{\potspace^N} \frac{1}{N} \sum_{j=1}^N \br*{ \psi(y^j) - \psi(X_{r}^j) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}})                                                                  \\
+     & = \frac{\lambda}{N} \sum_{j=1}^N \int_{\potspace^N} \br*{ \psi(y^j) - \psi(X_{r}^j) } \sum_{i=1}^N \delta_{\bm{\jtarg}^i(\bm{X}_r)}(\odif{\bm{y}})                                     \\
+     & = \frac{\lambda}{N} \sum_{j=1}^N \sum_{i=1}^N \int_{\potspace^N} \br*{ \psi(y^j) - \psi(X_{r}^j) } \delta_{\jtarg^i(\bm{X}_r)}(\odif{y^i}) \prod_{k \neq i} \delta_{X_r^k}(\odif{y^k}) \\
+     & = \frac{\lambda}{N} \sum_{j=1}^N \sum_{i=1}^N \br{ \br*{ \psi(\jtarg^i(\bm{X}_r)) - \psi(X_{r}^j) } \ind{i = j} + (0 - 0) \ind{i \neq j} }                                             \\
+     & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \psi(\jtarg^i(\bm{X}_r)) - \psi(X_{r}^j) }                                                                                                      \\
+     & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
+    + \br*{ \psi(X_{r}^i + \frac{\omega}{N} \sum_{j=1}^N \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
+     & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
+    + \br*{ \psi(x + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^{\lambda, N}(\odif{x})                                                           \\
+     & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) \mu_{r}^{\lambda, N}(\odif{x})
+  \end{split}
+\end{equation}
+for
+\begin{equation}
+  \ol{\kappa}_r(x, \odif{y}) \coloneqq \delta_{\bar{\jtarg}_r(x)}(\odif{y}),
+  \quad\text{and}\quad
+  \ol{\jtarg}_r(x) \coloneqq \begin{cases}
+    x + \omega \mu_r^{\lambda, N}([V_F,+\infty)) & \text{if } x < V_F,    \\
+    V_R                                          & \text{if } x \geq V_F.
+  \end{cases}
+\end{equation}
+Substituting this into \zcref{eq:hat-M-derivation-start} yields
+\begin{equation}
+  \begin{split}
+    \widehat{M}_t^{\lambda, N}[\psi]
+    % &= \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) - \int_0^t \frac{1}{N} \sum_{i=1}^N b(X_{r}^i) \partial_{x} \psi(X_{r}^i) \odif{r} \\
+    % &\quad - \lambda \int_0^t \frac{1}{N} \sum_{i=1}^N \sbr*{ \br*{ \psi(V_F) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
+    % + \br*{ \psi(X_{r}^i + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) } \odif{r} \\
+    % &= \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}} - \int_0^t \int_\potspace b(x) \partial_x \psi(x) \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}\\
+    % &\quad - \lambda \int_0^t \br*{ \int_{-\infty}^{V_F} \br*{ \psi(x + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(x) } \mu_{r}^{\lambda, N}(\odif{x}) + \int_{V_F}^\infty (\psi(V_F) - \psi(x)) \mu_{r}^{\lambda, N}(\odif{x}) } \\
+    %
+     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
+    - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) }}_{\eqqcolon \widehat{L}_r^{\lambda, N} [\psi](x)} \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}.
+  \end{split}
+\end{equation}
+Note that this can also be interpreted as a random variable in $\mu^{\lambda,N}$ instead of $\bm{X}$, where $\widehat{L}_r^{\lambda, N}$ also depends on the empirical measure through $\ol{\kappa}$.
+
+\bigskip
+
+The law of $(\mu_t^{\lambda, N})_{t\in[0,T]}$ is given by
+\begin{equation}
+  \lawmu^{\lambda,N} \coloneqq \Theta_N \# P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
+\end{equation}
+which is defined on the $\sigma$-algebra
+\begin{equation}
+  \widehat{\cF} \coloneqq \Theta_N \# \cF \coloneqq \{B \subseteq D_{\cP(\potspace)}[0,T] : \Theta_N^{-1}(B) \in \cF\}.
+\end{equation}
+
+\begin{corollary}\label{cor:hat-M-mart}
+  $\widehat{M}_t^{\lambda, N}[\psi]$ is a martingale on $(D_{\cP(\potspace)}[0,T], \widehat{\cF}, \lawmu^{\lambda,N})$ adapted to the filtration $\widehat{\cF}_t \coloneqq \Theta_N \# \cF_t$.
+\end{corollary}
+\begin{proof}
+  Adaptation and integrability are clear from \zcref{thm:mart-problem-sol}.
+  For $s > t$, $B \in \widehat{\cF}_t$,
+  \begin{equation}
+    \begin{split}
+      \int_B \widehat{M}_{s}^{\lambda, N}[\psi] \odif{\lawmu^{\lambda,N}}
+       & = \int_B \sbr*{ \int_\potspace \psi \odif{\nu_s} - \int_\potspace \psi \odif{\nu_0} - \int_0^s \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \nu_{r}(\odif{x}) \odif{r} } \lawmu^{\lambda,N} (\odif{\nu})                                                                          \\
+       & = \int_{\Theta_N(\Theta_N^{-1}(B))} \sbr*{ \int_\potspace \psi \odif{\nu_s} - \int_\potspace \psi \odif{\nu_0} - \int_0^s \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \nu_{r}(\odif{x}) \odif{r} } \Theta_N \# P^{\lambda, N} (\odif{\nu})                                       \\
+       & = \int_{\Theta_N^{-1}(B)} \sbr*{ \int_\potspace \psi(x) (\Theta_N(\omega))_s(\odif{x}) - \int_\potspace \psi(x) (\Theta_N(\omega))_0(\odif{x}) - \int_0^s \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) (\Theta_N(\omega))_{r}(\odif{x}) \odif{r} } P^{\lambda, N} (\odif{\omega}) \\
+       & = \int_{\Theta_N^{-1}(B)} \sbr*{ \int_\potspace \psi(x) \mu_s^{\lambda,N}(\odif{x}) - \int_\potspace \psi(x) \mu_0^{\lambda,N}(\odif{x}) - \int_0^s \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda,N}(\odif{x}) \odif{r} } \odif{P^{\lambda, N}}                   \\
+       & = \int_{\Theta_N^{-1}(B)} \widehat{M}_s^{\lambda, N}[\psi] \odif{P^{\lambda, N}}                                                                                                                                                                                                         \\
+       & = \int_{\Theta_N^{-1}(B)} \widehat{M}_t^{\lambda, N}[\psi] \odif{P^{\lambda, N}}
+      = \int_B \widehat{M}_t^{\lambda, N}[\psi] \odif{\lawmu^{\lambda,N}},
+    \end{split}
+  \end{equation}
+  which implies that
+  \begin{equation}
+    \Exp{\lawmu^{\lambda,N}}{\widehat{M}_{s}^{\lambda, N}[\psi] \given \widehat{\cF}_t} = \widehat{M}_t^{\lambda, N}[\psi].
+  \end{equation}
+\end{proof}
+
+
+If $(\mu_t^{\lambda, N})_{t\in[0,T]}$ would converge a.s. for $N\to\infty$ w.r.t. Skorokhod topology, it would follow by Proposition 5.2 (EK) that it would converge pointwise at continuity points.
+This would make $\widehat{M}_t^{\lambda, N}[\psi]$ converge too.
+But unfortunately this will not apply; at most $(\lawmu^{\lambda,N})$ will converge narrowly due to being tight.

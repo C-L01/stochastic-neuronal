@@ -27,21 +27,20 @@
 
 %%% Bibliography
 \usepackage[
-backend=biber,
-style=numeric,
-url=false
+  backend=biber,
+  style=numeric,
+  url=false
 ]{biblatex}
-\addbibresource{references.bib}
 
 %%% Referencing packages
 \usepackage[% pagebackref=true,                 % incompatible with biblatex
-            colorlinks=true,
-            linkcolor=gray,
-            bookmarks=true,
-            filecolor=gray,
-            urlcolor=gray,
-            citecolor=gray
-           ]{hyperref} % Make links clickable and generate bookmarks (so you can easily click through in acroread)
+  colorlinks=true,
+  linkcolor=gray,
+  bookmarks=true,
+  filecolor=gray,
+  urlcolor=gray,
+  citecolor=gray
+]{hyperref} % Make links clickable and generate bookmarks (so you can easily click through in acroread)
 
 \usepackage{zref-clever}                        % zref-clever > cleveref > autoref (ordered by my preference)
 \zcsetup{typeset=both,nosort,comp,cap,nameinlink=false}

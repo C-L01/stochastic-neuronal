@@ -3,6 +3,7 @@
     "latex-workshop.formatting.latex": "latexindent",
     "latex-workshop.latex.outDir": "%DIR%/temp",
     "latex-workshop.intellisense.citation.backend": "biblatex",
+    "latex-workshop.intellisense.citation.format": ["@"],
 
     // LaTeX Workshop Recipes and Tools
     "latex-workshop.latex.recipes": [

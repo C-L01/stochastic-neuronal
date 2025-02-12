@@ -1,0 +1,71 @@
+\section{Compactness for fixed \(\lambda\)}
+
+\begin{theorem}
+  For fixed $\lambda > 0$, $\Set{ \lawmu^{\lambda, N} }_{N\in\bN} \subset \cP(D_{\cP(\potspace)}[0,T])$ is relatively compact.
+  % \begin{equation}
+  %     \operatorname{Law}(\mu^{\lambda, N}) = \lawmu^{\lambda, N} \wto \bar{\lawmu} \in \mathcal{P}(D_{\mathcal{P}(\potspace)}[0,T])
+  % \end{equation}
+  % as $N\to\infty$.
+\end{theorem}
+
+\begin{proof}
+  By Prokhorov's Theorem \cite[Theorem 5.1]{billingsleyConvergenceProbabilityMeasures1999}, it suffices to show that $\Set{ \lawmu^{\lambda, N} }_{N\in\bN}$ is tight.
+  Recall that $\lawmu^{\lambda, N}$ is the law of the empirical measure process $\mu^{\lambda, N}$.
+  Because $(\cP(\potspace), \pi)$ is a (complete, separable) metric space with $\pi$ the standard Prokhorov metric that metrizes weak convergence \cite[Theorem 6.8]{billingsleyConvergenceProbabilityMeasures1999}, Corollary 21 of Kouritzin \cite{kouritzinTightnessProbabilityMeasures2015} tells us that it suffices to show that the compact containment condition (CCC) and the weak modulus of continuity condition (WMCC) hold.
+
+  To verify the CCC we have to show that
+  \begin{equation}
+    \forall \eps > 0 : \exists \cK_\eps \Subset \cP(\potspace) :
+    \inf_{N\in\bN} P^{\lambda, N} (\mu_t^{\lambda, N} \in \cK_\eps,\ 0 \leq t \leq T) \geq 1 - \eps.
+  \end{equation}
+  Let $\eps > 0$, and simply define
+  \begin{equation}
+    \cK_\eps \coloneqq \Set{ \mu_t^{\lambda, N} \given t \in [0,T],\  }
+  \end{equation}
+
+  % As $\potspace$ is compact, complete and separable, $\cP(\potspace)$ is compact w.r.t. the weak topology by Prokhorov's Theorem.
+  % Therefore, it is clear that the family of processes $\{\mu^{\lambda, N}\}_{N\in\bN} \subset \cP(\potspace)$ satisfies CCC.
+
+  \bigskip
+
+  To verify that the WMCC holds, we define the following collection of functions on $\cP(\potspace)$:
+  \begin{equation}
+    \cG \coloneqq \Set{\nu \mapsto \int_\potspace \psi \odif{\nu} \given \psi \in C^1(\potspace) \cap C_0(\potspace)}.
+  \end{equation}
+  Because we are using the topology of weak convergence on $\cP(\potspace)$, it follows from $C^1(\potspace) \cap C_0(\potspace) \subset C_b(\potspace)$ that $\cG \subset C(\cP(\potspace))$.
+  Furthermore, $\cG$ is closed under addition and it separates points (on compacts).
+
+  Let $g = g_\psi \in \cG$.
+  It now suffices to show that $\{g \circ \mu^{\lambda, N}\}_{N\in\bN}$ satisfies the asymptotic modulus of continuity condition (AMCC).
+  Let $\eta > 0$.
+  % By taking $\mathcal{J} \coloneqq \{\Id\} \subset C_b(\cP(\potspace))$, which clearly strongly separates points, in Proposition 14 b)
+  Let $N_0 \in \bN$ such that $\Exp{}{[M_T^{\lambda, N}]} < $, which is possible by \zcref{prop:vanishing-variance}, and let $N \geq N_0$.
+  Now observe that
+  \begin{equation}
+    g \circ \mu^{\lambda, N} = \int_\potspace \psi \odif{\mu^{\lambda, N}} = S^{\lambda, N} = M^{\lambda, N} - A^{\lambda, N}.
+  \end{equation}
+  It follows that for $C_\lambda^\psi \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty$ (such that $\widehat{L}^{\lambda,N}_t [\psi] (x) \leq C_\lambda^\psi$ for all $t$, $x$) and $\delta \coloneqq \frac{1}{2C_\lambda^\psi}$ and a $\delta$-sparse partition $\{t_i\}$ such that $t_i - t_{i-1} < \frac{1}{C_\lambda^\psi}$, we have
+  \begin{equation}
+    \begin{split}
+      P^{\lambda, N} (w'(g \circ \mu^{\lambda, N}, \delta) \geq \eta)
+       & \leq P^{\lambda, N}( \max_i w(M^{\lambda, N}, [t_{i-1}, t_i)) + w(A^{\lambda, N}, [t_{i-1}, t_i) \geq \eta)                                     \\
+       & \leq P^{\lambda, N}( \max_i w(M^{\lambda, N}, [t_{i-1}, t_i)) \geq \frac{\eta}{2}) + P^{\lambda, N}(w(A^{\lambda, N}, [t_{i-1}, t_i) \geq \eta)
+    \end{split}
+  \end{equation}
+
+
+  % Since for any $\psi \in C_b(\potspace)$,
+  % \begin{equation}
+  %     \sup_{N\in\bN} \Exp{}{ \sup_{t\in[0,T]} \abs{ \int_\potspace \psi \odif{\mu_t^{\lambda,N}} } } \leq \norm{\psi}_{\infty},
+  % \end{equation}
+  % it suffices to show by the Aldous-Rebolledo criterion that both the martingale part and bounded variation part of $S_t$ have tight laws.
+  % For stopping times $0 \leq S \leq S' \leq S + \delta \leq T$, we have
+  % \begin{equation}
+  %     \Exp{}{ \widehat{M}_{S'}^{\lambda,N} - \widehat{M}_{S}^{\lambda,N} }
+  %     \overset{\text{(CS)}}{\leq} \Exp{}{ \abs{ \widehat{M}_{S'}^{\lambda,N} - \widehat{M}_{S}^{\lambda,N} }^2 }^{1/2}
+  %     \leq \Exp{}{\sbr{\widehat{M}^{\lambda,N}}_{S+\delta} - \sbr{\widehat{M}^{\lambda,N}}_{S}}^{1/2}
+  %     \overset{N\to\infty}{\to} 0
+  % \end{equation}
+  % by \zcref{prop:before}.
+  % The bounded variation part $A_{S'} - A_S$ also clearly goes to zero for $\delta \downarrow 0$.
+\end{proof}
