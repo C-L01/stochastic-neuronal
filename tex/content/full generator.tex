@@ -1,22 +1,22 @@
 \section{Full generator}
 
-The full generator $L^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)$ of our model is defined as
+The full generator \(L^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) of our model is defined as
 \begin{equation}
   L^{\lambda, N} = \ol{L_{\cD}^{N}} + L_{\cJ}^{\lambda, N}.
 \end{equation}
-Here $\ol{L_{\cD}^{N}}$ is the (weak) closure of $L_{\cD}^N$.
+Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\).
 
 % By Theorem 1 from Dempster \cite{dempster_martingale_1998},\footnote{Which follows from a combination of perturbation results from \cite{ethier_markov_1985}.} we have the following result.
 
 \begin{theorem}\label{thm:mart-problem-sol}
-  Let $\lambda > 0$, $N \in \bN$, and let $\nu \in \cP(\potspace^N)$ be an initial condition.
-  Then the martingale problem for $(L^{\lambda, N}, \nu)$ has a solution%\textit{unique} solution.
-  That means that there exists a probability measure $P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])$ such that for the stochastic process $D_{\potspace^N}[0,T] \ni \omega \mapsto \bm{X}(t,\omega) \coloneqq \omega_t$ defined on $(D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})$ and each $\varphi \in M_b(\potspace^N)$,
+  Let \(\lambda > 0\), \(N \in \bN\), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
+  Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution%\textit{unique} solution.
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \omega \mapsto \bm{X}(t,\omega) \coloneqq \omega_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in M_b(\potspace^N)\),
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}
   \end{equation}
-  is a martingale w.r.t. the filtration $\Set{\cF_t^\bm{X}}_{t\geq0}$.
+  is a martingale w.r.t. the filtration \(\Set{\cF_t^\bm{X}}_{t\geq0}\).
 \end{theorem}
 
 \begin{proof}
@@ -37,7 +37,7 @@ Here $\ol{L_{\cD}^{N}}$ is the (weak) closure of $L_{\cD}^N$.
 
 % \dots
 
-% If we assume $\omega^{ij} = \omega / N$, and for $\varphi = \frac{1}{N} \bigoplus_i \psi$, the non-spike jump part simplifies to
+% If we assume \(\omega^{ij} = \omega / N\), and for \(\varphi = \frac{1}{N} \bigoplus_i \psi\), the non-spike jump part simplifies to
 % \begin{equation}
 %     \lambda \int \partial_x \psi (x) \omega \mu_r^\lambda([V_F, \infty)) \mu_r(\odif{x})
 % \end{equation}

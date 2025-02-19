@@ -1,41 +1,41 @@
 \section{Vanishing variance}
 
-Instead, we will show that the variance of $(\widehat{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}$ vanishes for large $N$, implying that it has a deterministic limit.
-In the following, we suppress the dependence on $\psi$.
+Instead, we will show that the variance of \((\widehat{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.
+In the following, we suppress the dependence on \(\psi\).
 
 \begin{proposition}\label{prop:vanishing-variance}  % could remove variance, and just show quad. var. goes to zero as that is all I need, right?
-  For all $\lambda > 0$, $t \in [0,T]$,
+  For all \(\lambda > 0\), \(t \in [0,T]\),
   \begin{equation}
     \lim_{N\to\infty} \Var{\lawmu^{\lambda,N}}{\widehat{M}_t^{\lambda,N}} = 0.
   \end{equation}
 \end{proposition}
 \begin{proof}
-  Recall that $(\widehat{M}_s^{\lambda,N})_{s\in[0,T]}$ is a martingale by \zcref{cor:hat-M-mart}.
+  Recall that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is a martingale by \zcref{cor:hat-M-mart}.
   In particular,
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{\widehat{M}_t^{\lambda,N}} = \Exp{\lawmu^{\lambda,N}}{\widehat{M}_0^{\lambda,N}}
     \overset{\zcref{eq:M-def}}{=} \Exp{\lawmu^{\lambda,N}}{0} = 0.
   \end{equation}
-  Note also that $(\widehat{M}_s^{\lambda,N})_{s\in[0,T]}$ is bounded, so in particular square integrable.
+  Note also that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded, so in particular square integrable.
   Hence the variance exists and equals the second moment.
-  We can relate the second moment to the expectation of the quadratic variation, for which we write $\sbr{\widehat{M}^{\lambda,N}}_t$, using Theorem 7.27 from \cite[201]{klebanerIntroductionStochasticCalculus2012}.
-  Namely, since $\widehat{M}_0^{\lambda,N} = 0$,
+  We can relate the second moment to the expectation of the quadratic variation, for which we write \(\sbr{\widehat{M}^{\lambda,N}}_t\), using Theorem 7.27 from \cite[201]{klebanerIntroductionStochasticCalculus2012}.
+  Namely, since \(\widehat{M}_0^{\lambda,N} = 0\),
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{(\widehat{M}_t^{\lambda,N})^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\widehat{M}^{\lambda,N}}_t}.
   \end{equation}
   % \begin{equation}
   %     (\widehat{M}_t^{\lambda,N})^2 = \abr{\widehat{M}^{\lambda,N}}_t + 2 \int_0^t \widehat{M}_{s-}^{\lambda,N} \odif{\widehat{M}_s^{\lambda,N}}
   % \end{equation}
-  % Note that $(\widehat{M}_s^{\lambda,N})_{s\in[0,T]}$ is càdlàg by \zcref{eq:M-def} and adapted, so $(\widehat{M}_{s-}^{\lambda,N})_{s\in[0,T]}$ is left-continuous and adapted.
-  % This means that it is predictable (see e.g. Definition 8.3 \cite{klebanerIntroductionStochasticCalculus2012}), so as $(\widehat{M}_s^{\lambda,N})_{s\in[0,T]}$ is bounded the stochastic integral is well-defined.
+  % Note that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is càdlàg by \zcref{eq:M-def} and adapted, so \((\widehat{M}_{s-}^{\lambda,N})_{s\in[0,T]}\) is left-continuous and adapted.
+  % This means that it is predictable (see e.g. Definition 8.3 \cite{klebanerIntroductionStochasticCalculus2012}), so as \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded the stochastic integral is well-defined.
 
   Now denote
   \begin{equation}\label{eq:M=S-A}
     \widehat{M}_t^{\lambda,N} = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}} - \int_0^t \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}
     \eqqcolon S_t - S_0 - A_t,
   \end{equation}
-  where $(S_r)_{r\in[0,T]}$ is a semimartingale and $(A_r)_{r\in[0,T]}$ a process of bounded variation.
-  Then by Itô's formula for semimartingales ((8.58) in \cite[236]{klebanerIntroductionStochasticCalculus2012}, with $f(x) \coloneqq x^2$) we have
+  where \((S_r)_{r\in[0,T]}\) is a semimartingale and \((A_r)_{r\in[0,T]}\) a process of bounded variation.
+  Then by Itô's formula for semimartingales ((8.58) in \cite[236]{klebanerIntroductionStochasticCalculus2012}, with \(f(x) \coloneqq x^2\)) we have
   \begin{equation}\label{eq:S^2-q-var-rel}
     \begin{split}
       S_t^2 - S_0^2
@@ -47,7 +47,7 @@ In the following, we suppress the dependence on $\psi$.
     \end{split}
   \end{equation}
 
-  By choosing $\varphi \coloneqq \br{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2$ in \zcref{eq:M-def}, we get
+  By choosing \(\varphi \coloneqq \br{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2\) in \zcref{eq:M-def}, we get
   \begin{equation}
     \begin{split}
       M_t^{\lambda, N}\sbr*{ \br*{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2 }
@@ -84,7 +84,7 @@ In the following, we suppress the dependence on $\psi$.
       \overset{\eqref{eq:S^2-q-var-rel}}       & {=} \sbr{S}_t + 2 \int_0^t S_{r-} \odif{\widehat{M}_{r-}^{\lambda,N}} + \mathcal{O}(N^{-1}),
     \end{split}
   \end{equation}
-  Now, note that the first term equals $\sbr{\widehat{M}^{\lambda,N}}_t$ because $A$ is of bounded variation (so its quadratic variation is zero).
+  Now, note that the first term equals \(\sbr{\widehat{M}^{\lambda,N}}_t\) because \(A\) is of bounded variation (so its quadratic variation is zero).
   The second term is a martingale so it vanishes in expectation.
   Hence
   \begin{equation}

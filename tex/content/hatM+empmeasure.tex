@@ -18,7 +18,7 @@
     % &\quad - \int_0^t \frac{1}{N} \sum_{i=1}^N \br*{ b(X_{r}^i) \partial_{x} \psi(X_{r}^i) - \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) } \odif{r}
   \end{split}
 \end{equation}
-Here we used the empirical measure $\mu^{\lambda,N}$, which is defined as
+Here we used the empirical measure \(\mu^{\lambda,N}\), which is defined as
 \begin{equation}
   \br{ t \mapsto \mu_t^{\lambda, N} \coloneqq \Theta_N(\bm{X})_t = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i} } \in D_{\cP(\potspace)}[0,T]
 \end{equation}
@@ -26,7 +26,7 @@ where
 \begin{equation}
   \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; (x_\cdot^1,\dots,x_\cdot^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x_\cdot^i}.
 \end{equation}
-If we assume $\omega^{ij} = \frac{\omega}{N}$, we get
+If we assume \(\omega^{ij} = \frac{\omega}{N}\), we get
 \begin{equation}\label{eq:kappa-to-mean-kappa}
   \begin{split}
     % &\frac{1}{N} \sum_{i=1}^N \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) \\
@@ -77,25 +77,25 @@ Substituting this into \zcref{eq:hat-M-derivation-start} yields
     - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) }}_{\eqqcolon \widehat{L}_r^{\lambda, N} [\psi](x)} \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}.
   \end{split}
 \end{equation}
-Note that this can also be interpreted as a random variable in $\mu^{\lambda,N}$ instead of $\bm{X}$, where $\widehat{L}_r^{\lambda, N}$ also depends on the empirical measure through $\ol{\kappa}$.
+Note that this can also be interpreted as a random variable in \(\mu^{\lambda,N}\) instead of \(\bm{X}\), where \(\widehat{L}_r^{\lambda, N}\) also depends on the empirical measure through \(\ol{\kappa}\).
 
 \bigskip
 
-The law of $(\mu_t^{\lambda, N})_{t\in[0,T]}$ is given by
+The law of \((\mu_t^{\lambda, N})_{t\in[0,T]}\) is given by
 \begin{equation}
   \lawmu^{\lambda,N} \coloneqq \Theta_N \# P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
 \end{equation}
-which is defined on the $\sigma$-algebra
+which is defined on the \(\sigma\)-algebra
 \begin{equation}
   \widehat{\cF} \coloneqq \Theta_N \# \cF \coloneqq \{B \subseteq D_{\cP(\potspace)}[0,T] : \Theta_N^{-1}(B) \in \cF\}.
 \end{equation}
 
 \begin{corollary}\label{cor:hat-M-mart}
-  $\widehat{M}_t^{\lambda, N}[\psi]$ is a martingale on $(D_{\cP(\potspace)}[0,T], \widehat{\cF}, \lawmu^{\lambda,N})$ adapted to the filtration $\widehat{\cF}_t \coloneqq \Theta_N \# \cF_t$.
+  \(\widehat{M}_t^{\lambda, N}[\psi]\) is a martingale on \((D_{\cP(\potspace)}[0,T], \widehat{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \(\widehat{\cF}_t \coloneqq \Theta_N \# \cF_t\).
 \end{corollary}
 \begin{proof}
   Adaptation and integrability are clear from \zcref{thm:mart-problem-sol}.
-  For $s > t$, $B \in \widehat{\cF}_t$,
+  For \(s > t\), \(B \in \widehat{\cF}_t\),
   \begin{equation}
     \begin{split}
       \int_B \widehat{M}_{s}^{\lambda, N}[\psi] \odif{\lawmu^{\lambda,N}}
@@ -115,6 +115,6 @@ which is defined on the $\sigma$-algebra
 \end{proof}
 
 
-If $(\mu_t^{\lambda, N})_{t\in[0,T]}$ would converge a.s. for $N\to\infty$ w.r.t. Skorokhod topology, it would follow by Proposition 5.2 (EK) that it would converge pointwise at continuity points.
-This would make $\widehat{M}_t^{\lambda, N}[\psi]$ converge too.
-But unfortunately this will not apply; at most $(\lawmu^{\lambda,N})$ will converge narrowly due to being tight.
+If \((\mu_t^{\lambda, N})_{t\in[0,T]}\) would converge a.s. for \(N\to\infty\) w.r.t. Skorokhod topology, it would follow by Proposition 5.2 (EK) that it would converge pointwise at continuity points.
+This would make \(\widehat{M}_t^{\lambda, N}[\psi]\) converge too.
+But unfortunately this will not apply; at most \((\lawmu^{\lambda,N})\) will converge narrowly due to being tight.
