@@ -53,9 +53,9 @@ Then define
   \begin{enumerate}[(i)]
     \item For all \(T > 0\), there exists a compact set \(\Gamma_T \subset E\) such that \(x_t \in \Gamma_T\) for all \(t \in [0,T]\), \(x \in A\).
     \item For all \(T > 0\),
-      \begin{equation}
-        \lim_{\delta\to0} \sup_{x \in A} w'(x,\delta,T) = 0.
-      \end{equation}
+          \begin{equation}
+            \lim_{\delta\to0} \sup_{x \in A} w'(x,\delta,T) = 0.
+          \end{equation}
   \end{enumerate}
 \end{theorem}
 
@@ -109,32 +109,32 @@ The following result is therefore not surprising.
 
 \begin{theorem}
   Suppose \(\Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]\) satisfies both the CCC and the MCC.\@ Then \(\Pi\) is tight.
-  \end{theorem}
+\end{theorem}
 
-  \begin{proof}
-    See Theorem 13 from~\cite{kouritzinTightnessProbabilityMeasures2015}, or Theorem 3.7.2 plus Remark 3.7.3 from~\cite{ethierMarkovProcessesCharacterization1985}.
-  \end{proof}
+\begin{proof}
+  See Theorem 13 from~\cite{kouritzinTightnessProbabilityMeasures2015}, or Theorem 3.7.2 plus Remark 3.7.3 from~\cite{ethierMarkovProcessesCharacterization1985}.
+\end{proof}
 
-  However, verifying the CCC and/or the MCC can difficult.
-  To that end, Kouritzin introduces weaker alternative conditions.
-  One can substitute either the CCC or the MCC (not both) with such a weaker condition, and still preserve the result.
+However, verifying the CCC and/or the MCC can difficult.
+To that end, Kouritzin introduces weaker alternative conditions.
+One can substitute either the CCC or the MCC (not both) with such a weaker condition, and still preserve the result.
 
-  \subsection{Martingale problem on \texorpdfstring{\(D_E[0,\infty)\)}{D([0,infinity), E)}}\label{sec:martingale-problem}
+\subsection{Martingale problem on \texorpdfstring{\(D_E[0,\infty)\)}{D([0,infinity), E)}}\label{sec:martingale-problem}
 
-  For our definition of the martingale problem, we will follow Ethier and Kurz~\cite[p.174]{ethierMarkovProcessesCharacterization1985}.
-  Let \((A, D(A)) : M_b(E) \to M_b(E)\) be a linear operator.\footnote{The definition can be extended to multivalued, nonlinear operators, but we will not require such generality.}
-  We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of the martingale problem for \(A\) if for the canonical coordinate process
-  \begin{equation}
-    X_t(\omega) \coloneqq \omega_t, \quad \omega \in D_E[0,\infty), t \geq 0,
-  \end{equation}
-  defined on the probability space \((D_E[0,\infty), \mathscr{S}_E, P)\), it holds that for all test functions \(f \in D(A)\)
-  \begin{equation}
-    t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
-  \end{equation}
-  is a martingale with respect to the filtration \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
-  This eponymous condition is what makes the problem relevant in the study of stochastic processes; it is satisfied whenever \(A\) is the generator of a \(X\).
+For our definition of the martingale problem, we will follow Ethier and Kurz~\cite[p.174]{ethierMarkovProcessesCharacterization1985}.
+Let \((A, D(A)) : M_b(E) \to M_b(E)\) be a linear operator.\footnote{The definition can be extended to multivalued, nonlinear operators, but we will not require such generality.}
+We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of the martingale problem for \(A\) if for the canonical coordinate process
+\begin{equation}
+  X_t(\omega) \coloneqq \omega_t, \quad \omega \in D_E[0,\infty), t \geq 0,
+\end{equation}
+defined on the probability space \((D_E[0,\infty), \mathscr{S}_E, P)\), it holds that for all test functions \(f \in D(A)\)
+\begin{equation}
+  t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
+\end{equation}
+is a martingale with respect to the filtration \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
+This eponymous condition is what makes the problem relevant in the study of stochastic processes; it is satisfied whenever \(A\) is the generator of a \(X\).
 
-  If additionally \((X_0)_\# P = P X_0^{-1} = \mu\) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
-  Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
-  The martingale problem for \((A,\mu)\) is well-posed if (i) a solution exists and (ii) it is unique.
-  If this holds for all \(\mu \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.
+If additionally \((X_0)_\# P = P X_0^{-1} = \mu\) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
+Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
+The martingale problem for \((A,\mu)\) is well-posed if (i) a solution exists and (ii) it is unique.
+If this holds for all \(\mu \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.
