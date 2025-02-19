@@ -1,6 +1,6 @@
 {
     // LaTeX Workshop Settings
-    "latex-workshop.formatting.latex": "latexindent",
+    "latex-workshop.formatting.latex": "tex-fmt",
     "latex-workshop.latex.outDir": "%DIR%/temp",
     "latex-workshop.intellisense.citation.backend": "biblatex",
     "latex-workshop.intellisense.citation.format": ["@"],
