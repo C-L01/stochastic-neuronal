@@ -8,7 +8,7 @@ We will assume that \((E,d)\) is both separable and complete, because we will ex
   \item \(M(E)\) is the space of Borel measurable, real-valued functions on \(E\).
   \item \(M_b(E) \subset M(E)\) is the space of functions which are additionally bounded.
   \item \(C_b^{1-}(E) \subset M_b(E)\) is the space of function which are additionally locally Lipschitz continuous.
-  \item \(\cB(E)\) denotes the Borel \(\sigma\)-algebra on \(E\).
+  \item \(\cB(E)\) denotes the Borel \( \sigma \)-algebra on \(E\).
   \item \(\cP(E)\) is the space of Borel probability measures on \(E\).
 \end{itemize}
 
@@ -104,7 +104,7 @@ This is the subject of Prokhorov's theorem~\cite[57-65]{billingsleyConvergencePr
 
 \subsubsection{Tightness in Skorokhod spaces}
 
-We want to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in \(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\)}
+We want to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in \(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\).}
 To this end, we will make use of a characterization of tightness specific to probability measures on Skorokhod spaces by Kouritzin~\cite{kouritzinTightnessProbabilityMeasures2015}.
 There, the setting is very general, with \(E\) being a completely regular topological space.
 We will restrict Kouritzin's result to our context, in which \((E,d)\) is a Polish metric space and the tight set is always a sequence.
@@ -156,7 +156,8 @@ defined on the probability space \((D_E[0,\infty), \mathscr{S}_E, P)\), it holds
   t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
 \end{equation}
 is a martingale with respect to the filtration \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
-This eponymous condition is what makes the problem relevant in the study of stochastic processes; it is satisfied whenever \(A\) is the generator of a \(X\).
+This eponymous condition is what makes the problem relevant in the study of stochastic processes.
+It is satisfied whenever \(A\) is the generator of a Markov process \(X\)~\cite[161-162]{ethierMarkovProcessesCharacterization1985}.
 
 If additionally \( (X_0)_\# P = P X_0^{-1} = \mu \) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
 Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
