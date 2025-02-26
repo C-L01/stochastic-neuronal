@@ -1,5 +1,5 @@
 \documentclass{article}
-\input{includes}
+\input{config/includes}
 \usepackage{macros}
 
 \addbibresource{references.bib}   % needs to be here to trigger intellisense autocomplete, apparently
@@ -14,19 +14,15 @@
 
 \maketitle
 
-\input{preliminaries}
+\input{content/preliminaries}
 
-\input{drift}
+\input{content/model}
 
-\input{jump}
+\input{content/hatM+empmeasure}
 
-\input{full generator}
+\input{content/vanishing-variance}
 
-\input{hatM+empmeasure}
-
-\input{vanishing-variance}
-
-\input{compact-in-N}
+\input{content/compact-in-N}
 
 \printbibliography
 
