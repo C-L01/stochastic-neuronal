@@ -15,21 +15,18 @@
     // LaTeX Workshop Recipes and Tools
     "latex-workshop.latex.recipes": [
         {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
             "name": "pdflatex -> biber -> pdflatex*2",
             "tools": [
                 "pdflatex",
                 "biber",
                 "pdflatex",
                 "pdflatex"
-            ]
-        },
-        {
-            "name": "xelatex -> biber -> xelatex*2",
-            "tools": [
-                "xelatex",
-                "biber",
-                "xelatex",
-                "xelatex"
             ]
         }
     ],
