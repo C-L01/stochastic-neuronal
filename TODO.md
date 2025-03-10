@@ -9,11 +9,12 @@
 ## Model
 - [x] Go through Overleaf comments
 - [ ] Get solution existence for drift for non-Dirac i.c., using what Oliver said about conditional distributions
-- [ ] Check on elaborate on solution existence theorem for full generator mainly
-- [ ] Upgrade to unique solution (low-prio)
+- [ ] Check / elaborate on solution existence theorem for full generator mainly
+- [ ] Upgrade to unique solution for all martingale problems (low-prio)
 
 ## Connection to empirical measure
-- [ ] Go through Overleaf comments
+- [x] Go through Overleaf comments
+- [ ] Go over text below TODO
 
 ## Vanishing variance
 - [ ] Go through Overleaf comments, and the proof
