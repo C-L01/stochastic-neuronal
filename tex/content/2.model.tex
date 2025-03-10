@@ -1,13 +1,18 @@
 \section{Model}
 
+In this section we introduce our neuronal model, which we define as the solution of a martingale problem we will formulate.
+The operator generating this martingale problem is based on the dynamics of the model, and consists of a drift part and a jump part.
+We will start by treating these parts separately.
+
 \subsection{The drift generator}
 
-Let \(N \in \bN\) be the number of neurons.
-Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)\) with \(D(L_{\cD}^N) \coloneqq C^1(\potspace^N) \cap C_0(\potspace^N)\) as
+Let \( N \in \bN \) be the number of neurons.
+Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)\) with \(D(L_{\cD}^N) \coloneqq C_0^1(\potspace^N)\) as
 \begin{equation}
   L_{\cD}^{N}\varphi \coloneqq \bm{b} \cdot \nabla_{\bm{x}} \varphi,
 \end{equation}
-where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \(\bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top\), where \(b \in C_b^{1-}(\potspace)\) is the physical driving force.
+% TODO domain L-drift: I don't think that L-drift maps to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity. So assume compact support I guess? (Or do that for b...)
+where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), where \(b \in C_b^{1-}(\potspace)\) is the physical driving force.
 % TODO b conditions: The boundedness could be dropped and the growth condition that follows this could be sufficient (for L mapping to B), if we assume the test functions to be compactly supported
 We will assume that \(b\) satisfies the following linear growth assumption:
 \begin{equation}
@@ -23,8 +28,8 @@ where \(V_\mathrm{rest} \in (V_R, V_F)\) is the equilibrium potential.
 
 \subsection{Martingale problem of the drift generator}
 
-We will show that the \(D_{\potspace^N}[0,\infty)\) martingale problem for \(L_{\cD}^N\) always has a solution. % TODO unique solution?
-Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu \in \cP(\potspace^N)\) there exists a unique \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \((\bm{X}_0)_\# P = \mu\) and for any test function \(\varphi \in D(L_{\cD}^N)\),
+We will show that the \(D_{\potspace^N}[0,\infty)\) martingale problem for \(L_{\cD}^N\) always has a solution.
+Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu \in \cP(\potspace^N)\) there exists a unique \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \( (\bm{X}_0)_\# P = \mu \) and for any test function \(\varphi \in D(L_{\cD}^N)\),
 \begin{equation}
   \cD_t^{N}[\varphi]
   \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L_{\cD}^{N} \varphi(\bm{X}_r) \odif{r}
@@ -37,7 +42,7 @@ Suppose first \(\mu = \delta_{\bm{x}^0}\) for some \(\bm{x}^0 \in \potspace^N\),
 \begin{equation}
   \bm{x}_t = \bm{x}^0 + \int_0^t \bm{b}(\bm{x}_r) \odif{r}, \quad t \geq 0.
 \end{equation}
-Because \(b\) is locally Lipschitz continuous and satisfies the linear growth condition, this equation admits a unique global solution \(\bm{x} \in C^1_{\potspace^N}[0,\infty) \subset D_{\potspace^N}[0,\infty)\) \cite{ode_result}.
+Because \(b\) is locally Lipschitz continuous and satisfies the linear growth condition, this equation admits a unique global solution \(\bm{x} \in C^1_{\potspace^N}[0,\infty) \subset D_{\potspace^N}[0,\infty)\)~\cite{ode_result}.
 
 Now choose \(P \coloneqq \delta_{\bm{x}} \in \cP(D_{\potspace^N}[0,\infty))\).
 By construction we then have \(\bm{X} = \bm{X}(\bm{\omega}) = \bm{x}\) \(P\)-a.s.
@@ -45,13 +50,12 @@ Therefore, for any \(\varphi \in D(L_{\cD}^N)\),
 \begin{equation}
   \begin{split}
     \cD_t^{N}[\varphi] & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t \bm{b}(\bm{X}_r) \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r} \\
-    & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \dot{\bm{x}}_r \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r}   \\
-    & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \odv{}{r} \varphi(\bm{x}_r) \odif{r}                              \\
-    & = 0 \quad P\text{-a.s.}
+                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \dot{\bm{x}}_r \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r}   \\
+                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \odv{}{r} \varphi(\bm{x}_r) \odif{r}                              \\
+                       & = 0 \quad P\text{-a.s.}
   \end{split}
 \end{equation}
 As \(\cD_t^{N}[\varphi]\) is almost surely constant, it is trivially an \(\Set{\cF_t^X}\)-martingale.
-% TODO Uniqueness holds because...
 
 
 \subsection{Jump generator}
@@ -99,23 +103,23 @@ The full generator \(L^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) of
 \begin{equation}
   L^{\lambda, N} = \ol{L_{\cD}^{N}} + L_{\cJ}^{\lambda, N}.
 \end{equation}
-Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true /  if I want to use and argue this
+Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true / if I want to use and argue this
 
 % By Theorem 1 from Dempster \cite{dempster_martingale_1998},\footnote{Which follows from a combination of perturbation results from \cite{ethier_markov_1985}.} we have the following result.
 
 \begin{theorem}\label{thm:mart-problem-sol}
   Let \(\lambda > 0\), \(N \in \bN\), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
   Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution.% TODO \textit{unique} solution.
-  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \omega \mapsto \bm{X}(t,\omega) \coloneqq \omega_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in M_b(\potspace^N)\),
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}(t,\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_0^1(\potspace^N)\),
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}
   \end{equation}
-  is a martingale w.r.t. the filtration \(\Set{\cF_t^\bm{X}}_{t\geq0}\).
+  is a martingale w.r.t.\ the filtration \(\Set{\cF_t^\bm{X}}_{t\geq0}\).
 \end{theorem}
 
 \begin{proof}
-  This follows from Proposition 4.10.2 in \cite{ethierMarkovProcessesCharacterization1985}.
+  This follows from Proposition 4.10.2 in~\cite{ethierMarkovProcessesCharacterization1985}.
 \end{proof}
 
 
@@ -136,5 +140,3 @@ Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure
 % \begin{equation}
 %     \lambda \int \partial_x \psi (x) \omega \mu_r^\lambda([V_F, \infty)) \mu_r(\odif{x})
 % \end{equation}
-
-
