@@ -44,7 +44,7 @@
   \begin{equation}
     g \circ \mu^{\lambda, N} = \int_\potspace \psi \odif{\mu^{\lambda, N}} = S^{\lambda, N} = M^{\lambda, N} - A^{\lambda, N}.
   \end{equation}
-  It follows that for \(C_\lambda^\psi \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty\) (such that \(\widehat{L}^{\lambda,N}_t [\psi] (x) \leq C_\lambda^\psi\) for all \(t\), \(x\)) and \(\delta \coloneqq \frac{1}{2C_\lambda^\psi}\) and a \( \delta \)-sparse partition \(\{t_i\}\) such that \(t_i - t_{i-1} < \frac{1}{C_\lambda^\psi}\), we have
+  It follows that for \(C_\lambda^\psi \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty\) (such that \(\ol{L}^{\lambda,N}_t [\psi] (x) \leq C_\lambda^\psi\) for all \(t\), \(x\)) and \(\delta \coloneqq \frac{1}{2C_\lambda^\psi}\) and a \( \delta \)-sparse partition \(\{t_i\}\) such that \(t_i - t_{i-1} < \frac{1}{C_\lambda^\psi}\), we have
   \begin{equation}
     \begin{split}
       P^{\lambda, N} (w'(g \circ \mu^{\lambda, N}, \delta) \geq \eta)
@@ -61,9 +61,9 @@
   % it suffices to show by the Aldous-Rebolledo criterion that both the martingale part and bounded variation part of \(S_t\) have tight laws.
   % For stopping times \(0 \leq S \leq S' \leq S + \delta \leq T\), we have
   % \begin{equation}
-  %     \Exp{}{ \widehat{M}_{S'}^{\lambda,N} - \widehat{M}_{S}^{\lambda,N} }
-  %     \overset{\text{(CS)}}{\leq} \Exp{}{ \abs{ \widehat{M}_{S'}^{\lambda,N} - \widehat{M}_{S}^{\lambda,N} }^2 }^{1/2}
-  %     \leq \Exp{}{\sbr{\widehat{M}^{\lambda,N}}_{S+\delta} - \sbr{\widehat{M}^{\lambda,N}}_{S}}^{1/2}
+  %     \Exp{}{ \ol{M}_{S'}^{\lambda,N} - \ol{M}_{S}^{\lambda,N} }
+  %     \overset{\text{(CS)}}{\leq} \Exp{}{ \abs{ \ol{M}_{S'}^{\lambda,N} - \ol{M}_{S}^{\lambda,N} }^2 }^{1/2}
+  %     \leq \Exp{}{\sbr{\ol{M}^{\lambda,N}}_{S+\delta} - \sbr{\ol{M}^{\lambda,N}}_{S}}^{1/2}
   %     \overset{N\to\infty}{\to} 0
   % \end{equation}
   % by \zcref{prop:before}.

@@ -1,37 +1,37 @@
 \section{Vanishing variance}
 
-Instead, we will show that the variance of \((\widehat{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.
+Instead, we will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.
 In the following, we suppress the dependence on \(\psi\).
 
 \begin{proposition}\label{prop:vanishing-variance}  % could remove variance, and just show quad. var. goes to zero as that is all I need, right?
   For all \(\lambda > 0\), \(t \in [0,T]\),
   \begin{equation}
-    \lim_{N\to\infty} \Var{\lawmu^{\lambda,N}}{\widehat{M}_t^{\lambda,N}} = 0.
+    \lim_{N\to\infty} \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}} = 0.
   \end{equation}
 \end{proposition}
 \begin{proof}
-  Recall that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is a martingale by \zcref{cor:hat-M-mart}.
+  Recall that \((\ol{M}_s^{\lambda,N})_{s\in[0,T]}\) is a martingale by \zcref{cor:hat-M-mart}.
   In particular,
   \begin{equation}
-    \Exp{\lawmu^{\lambda,N}}{\widehat{M}_t^{\lambda,N}} = \Exp{\lawmu^{\lambda,N}}{\widehat{M}_0^{\lambda,N}}
+    \Exp{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}} = \Exp{\lawmu^{\lambda,N}}{\ol{M}_0^{\lambda,N}}
     \overset{\zcref{eq:M-def}}{=} \Exp{\lawmu^{\lambda,N}}{0} = 0.
   \end{equation}
-  Note also that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded, so in particular square integrable.
+  Note also that \((\ol{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded, so in particular square integrable.
   Hence the variance exists and equals the second moment.
-  We can relate the second moment to the expectation of the quadratic variation, for which we write \(\sbr{\widehat{M}^{\lambda,N}}_t\), using Theorem 7.27 from \cite[201]{klebanerIntroductionStochasticCalculus2012}.
-  Namely, since \(\widehat{M}_0^{\lambda,N} = 0\),
+  We can relate the second moment to the expectation of the quadratic variation, for which we write \(\sbr{\ol{M}^{\lambda,N}}_t\), using Theorem 7.27 from \cite[201]{klebanerIntroductionStochasticCalculus2012}.
+  Namely, since \(\ol{M}_0^{\lambda,N} = 0\),
   \begin{equation}
-    \Exp{\lawmu^{\lambda,N}}{(\widehat{M}_t^{\lambda,N})^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\widehat{M}^{\lambda,N}}_t}.
+    \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^{\lambda,N})^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^{\lambda,N}}_t}.
   \end{equation}
   % \begin{equation}
-  %     (\widehat{M}_t^{\lambda,N})^2 = \abr{\widehat{M}^{\lambda,N}}_t + 2 \int_0^t \widehat{M}_{s-}^{\lambda,N} \odif{\widehat{M}_s^{\lambda,N}}
+  %     (\ol{M}_t^{\lambda,N})^2 = \abr{\ol{M}^{\lambda,N}}_t + 2 \int_0^t \ol{M}_{s-}^{\lambda,N} \odif{\ol{M}_s^{\lambda,N}}
   % \end{equation}
-  % Note that \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is càdlàg by \zcref{eq:M-def} and adapted, so \((\widehat{M}_{s-}^{\lambda,N})_{s\in[0,T]}\) is left-continuous and adapted.
-  % This means that it is predictable (see e.g. Definition 8.3 \cite{klebanerIntroductionStochasticCalculus2012}), so as \((\widehat{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded the stochastic integral is well-defined.
+  % Note that \((\ol{M}_s^{\lambda,N})_{s\in[0,T]}\) is càdlàg by \zcref{eq:M-def} and adapted, so \((\ol{M}_{s-}^{\lambda,N})_{s\in[0,T]}\) is left-continuous and adapted.
+  % This means that it is predictable (see e.g. Definition 8.3 \cite{klebanerIntroductionStochasticCalculus2012}), so as \((\ol{M}_s^{\lambda,N})_{s\in[0,T]}\) is bounded the stochastic integral is well-defined.
 
   Now denote
   \begin{equation}\label{eq:M=S-A}
-    \widehat{M}_t^{\lambda,N} = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}} - \int_0^t \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}
+    \ol{M}_t^{\lambda,N} = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}} - \int_0^t \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda, N}(\odif{x}) \odif{r}
     \eqqcolon S_t - S_0 - A_t,
   \end{equation}
   where \((S_r)_{r\in[0,T]}\) is a semimartingale and \((A_r)_{r\in[0,T]}\) a process of bounded variation.
@@ -76,20 +76,20 @@ In the following, we suppress the dependence on \(\psi\).
       %
       \overset{(N\to\infty)}                   & {=} \br*{ \int_\potspace \psi(x) \mu_t^{\lambda, N}(\odif{x}) }^2 - \br*{ \int_\potspace \psi(x) \mu_0^{\lambda, N}(\odif{x}) }^2 - 2 \int_0^t \int_\potspace \int_\potspace \bigg\{ b(x) \psi(y) \partial_x \psi(x)                                                                                       \\
                                                & \quad + \int_\potspace (\psi(z) - \psi(x)) \psi(y) \lambda \ol{\kappa}_r(x,\odif{z}) \bigg\} \mu_{r}^{\lambda, N} (\odif{x}) \mu_{r}^{\lambda, N} (\odif{y}) \odif{r} + \mathcal{O}(N^{-1})                                                                                                                \\
-                                               & = \br*{ \int_\potspace \psi \odif{\mu_t^{\lambda, N}} }^2 - \br*{ \int_\potspace \psi \odif{\mu_0^{\lambda, N}} }^2 - 2 \int_0^t \int_\potspace \psi(y) \mu_{r}^{\lambda, N} (\odif{y}) \int_\potspace \widehat{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda, N} (\odif{x}) \odif{r} + \mathcal{O}(N^{-1}) \\
+                                               & = \br*{ \int_\potspace \psi \odif{\mu_t^{\lambda, N}} }^2 - \br*{ \int_\potspace \psi \odif{\mu_0^{\lambda, N}} }^2 - 2 \int_0^t \int_\potspace \psi(y) \mu_{r}^{\lambda, N} (\odif{y}) \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda, N} (\odif{x}) \odif{r} + \mathcal{O}(N^{-1}) \\
                                                & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odv{A_{r}}{r} \odif{r} + \mathcal{O}(N^{-1})                                                                                                                                                                                                                          \\
                                                & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odif{A_{r}} + \mathcal{O}(N^{-1})                                                                                                                                                                                                                                     \\
-                                               & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odif{\br*{S_{r} - S_0 - \widehat{M}_{r}^{\lambda,N}}} + \mathcal{O}(N^{-1})                                                                                                                                                                                           \\
-                                               & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odif{S_{r}} + 2 \int_0^t S_{r} \odif{\widehat{M}_{r}^{\lambda,N}} + \mathcal{O}(N^{-1})                                                                                                                                                                               \\
-      \overset{\eqref{eq:S^2-q-var-rel}}       & {=} \sbr{S}_t + 2 \int_0^t S_{r-} \odif{\widehat{M}_{r-}^{\lambda,N}} + \mathcal{O}(N^{-1}),
+                                               & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odif{\br*{S_{r} - S_0 - \ol{M}_{r}^{\lambda,N}}} + \mathcal{O}(N^{-1})                                                                                                                                                                                           \\
+                                               & = S_t^2 - S_0^2 - 2 \int_0^t S_{r-} \odif{S_{r}} + 2 \int_0^t S_{r} \odif{\ol{M}_{r}^{\lambda,N}} + \mathcal{O}(N^{-1})                                                                                                                                                                               \\
+      \overset{\eqref{eq:S^2-q-var-rel}}       & {=} \sbr{S}_t + 2 \int_0^t S_{r-} \odif{\ol{M}_{r-}^{\lambda,N}} + \mathcal{O}(N^{-1}),
     \end{split}
   \end{equation}
-  Now, note that the first term equals \(\sbr{\widehat{M}^{\lambda,N}}_t\) because \(A\) is of bounded variation (so its quadratic variation is zero).
+  Now, note that the first term equals \(\sbr{\ol{M}^{\lambda,N}}_t\) because \(A\) is of bounded variation (so its quadratic variation is zero).
   The second term is a martingale so it vanishes in expectation.
   Hence
   \begin{equation}
-    \Var{\lawmu^{\lambda,N}}{\widehat{M}_t^{\lambda,N}}
-    = \Exp{\lawmu^{\lambda,N}}{\sbr{\widehat{M}^{\lambda,N}}_t}
+    \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}}
+    = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^{\lambda,N}}_t}
     = \Exp*{\lawmu^{\lambda,N}}{M_t^{\lambda, N}\sbr*{ \br*{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2 }} + \mathcal{O}(N^{-1})
     = \mathcal{O}(N^{-1}) \overset{N\to\infty}{\to} 0.
   \end{equation}
