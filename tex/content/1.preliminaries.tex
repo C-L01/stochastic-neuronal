@@ -7,7 +7,11 @@ We will assume that \((E,d)\) is both separable and complete, because we will ex
 \begin{itemize}
   \item \(M(E)\) is the space of Borel measurable, real-valued functions on \(E\).
   \item \(M_b(E) \subset M(E)\) is the space of functions which are additionally bounded.
-  \item \(C_b^{1-}(E) \subset M_b(E)\) is the space of function which are additionally locally Lipschitz continuous.
+  \item \(M_0(E) \subset M(E)\) is the space of functions which are additionally vanishing at infinity.
+  \item \(M_c(E) \subset M(E)\) is the space of functions which are additionally compactly supported.
+  \item \(C_*(E) \subset M_*(E)\), \( * \in \Set{b, 0, c} \) is the space of function which are (additionally) continuous.
+  \item \(C_*^{1-}(E) \subset C_*(E)\), \( * \in \Set{b, 0, c} \) is the space of function which are (additionally) locally Lipschitz continuous.
+  \item \(C_*^{k}(E) \subset C_*^{1-}(E)\), \( * \in \Set{b, 0, c} \), \( k \in \bN \) is the space of function which are (additionally) \(k\)-times continuously differentiable.
   \item \(\cB(E)\) denotes the Borel \( \sigma \)-algebra on \(E\).
   \item \(\cP(E)\) is the space of Borel probability measures on \(E\).
 \end{itemize}
@@ -72,7 +76,7 @@ Many different notions of convergence exist for sequences of (probability) measu
 We will focus on \textit{narrow convergence}, which is also often called weak convergence.
 On the level of random variables it corresponds to convergence in distribution.
 
-\begin{definition}
+\begin{definition}\label{def:narrow-conv}
   Let \(\Set{\mu_n}_{n\in\bN} \subset \cP(E)\).
   This sequence of probability measures converges narrowly to \(\mu \in \cP(E)\), which we denote with \( \mu_n \wto \mu \), if
   \begin{equation}
