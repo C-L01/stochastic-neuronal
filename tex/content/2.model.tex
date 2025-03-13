@@ -110,12 +110,12 @@ Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure
 \begin{theorem}\label{thm:mart-problem-sol}
   Let \(\lambda > 0\), \(N \in \bN\), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
   Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution.% TODO \textit{unique} solution.
-  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}(t,\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_0^1(\potspace^N)\),
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_0^1(\potspace^N)\),
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}
   \end{equation}
-  is a martingale w.r.t.\ the filtration \(\Set{\cF_t^\bm{X}}_{t\geq0}\).
+  is a martingale w.r.t.\ the filtration \(\Set{\cF_t}_{t\geq0} \coloneqq \Set{\cF_t^\bm{X}}_{t\geq0}\).
 \end{theorem}
 
 \begin{proof}
