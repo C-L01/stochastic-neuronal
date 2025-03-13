@@ -189,20 +189,18 @@
 
 %%% Theorems
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]    % numbered by section
-% \newtheorem{assumption}[definition]{Assumption} % same count as definition
-% \newtheorem{notation}[definition]{Notation}     % same count as definition
-\newtheorem{example}{Example}[section]          % numbered by section
-
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]         % numbered by section
-\newtheorem{corollary}{Corollary}[theorem]     % numbered by theorem
-\newtheorem{proposition}{Proposition}[section] % same count as theorem
-\newtheorem{lemma}{Lemma}[section]             % same count as theorem
+\newtheorem{theorem}{Theorem}[section]          % numbered by section
+\newtheorem{corollary}[theorem]{Corollary}      % same counter as theorem
+\newtheorem{proposition}[theorem]{Proposition}  % same counter as theorem
+\newtheorem{lemma}[theorem]{Lemma}              % same counter as theorem
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}    % same counter as theorem
+\newtheorem{example}[theorem]{Example}          % same counter as theorem
 
 \theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]           % numbered by section
+\newtheorem{remark}[theorem]{Remark}            % same counter as theorem
 
 % Tell zref-clever how to reference these
 % \AddToHook{env/lemma/begin}{%
