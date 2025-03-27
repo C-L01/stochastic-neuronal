@@ -1,6 +1,6 @@
 \section{Empirical measure}
 
-Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure curve} \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).\footnote{We explicitly indicate the dependence on both \(\lambda\) and \(N\), as we will vary them later.}
+Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure curve} \(\mu^N \in D_{\cP(\potspace)}[0,T]\).\footnote{We explicitly indicate the dependence on both \(\lambda\) and \(N\), as we will vary them later.}
 It is based on the following function,
 \begin{equation}
   \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; \quad (x^1,\dots,x^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x^i},
@@ -9,18 +9,18 @@ which compresses the information on all neuron position curves to an (empirical)
 \begin{definition}\label{def:emp-measure}
   The empirical measure curve of the process \(\bm{X}\) is defined as
   \begin{equation}
-    \mu^{\lambda, N} \coloneqq \Theta_N(\bm{X}) = \frac{1}{N} \sum_{i=1}^N \delta_{X^i}.
+    \mu^N \coloneqq \Theta_N(\bm{X}) = \frac{1}{N} \sum_{i=1}^N \delta_{X^i}.
   \end{equation}
   At time \(t \in [0,T]\), the \textit{empirical measure} thus equals
   \begin{equation}
-    \mu_t^{\lambda, N} = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i}.
+    \mu_t^N = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i}.
   \end{equation}
 \end{definition}
-Note that the measure \(\mu_t^{\lambda, N}\) is a random measure.
+Note that the measure \(\mu_t^N\) is a random measure.
 As claimed above, it easily follows that the empirical measure curve is càdlàg with respect to the narrow topology.
 We will nonetheless prove this to illustrate the concepts we have introduced so far.
 \begin{lemma}
-  For the empirical measure curve as defined in \zcref{def:emp-measure}, we have \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).
+  For the empirical measure curve as defined in \zcref{def:emp-measure}, we have \(\mu^N \in D_{\cP(\potspace)}[0,T]\).
 \end{lemma}
 
 \begin{proof}
@@ -31,14 +31,14 @@ We will nonetheless prove this to illustrate the concepts we have introduced so 
   \end{equation}
   It follows that for any test function \(\psi \in C_b(\potspace)\),
   \begin{equation}
-    \lim_{s \downarrow t} \int_{\potspace^N} \psi \odif{\mu_s^{\lambda, N}}
+    \lim_{s \downarrow t} \int_{\potspace^N} \psi \odif{\mu_s^N}
     = \lim_{s \downarrow t} \frac{1}{N} \sum_{i=1}^N \psi(X_s^i)
     = \frac{1}{N} \sum_{i=1}^N \psi(X_t^i)
-    = \int_{\potspace^N} \psi \odif{\mu_t^{\lambda, N}}.
+    = \int_{\potspace^N} \psi \odif{\mu_t^N}.
   \end{equation}
-  By \zcref{def:narrow-conv} this means that \(\mu_s^{\lambda, N} \wto \mu_t^{\lambda, N}\) as \(s \downarrow t\), whence \(\mu^{\lambda,N}\) is right-continuous.
-  The existence of left-limits for \(\mu^{\lambda,N}\) follows in exactly the same way from their existence for \(\bm{X}\).
-  We conclude that \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).
+  By \zcref{def:narrow-conv} this means that \(\mu_s^N \wto \mu_t^N\) as \(s \downarrow t\), whence \(\mu^N\) is right-continuous.
+  The existence of left-limits for \(\mu^N\) follows in exactly the same way from their existence for \(\bm{X}\).
+  We conclude that \(\mu^N \in D_{\cP(\potspace)}[0,T]\).
 \end{proof}
 
 \subsection{Empirical martingale}
@@ -56,12 +56,12 @@ That is, for any such \( \psi \) we define the \textit{empirical martingale} as
     \ol{M}_t^{\lambda, N}[\psi] \coloneqq
     M_t^{\lambda, N}\sbr*{\frac{1}{N} \bigoplus_{i=1}^N \psi}
      & = \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) - \int_0^t L^{\lambda, N} \br*{\frac{1}{N}\bigoplus_{i=1}^N \psi} (\bm{X}_r) \odif{r} \\
-     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
+     & = \int_\potspace \psi \odif{\mu_t^N} - \int_\potspace \psi \odif{\mu_0^N}
     - \int_0^t \sum_{i=1}^N b(X_{r}^i) \cdot \frac{1}{N} \partial_{x} \psi(X_{r}^i) \odif{r}                                                                               \\
     % &\quad - \int_0^t \sum_{i=1}^N \int_\potspace \frac{1}{N} \br*{ \psi(y) + \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r}^j) - \sum_{j=1}^N \psi(X_{r}^j) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) \odif{r} \\
      & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
-     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
-    - \int_0^t \int_\potspace b(x) \partial_{x} \psi(x) \mu_r^{\lambda, N}(\odif{x}) \odif{r}                                                                              \\
+     & = \int_\potspace \psi \odif{\mu_t^N} - \int_\potspace \psi \odif{\mu_0^N}
+    - \int_0^t \int_\potspace b(x) \partial_{x} \psi(x) \mu_r^N(\odif{x}) \odif{r}                                                                              \\
      & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
     %
     % &= \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) \\
@@ -80,8 +80,8 @@ Then, the integrand of the last term can be rewritten as
      & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
     + \br*{ \psi(X_{r}^i + \frac{\omega}{N} \sum_{j=1}^N \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
      & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
-    + \br*{ \psi(x + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^{\lambda, N}(\odif{x})                                                           \\
-     & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^{\lambda, N}}(x, \odif{y}) \mu_{r}^{\lambda, N}(\odif{x})
+    + \br*{ \psi(x + \omega \mu_r^N([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^N(\odif{x})                                                           \\
+     & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) \mu_{r}^N(\odif{x})
   \end{split}
 \end{equation}
 for
@@ -97,14 +97,14 @@ Substituting this into \zcref{eq:emp-M-derivation-start} yields
 \begin{equation}\label{eq:emp-M-expression}
   \begin{split}
     \ol{M}_t^{\lambda, N}[\psi]
-     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
-    - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^{\lambda, N}}(x, \odif{y}) }}_{\eqqcolon \ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda} [\psi](x)} \mu_{r}^{\lambda, N}(\odif{x}) \odif{r} \\
-     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
-    - \int_0^t \int_\potspace \ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda} [\psi] \odif{\mu_{r}^{\lambda, N}} \odif{r}.
+     & = \int_\potspace \psi \odif{\mu_t^N} - \int_\potspace \psi \odif{\mu_0^N}
+    - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) }}_{\eqqcolon \ol{L}_{\mu_{r}^N}^{\lambda} [\psi](x)} \mu_{r}^N(\odif{x}) \odif{r} \\
+     & = \int_\potspace \psi \odif{\mu_t^N} - \int_\potspace \psi \odif{\mu_0^N}
+    - \int_0^t \int_\potspace \ol{L}_{\mu_{r}^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}.
   \end{split}
 \end{equation}
-If we identify test functions with functions\footnote{Not functionals, because as \( \phi \) is not necessarily continuous as a test function, it is also not necessarily (narrowly) continuous as a function on measures.} on measures, i.e.\ \( \phi(\nu) \coloneqq \int_\potspace \phi \odif{\nu} \) for \(\phi \in M_b(\potspace)\), \( \nu \in \cP(\potspace) \), we observe that this expression for \(\ol{M}^{\lambda,N}\) seems very similar to the martingale problem from \zcref{sec:martingale-problem} if we interpret it as a function of \(\mu^{\lambda,N}\) instead of \(\bm{X}\).
-However, the operator \(\ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda}\) has a nonlinear dependence on the empirical measure, so it is not actually of this form.
+If we identify test functions with functions\footnote{Not functionals, because as \( \phi \) is not necessarily continuous as a test function, it is also not necessarily (narrowly) continuous as a function on measures.} on measures, i.e.\ \( \phi(\nu) \coloneqq \int_\potspace \phi \odif{\nu} \) for \(\phi \in M_b(\potspace)\), \( \nu \in \cP(\potspace) \), we observe that this expression for \(\ol{M}^{\lambda,N}\) seems very similar to the martingale problem from \zcref{sec:martingale-problem} if we interpret it as a function of \(\mu^N\) instead of \(\bm{X}\).
+However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependence on the empirical measure, so it is not actually of this form.
 
 \subsection{The empirical martingale is a martingale}
 
@@ -117,7 +117,7 @@ The empirical martingale is a martingale, in two ways.
 \end{proof}
 
 However, \(\ol{M}_t^{\lambda,N}[\psi]\) depends on \( \bm{X} \) only through the empirical measure.
-The law of the empirical measure curve \(\mu^{\lambda, N} = \Theta_N(\bm{X})\) is given by
+The law of the empirical measure curve \(\mu^N = \Theta_N(\bm{X})\) is given by
 \begin{equation}
   \lawmu^{\lambda,N} \coloneqq \Theta_N \# P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
 \end{equation}
@@ -126,7 +126,7 @@ which is defined on the (pushforward) \( \sigma \)-algebra
   \ol{\cF} \coloneqq \Theta_N \# \mathscr{S}_{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_{\potspace^N}}.
 \end{equation}
 It is easily verified that this indeed defines a \( \sigma \)-algebra.
-We will show that the empirical martingale is still a martingale when we interpret it as a random variable on~\((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\), i.e.\ when we interpret it as a function in \(\mu^{\lambda,N}\) instead of \(\bm{X}\).\footnote{We will not distinguish between \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\potspace^N}[0,T] \to \bR \) and \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\cP(\potspace)}[0,T] \to \bR \) notationally, except when necessary.}
+We will show that the empirical martingale is still a martingale when we interpret it as a random variable on~\((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\), i.e.\ when we interpret it as a function in \(\mu^N\) instead of \(\bm{X}\).\footnote{We will not distinguish between \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\potspace^N}[0,T] \to \bR \) and \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\cP(\potspace)}[0,T] \to \bR \) notationally, except when necessary.}
 
 \begin{proposition}\label{prop:emp-M-mart}
   \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \# \cF_t^{\bm{X}} \)}.
@@ -205,6 +205,6 @@ We will show that the empirical martingale is still a martingale when we interpr
 \end{proof}
 
 % TODO decide what to do with the following
-If the empirical measure \(\mu^{\lambda, N}\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \bar{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from \cite{ethierMarkovProcessesCharacterization1985} that it would converge pointwise at the continuity points of \( \bar{\mu}^\lambda \).
+If the empirical measure \(\mu^N\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \bar{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from \cite{ethierMarkovProcessesCharacterization1985} that it would converge pointwise at the continuity points of \( \bar{\mu}^\lambda \).
 This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.   % TODO would it?
 But unfortunately this will not apply; at most \(\lawmu^{\lambda,N}\) will converge narrowly due to being tight.  % TODO why?
