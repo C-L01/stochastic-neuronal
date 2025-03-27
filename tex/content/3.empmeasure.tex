@@ -1,22 +1,26 @@
-\section{Empirical measure and empirical martingale}
+\section{Empirical measure}
 
-Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure} curve \(\mu^{\lambda,N} \in D_{\cP(\bR)}[0,T]\).\footnote{We explicitly indicate the dependence on both \(\lambda\) and \(N\), as we will vary them later.}
+Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure curve} \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).\footnote{We explicitly indicate the dependence on both \(\lambda\) and \(N\), as we will vary them later.}
 It is based on the following function,
 \begin{equation}
-  \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; \quad (x_\cdot^1,\dots,x_\cdot^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x_\cdot^i},
+  \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; \quad (x^1,\dots,x^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x^i},
 \end{equation}
-which compresses the information on all neuron positions to an (empirical) average.
+which compresses the information on all neuron position curves to an (empirical) average.
 \begin{definition}\label{def:emp-measure}
-  The empirical measure of the process \(\bm{X}\) at time \(t \in [0,T]\) is defined as
+  The empirical measure curve of the process \(\bm{X}\) is defined as
   \begin{equation}
-    \mu_t^{\lambda, N} \coloneqq \Theta_N(\bm{X})_t = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i}.
+    \mu^{\lambda, N} \coloneqq \Theta_N(\bm{X}) = \frac{1}{N} \sum_{i=1}^N \delta_{X^i}.
+  \end{equation}
+  At time \(t \in [0,T]\), the \textit{empirical measure} thus equals
+  \begin{equation}
+    \mu_t^{\lambda, N} = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i}.
   \end{equation}
 \end{definition}
 Note that the measure \(\mu_t^{\lambda, N}\) is a random measure.
 As claimed above, it easily follows that the empirical measure curve is càdlàg with respect to the narrow topology.
 We will nonetheless prove this to illustrate the concepts we have introduced so far.
 \begin{lemma}
-  For the empirical measure curve as defined in \zcref{def:emp-measure}, we have \(\mu^{\lambda,N} \in D_{\cP(\bR)}[0,T]\).
+  For the empirical measure curve as defined in \zcref{def:emp-measure}, we have \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).
 \end{lemma}
 
 \begin{proof}
@@ -34,8 +38,10 @@ We will nonetheless prove this to illustrate the concepts we have introduced so 
   \end{equation}
   By \zcref{def:narrow-conv} this means that \(\mu_s^{\lambda, N} \wto \mu_t^{\lambda, N}\) as \(s \downarrow t\), whence \(\mu^{\lambda,N}\) is right-continuous.
   The existence of left-limits for \(\mu^{\lambda,N}\) follows in exactly the same way from their existence for \(\bm{X}\).
-  We conclude that \(\mu^{\lambda,N} \in D_{\cP(\bR)}[0,T]\).
+  We conclude that \(\mu^{\lambda,N} \in D_{\cP(\potspace)}[0,T]\).
 \end{proof}
+
+\subsection{Empirical martingale}
 
 The compression of information to empirical averages can also be obtained at the martingale level.
 This is achieved by restricting the test function argument of \(M\) (from \zcref{thm:mart-problem-sol}) to one of the form
@@ -75,69 +81,130 @@ Then, the integrand of the last term can be rewritten as
     + \br*{ \psi(X_{r}^i + \frac{\omega}{N} \sum_{j=1}^N \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
      & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
     + \br*{ \psi(x + \omega \mu_r^{\lambda, N}([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^{\lambda, N}(\odif{x})                                                           \\
-     & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) \mu_{r}^{\lambda, N}(\odif{x})
+     & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^{\lambda, N}}(x, \odif{y}) \mu_{r}^{\lambda, N}(\odif{x})
   \end{split}
 \end{equation}
 for
 \begin{equation}
-  \ol{\kappa}_r(x, \odif{y}) \coloneqq \delta_{\bar{\jtarg}_r(x)}(\odif{y}),
+  \ol{\kappa}_\nu(x, \odif{y}) \coloneqq \delta_{\bar{\jtarg}_\nu(x)}(\odif{y}),
   \quad\text{and}\quad
-  \ol{\jtarg}_r(x) \coloneqq \begin{cases}
-    x + \omega \mu_r^{\lambda, N}([V_F,+\infty)) & \text{if } x < V_F,    \\
-    V_R                                          & \text{if } x \geq V_F.
-  \end{cases}
+  \ol{\jtarg}_\nu(x) \coloneqq \begin{cases}
+    x + \omega \nu([V_F,+\infty)) & \text{if } x < V_F    \\
+    V_R                           & \text{if } x \geq V_F
+  \end{cases}, \quad \nu \in \cP(\potspace).
 \end{equation}
 Substituting this into \zcref{eq:emp-M-derivation-start} yields
-\begin{equation}
+\begin{equation}\label{eq:emp-M-expression}
   \begin{split}
     \ol{M}_t^{\lambda, N}[\psi]
      & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
-    - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_r(x, \odif{y}) }}_{\eqqcolon \ol{L}_r^{\lambda, N} [\psi](x)} \mu_{r}^{\lambda, N}(\odif{x}) \odif{r} \\
-    & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
-    - \int_0^t \int_\potspace \ol{L}_r^{\lambda, N} [\psi] \odif{\mu_{r}^{\lambda, N}} \odif{r} \\
+    - \int_0^t \int_\potspace \underbrace{\br*{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^{\lambda, N}}(x, \odif{y}) }}_{\eqqcolon \ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda} [\psi](x)} \mu_{r}^{\lambda, N}(\odif{x}) \odif{r} \\
+     & = \int_\potspace \psi \odif{\mu_t^{\lambda, N}} - \int_\potspace \psi \odif{\mu_0^{\lambda, N}}
+    - \int_0^t \int_\potspace \ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda} [\psi] \odif{\mu_{r}^{\lambda, N}} \odif{r}.
   \end{split}
 \end{equation}
-If we identify test functions with functions on measures, i.e. \( \phi(\nu) \coloneqq \int_\potspace \phi \odif{\nu} \) for \(\phi \in M_b(\potspace)\), \( \nu \in \cP(\potspace) \),\footnote{Because \(\phi\) is not necessarily continuous as a test function, it is also not necessarily (narrowly) continuous as a function on measures.} we observe that this expression for \(\ol{M}^{\lambda,N}\) is very similar to the martingale problem from \zcref{sec:martingale-problem} if we interpret it as a random variable in \(\mu^{\lambda,N}\) instead of \(\bm{X}\).
-However, the operator \(\ol{L}_r^{\lambda, N}\) has a nonlinear dependence on the empirical measure through \(\ol{\kappa}\), so it is not actually of this form.
+If we identify test functions with functions\footnote{Not functionals, because as \( \phi \) is not necessarily continuous as a test function, it is also not necessarily (narrowly) continuous as a function on measures.} on measures, i.e.\ \( \phi(\nu) \coloneqq \int_\potspace \phi \odif{\nu} \) for \(\phi \in M_b(\potspace)\), \( \nu \in \cP(\potspace) \), we observe that this expression for \(\ol{M}^{\lambda,N}\) seems very similar to the martingale problem from \zcref{sec:martingale-problem} if we interpret it as a function of \(\mu^{\lambda,N}\) instead of \(\bm{X}\).
+However, the operator \(\ol{L}_{\mu_{r}^{\lambda, N}}^{\lambda}\) has a nonlinear dependence on the empirical measure, so it is not actually of this form.
 
-\bigskip
+\subsection{The empirical martingale is a martingale}
 
-% TODO rewrote all above, so start from here
+The empirical martingale is a martingale, in two ways.
+\begin{corollary}\label{cor:easy-emp-M-mart}
+  \(\ol{M}_t^{\lambda,N}[\psi]\) is a martingale on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) adapted to the filtration \( \cF = \Set{\cF_t^\bm{X}}_{t\geq0} \).
+\end{corollary}
+\begin{proof}
+  This directly holds by definition of \( \ol{M}_t^{\lambda,N}[\psi] \) in~\zcref{eq:emp-M-derivation-start} and \zcref{thm:mart-problem-sol}.
+\end{proof}
 
-The law of \((\mu_t^{\lambda, N})_{t\in[0,T]}\) is given by
+However, \(\ol{M}_t^{\lambda,N}[\psi]\) depends on \( \bm{X} \) only through the empirical measure.
+The law of the empirical measure curve \(\mu^{\lambda, N} = \Theta_N(\bm{X})\) is given by
 \begin{equation}
   \lawmu^{\lambda,N} \coloneqq \Theta_N \# P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
 \end{equation}
-which is defined on the \( \sigma \)-algebra
+which is defined on the (pushforward) \( \sigma \)-algebra
 \begin{equation}
-  \ol{\cF} \coloneqq \Theta_N \# \cF \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] : \Theta_N^{-1}(B) \in \cF}.
+  \ol{\cF} \coloneqq \Theta_N \# \mathscr{S}_{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_{\potspace^N}}.
 \end{equation}
+It is easily verified that this indeed defines a \( \sigma \)-algebra.
+We will show that the empirical martingale is still a martingale when we interpret it as a random variable on~\((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\), i.e.\ when we interpret it as a function in \(\mu^{\lambda,N}\) instead of \(\bm{X}\).\footnote{We will not distinguish between \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\potspace^N}[0,T] \to \bR \) and \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\cP(\potspace)}[0,T] \to \bR \) notationally, except when necessary.}
 
-\begin{corollary}\label{cor:emp-M-mart}
-  \(\ol{M}_t^{\lambda, N}[\psi]\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \(\ol{\cF}_t \coloneqq \Theta_N \# \cF_t\).
-\end{corollary}
+\begin{proposition}\label{prop:emp-M-mart}
+  \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \# \cF_t^{\bm{X}} \)}.
+\end{proposition}
 \begin{proof}
-  Adaptation and integrability are clear from \zcref{thm:mart-problem-sol}. % TODO Are they really? Check for yourself
-  For \(s > t\), \(B \in \ol{\cF}_t\),
+  In this proof we will write \( \ol{M}_t \) instead of \( \ol{M}_t^{\lambda, N}[\psi] \) to lighten the notational burden.
+  Furthermore, we will have to distinguish between \( \ol{M}_t \) being a function on \( D_{\cP(\potspace)}[0,T] \) or on \( D_{\potspace^N}[0,T] \), which we will do by writing\footnote{As an exception to the previous footnote.}
+  \begin{equation}
+    \ol{M}_t(\nu) \coloneqq \int_\potspace \psi \odif{\nu_t} - \int_\potspace \psi \odif{\nu_0}
+    - \int_0^t \int_\potspace \ol{L}_{\nu_r}^{\lambda} [\psi] \odif{\nu_r} \odif{r},
+    \quad \nu \in D_{\cP(\potspace)}[0,T],
+  \end{equation}
+  for the former, and
+  \begin{equation}
+    \widehat{\ol{M}}_t(\bm{\omega}) \coloneqq \ol{M}_t(\Theta_N(\bm{\omega})), \quad \bm{\omega} \in D_{\potspace^N}[0,T],
+  \end{equation}
+  for the latter.
+
+  We will start by proving that \( (\ol{M}_t)_{t\in[0,T]} \) is adapted to \( (\ol{\cF}_t)_{t\in[0,T]} \).
+  For an arbitrary \( B \in \cB \), we have to show that
+  \mbox{\begin{math}
+    \ol{M}_t^{-1} (B) \in \ol{\cF}_t.
+  \end{math}}
+  We have
   \begin{equation}
     \begin{split}
-      \int_B \ol{M}_{s}^{\lambda, N}[\psi] \odif{\lawmu^{\lambda,N}}
-       & = \int_B \sbr*{ \int_\potspace \psi \odif{\nu_s} - \int_\potspace \psi \odif{\nu_0} - \int_0^s \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) \nu_{r}(\odif{x}) \odif{r} } \lawmu^{\lambda,N} (\odif{\nu})                                                                          \\
-       & = \int_{\Theta_N(\Theta_N^{-1}(B))} \sbr*{ \int_\potspace \psi \odif{\nu_s} - \int_\potspace \psi \odif{\nu_0} - \int_0^s \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) \nu_{r}(\odif{x}) \odif{r} } \Theta_N \# P^{\lambda, N} (\odif{\nu})                                       \\ % TODO Note that Theta_N is not surjective, so the integral domain shrinks here. But I think it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
-       & = \int_{\Theta_N^{-1}(B)} \sbr*{ \int_\potspace \psi(x) (\Theta_N(\omega))_s(\odif{x}) - \int_\potspace \psi(x) (\Theta_N(\omega))_0(\odif{x}) - \int_0^s \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) (\Theta_N(\omega))_{r}(\odif{x}) \odif{r} } P^{\lambda, N} (\odif{\omega}) \\
-       & = \int_{\Theta_N^{-1}(B)} \sbr*{ \int_\potspace \psi(x) \mu_s^{\lambda,N}(\odif{x}) - \int_\potspace \psi(x) \mu_0^{\lambda,N}(\odif{x}) - \int_0^s \int_\potspace \ol{L}_r^{\lambda, N} [\psi](x) \mu_{r}^{\lambda,N}(\odif{x}) \odif{r} } \odif{P^{\lambda, N}}                   \\
-       & = \int_{\Theta_N^{-1}(B)} \ol{M}_s^{\lambda, N}[\psi] \odif{P^{\lambda, N}}                                                                                                                                                                                                         \\
-       & = \int_{\Theta_N^{-1}(B)} \ol{M}_t^{\lambda, N}[\psi] \odif{P^{\lambda, N}} % TODO Martingale property, using the definition of contidional expectation and the fact that Theta_N^{-1}(B) \in \cF_t (by definition of \hat{\cF}_t)
-      = \int_B \ol{M}_t^{\lambda, N}[\psi] \odif{\lawmu^{\lambda,N}},
+      \Theta_N^{-1}(\ol{M}_t^{-1} (B))
+       & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \Theta_N(\bm{\omega}) \in \ol{M}_t^{-1} (B) } \\
+       & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \ol{M}_t(\Theta_N(\bm{\omega})) \in B }       \\
+       & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \widehat{\ol{M}}_t(\bm{\omega}) \in B } \\
+       & = \widehat{\ol{M}}_t^{-1}(B) \in \cF_t^{\bm{X}}
     \end{split}
   \end{equation}
-  which implies that
+  where the inclusion holds because \( (\widehat{\ol{M}})_{t\in[0,T]} \) is adapted to \( (\cF_t^{\bm{X}})_{t\in[0,T]} \) by \zcref{cor:easy-emp-M-mart}.
+  This implies, by definition of \( \ol{\cF}_t \), that
   \begin{equation}
-    \Exp{\lawmu^{\lambda,N}}{\ol{M}_{s}^{\lambda, N}[\psi] \given \ol{\cF}_t} = \ol{M}_t^{\lambda, N}[\psi].
+    \ol{M}_t^{-1} (B) \in \ol{\cF}_t,
   \end{equation}
+  proving that \( (\ol{M}_t)_{t\in[0,T]} \) is adapted to \( (\ol{\cF}_t)_{t\in[0,T]} \).
+
+  \medskip
+
+  Integrability holds because for all \( t \in [0,T] \)
+  \begin{equation}
+    \begin{split}
+    \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\lawmu^{\lambda,N}}
+    &= \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
+    \overset{(*)}&{=} \int_{\Theta_N(D_{\potspace^N}[0,T])} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
+    &= \int_{D_{\potspace^N}[0,T]} \abs{\ol{M}_{t} \circ \Theta_N} \odif{P^{\lambda,N}}
+    = \int_{D_{\potspace^N}[0,T]} \abs{\widehat{\ol{M}}_{t}} \odif{P^{\lambda,N}} < \infty,
+    \end{split}
+  \end{equation}
+  since \(\widehat{\ol{M}}_{t}\) is integrable (due to \zcref{cor:easy-emp-M-mart}).
+  Note that in step \((*)\) we merely removed a \(\br{\Theta_N \# P^{\lambda,N}}\)-null set.
+
+  \medskip
+
+  Finally, let \(s > t\), \(\Gamma \in \ol{\cF}_t\), then with a similar derivation we get
+  \begin{equation}
+    \begin{split}
+      \int_\Gamma \ol{M}_{s} \odif{\lawmu^{\lambda,N}}
+      % &= \int_\Gamma \ol{M}_{s} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
+      &= \int_{\Theta_N(\Theta_N^{-1}(\Gamma))} \ol{M}_{s} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\ % NOTE that Theta_N is not surjective, so the integral domain shrinks here. But it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
+      &= \int_{\Theta_N^{-1}(\Gamma)} \ol{M}_{s} \circ \Theta_N \odif{P^{\lambda,N}} \\
+      &= \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{s} \odif{P^{\lambda,N}} \\
+      \overset{(*)}&{=} \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{t} \odif{P^{\lambda,N}}
+      = \int_\Gamma \ol{M}_t \odif{\lawmu^{\lambda,N}},
+    \end{split}
+  \end{equation}
+  where in step \((*)\) we could use the martingale property of \(\widehat{\ol{M}}\) since \(\Gamma \in \ol{\cF}_t\) implies \(\Theta_N^{-1}(\Gamma) \in \cF_t^{\bm{X}}\).
+  This means that
+  \begin{equation}
+    \Exp{\lawmu^{\lambda,N}}{\ol{M}_{s} \given \ol{\cF}_t} = \ol{M}_t.
+  \end{equation}
+  We conclude that \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \# \cF_t^{\bm{X}} \)}.
 \end{proof}
 
-
-If \((\mu_t^{\lambda, N})_{t\in[0,T]}\) would converge a.s. for \(N\to\infty\) w.r.t. Skorokhod topology, it would follow by Proposition 5.2 (EK) that it would converge pointwise at continuity points.
-This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.
-But unfortunately this will not apply; at most \((\lawmu^{\lambda,N})\) will converge narrowly due to being tight.
+% TODO decide what to do with the following
+If the empirical measure \(\mu^{\lambda, N}\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \bar{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from \cite{ethierMarkovProcessesCharacterization1985} that it would converge pointwise at the continuity points of \( \bar{\mu}^\lambda \).
+This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.   % TODO would it?
+But unfortunately this will not apply; at most \(\lawmu^{\lambda,N}\) will converge narrowly due to being tight.  % TODO why?
