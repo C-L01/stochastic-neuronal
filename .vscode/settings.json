@@ -76,6 +76,6 @@
         "editor.insertSpaces": true,                // Uses spaces instead of tabs
         "editor.tabSize": 2,                        // Sets tab width to 2
         "editor.wordWrap": "bounded",               // Wraps text
-        "editor.wordWrapColumn": 92                 // Wraps text at column 92
+        "editor.wordWrapColumn": 130                // Wraps text at column 92
     },
 }
