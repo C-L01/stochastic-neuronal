@@ -4,14 +4,15 @@
 ## Preliminaries
 - [ ] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$. If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
 - [ ] Add Arzèla-Ascoli for comparison
-- [ ] Add the Kouritzin result(s) I end up using.
+- [ ] Add the specific Kouritzin result(s) I end up using.
 - [ ] Jusitfy the martingale problem's connection with SDE's.
+- [ ] Change to $s-$ in the martingale problem integrand (and update subsequent sections accordingly)
 
 ## Model
 - [x] Go through Overleaf comments
-- [ ] Get solution existence for drift for non-Dirac i.c., using what Oliver said about conditional distributions
+- [ ] Get solution existence for drift for non-Dirac initial conditions, using conditional distributions probably
 - [ ] Check / elaborate on solution existence theorem (proof), for full generator mainly
-- [ ] Upgrade to unique solution for all martingale problems (low-prio)
+- [ ] Upgrade to unique solution for the martingale problems
 
 ## Connection to empirical measure
 - [x] Go through Overleaf comments
@@ -20,8 +21,8 @@
 - [ ] Also in that proof, there is a zcref problem as it writes Theorem instead of Definition
 
 ## Vanishing variance
-- [ ] Go through Overleaf comments
-- [ ] Rewrite / update
+- [x] Go through Overleaf comments
+- [x] Rewrite / update
 
 ## Compactness for fixed $\lambda$
 - [ ] Go through Overleaf comments
