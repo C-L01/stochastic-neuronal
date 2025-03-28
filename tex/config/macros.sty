@@ -189,6 +189,7 @@
 
 %%% Theorems
 
+% Define theorems, corollaries, propositions, lemmas, definitions, examples and remarks
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]          % numbered by section
 \newtheorem{corollary}[theorem]{Corollary}      % same counter as theorem
@@ -202,6 +203,12 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}            % same counter as theorem
 
-% Tell zref-clever how to reference these
-% \AddToHook{env/lemma/begin}{%
-% \zcsetup{countertype={lemma=theorem}}}
+% Tell zref-clever how to reference the above, by locally pairing the 'theorem'-counter with the appropriate reference type
+% Note that we are making use of built-in reference types from zref-clever here (namely corollary, proposition, etc.).
+% We could change the behavior of those reference types, or create new ones, using zcRefTypeSetup (see the docs).
+\AddToHook{env/corollary/begin}{\zcsetup{countertype={theorem=corollary}}}
+\AddToHook{env/proposition/begin}{\zcsetup{countertype={theorem=proposition}}}
+\AddToHook{env/definition/begin}{\zcsetup{countertype={theorem=definition}}}
+\AddToHook{env/example/begin}{\zcsetup{countertype={theorem=example}}}
+\AddToHook{env/lemma/begin}{\zcsetup{countertype={theorem=lemma}}}
+\AddToHook{env/remark/begin}{\zcsetup{countertype={theorem=remark}}}

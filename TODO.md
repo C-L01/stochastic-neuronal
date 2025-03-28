@@ -18,7 +18,7 @@
 - [x] Go through Overleaf comments
 - [x] Rewrite
 - [ ] It would be cleaner to prove that the claimed domain for Theta_N is correct, instead of showing that the emp measure is cadlag
-- [ ] Also in that proof, there is a zcref problem as it writes Theorem instead of Definition
+- [x] Also in that proof, there is a zcref problem as it writes Theorem instead of Definition
 
 ## Vanishing variance
 - [x] Go through Overleaf comments
