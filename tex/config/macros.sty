@@ -189,6 +189,15 @@
 
 %%% Theorems
 
+% Tell zref-clever how to reference these (NOTE: must (apparently) be done before newtheorem definitions)
+\AddToHook{env/corollary/begin}{\zcsetup{countertype={corollary=theorem}}}
+\AddToHook{env/proposition/begin}{\zcsetup{countertype={proposition=theorem}}}
+\AddToHook{env/definition/begin}{\zcsetup{countertype={definition=theorem}}}
+\AddToHook{env/example/begin}{\zcsetup{countertype={example=theorem}}}
+\AddToHook{env/lemma/begin}{\zcsetup{countertype={lemma=theorem}}}
+\AddToHook{env/remark/begin}{\zcsetup{countertype={remark=theorem}}}
+
+% Define theorems, corollaries, propositions, lemmas, definitions, examples and remarks
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]          % numbered by section
 \newtheorem{corollary}[theorem]{Corollary}      % same counter as theorem
@@ -202,6 +211,4 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}            % same counter as theorem
 
-% Tell zref-clever how to reference these
-% \AddToHook{env/lemma/begin}{%
-% \zcsetup{countertype={lemma=theorem}}}
+
