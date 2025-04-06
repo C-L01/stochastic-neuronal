@@ -5,8 +5,8 @@
 - [ ] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$. If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
 - [ ] Add Arzèla-Ascoli for comparison
 - [ ] Add the specific Kouritzin result(s) I end up using.
-- [ ] Jusitfy the martingale problem's connection with SDE's.
-- [ ] Change to $s-$ in the martingale problem integrand (and update subsequent sections accordingly)
+- [ ] Justify the martingale problem's connection with SDE's.
+- [x] Change to $s-$ in the martingale problem integrand (and update subsequent sections accordingly)
 
 ## Model
 - [x] Go through Overleaf comments
@@ -17,7 +17,7 @@
 ## Connection to empirical measure
 - [x] Go through Overleaf comments
 - [x] Rewrite
-- [ ] It would be cleaner to prove that the claimed domain for Theta_N is correct, instead of showing that the emp measure is cadlag
+- [x] It would be cleaner to prove that the claimed domain for Theta_N is correct, instead of showing that the emp measure is cadlag
 - [x] Also in that proof, there is a zcref problem as it writes Theorem instead of Definition
 
 ## Vanishing variance
