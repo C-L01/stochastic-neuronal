@@ -1,11 +1,36 @@
 \section{Empirical measure}
 
-Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure curve} \(\mu^N \in D_{\cP(\potspace)}[0,T]\).\footnote{We explicitly indicate the dependence on both \(\lambda\) and \(N\), as we will vary them later.}
+Instead of tracking the evolution of all individual neurons over time, we are interested in the \textit{empirical measure curve} \(\mu^N \in D_{\cP(\potspace)}[0,T]\).
 It is based on the following function,
 \begin{equation}
   \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; \quad (x^1,\dots,x^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x^i},
 \end{equation}
-which compresses the information on all neuron position curves to an (empirical) average.
+which compresses the information of all neuron position curves to an (empirical) average curve.
+The fact that \(\Theta_N\) maps to the space of càdlàg probability measure curves, as claimed, follows directly from the definition of narrow convergence.
+To illustrate the concepts we have introduced so far we will nonetheless quickly prove this.
+\begin{lemma}\label{lem:range-of-Theta}
+  For \(\bm{x} \in D_{\potspace^N}[0,T]\) we have \(\Theta_N(\bm{x}) \in D_{\cP(\potspace)}[0,T]\).
+\end{lemma}
+
+\begin{proof}
+  First of all, note that \(\Theta_N(\bm{x})_t\) is a convex combination of (Dirac) probability measures for any \(t \in [0,T]\), so since \(\cP(\potspace)\) is convex \(\Theta_N(\bm{x})_t \in \cP(\potspace)\).
+  By definition \(\bm{x}\) is right-continuous, meaning for any \(t \in [0,T)\)
+  \begin{equation}
+    \forall i \in [N] : \lim_{s \downarrow t} x_s^i = x_t^i.
+  \end{equation}
+  It follows that for all test functions \(\psi \in C_b(\potspace)\),
+  \begin{equation}
+    \lim_{s \downarrow t} \int_{\potspace^N} \psi \odif{\Theta_N(\bm{x})_s}
+    = \lim_{s \downarrow t} \frac{1}{N} \sum_{i=1}^N \psi(x_s^i)
+    = \frac{1}{N} \sum_{i=1}^N \psi(x_t^i)
+    = \int_{\potspace^N} \psi \odif{\Theta_N(\bm{x})_t}.
+  \end{equation}
+  By \zcref{def:narrow-conv} this means that \(\Theta_N(\bm{x})_s \wto \Theta_N(\bm{x})_t\) as \(s \downarrow t\), whence \(\Theta_N(\bm{x})\) is right-continuous (with respect to the narrow topology).
+  The existence of (narrow) left-limits for \(\Theta_N(\bm{x})\) follows in exactly the same way from their existence for \(\bm{x}\).
+  We conclude that \(\Theta_N(\bm{x}) \in D_{\cP(\potspace)}[0,T]\).
+\end{proof}
+
+We will now apply \(\Theta_N\) to our curve of neuron potentials to obtain the empirical measure curve.
 \begin{definition}\label{def:emp-measure}
   The empirical measure curve of the process \(\bm{X}\) is defined as
   \begin{equation}
@@ -15,31 +40,17 @@ which compresses the information on all neuron position curves to an (empirical)
   \begin{equation}
     \mu_t^N = \frac{1}{N} \sum_{i=1}^N \delta_{X_t^i}.
   \end{equation}
+  Note that this is a random probability measure on \( \potspace \).
 \end{definition}
-Note that the measure \(\mu_t^N\) is a random measure.
-As claimed above, it easily follows that the empirical measure curve is càdlàg with respect to the narrow topology.
-We will nonetheless prove this to illustrate the concepts we have introduced so far.
-\begin{lemma}
-  For the empirical measure curve as defined in \zcref{def:emp-measure}, we have \(\mu^N \in D_{\cP(\potspace)}[0,T]\).
-\end{lemma}
 
+\begin{corollary}
+  The empirical measure curve is càdlàg w.r.t. the narrow topology, i.e.\ \( \mu^N \in D_{\cP(\potspace)}[0,T] \)~a.s.
+\end{corollary}
 \begin{proof}
   Recall from \zcref{thm:mart-problem-sol} that \(\bm{X} \in D_{\potspace^N}[0,T]\).
-  Thus, \(\bm{X}\) is right-continuous, so for any \(t \in [0,T)\)
-  \begin{equation}
-    \forall i \in [N] : \lim_{s \downarrow t} X_s^i = X_t^i.
-  \end{equation}
-  It follows that for any test function \(\psi \in C_b(\potspace)\),
-  \begin{equation}
-    \lim_{s \downarrow t} \int_{\potspace^N} \psi \odif{\mu_s^N}
-    = \lim_{s \downarrow t} \frac{1}{N} \sum_{i=1}^N \psi(X_s^i)
-    = \frac{1}{N} \sum_{i=1}^N \psi(X_t^i)
-    = \int_{\potspace^N} \psi \odif{\mu_t^N}.
-  \end{equation}
-  By \zcref{def:narrow-conv} this means that \(\mu_s^N \wto \mu_t^N\) as \(s \downarrow t\), whence \(\mu^N\) is right-continuous.
-  The existence of left-limits for \(\mu^N\) follows in exactly the same way from their existence for \(\bm{X}\).
-  We conclude that \(\mu^N \in D_{\cP(\potspace)}[0,T]\).
+  The result now follows from \zcref{lem:range-of-Theta}.
 \end{proof}
+
 
 \subsection{Empirical martingale}\label{subsec:emp-mart}
 
