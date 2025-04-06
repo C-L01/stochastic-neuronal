@@ -55,7 +55,7 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \begin{equation}
     S_s^N \coloneqq \int_\potspace \psi \odif{\mu_s^N},
     \quad
-    A_s^N \coloneqq \int_0^s \int_\potspace \ol{L}_r^{\lambda, N} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T],
+    A_s^N \coloneqq \int_0^s \int_\potspace \ol{L}_{\mu_r^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T],
   \end{equation}
   such that
   \begin{equation}\label{eq:M=S-A}
@@ -77,11 +77,11 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \end{equation}
 
   Now we are going to reuse the original martingale from \zcref{thm:mart-problem-sol}, but we will choose \(\varphi \coloneqq \br{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2\) as the test function this time.
-  Recall \zcref{eq:M-def}
+  Recall \zcref{eq:M-def} and \zcref{eq:mart-problem-s-}, which together yield
   \begin{equation}
     M_t^{\lambda, N}[\varphi]
-    = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi (\bm{X}_r) \odif{r}
-    = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}_r) \odif{r}.
+    = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi (\bm{X}_{r-}) \odif{r}
+    = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}_{r-}) \odif{r}.
   \end{equation}
   We will substiture the aforementioned choice of \( \varphi \) into this expression term by term, starting with
   \begin{equation}
@@ -96,44 +96,44 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   Next, we have
   \begin{equation}
     \begin{split}
-      (L_{\cD}^{N} \varphi) (\bm{X}_r)
-       & = \sum_{i=1}^N b(X_r^i) \partial_{x^i}\br*{ \frac{1}{N} \bigoplus_{j=1}^N \psi }^2 (\bm{X}_r)               \\
-       & = \frac{1}{N^2} \sum_{i=1}^N b(X_r^i) \cdot 2 \br*{ \sum_{j=1}^N \psi(X_r^j) } \cdot \partial_x \psi(X_r^i) \\
-       & = \frac{2}{N^2} \sum_{j=1}^N \psi(X_r^j) \sum_{i=1}^N b(X_r^i) \partial_x \psi(X_r^i)                       \\
-       & = 2 \int_\potspace \psi \odif{\mu_r^N} \int_\potspace b(x) \partial_x \psi (x) \mu_r^N(\odif{x})            \\
-       & = 2 S_r^N \int_\potspace b(x) \partial_x \psi (x) \mu_r^N(\odif{x}).
+      (L_{\cD}^{N} \varphi) (\bm{X}_{r-})
+       & = \sum_{i=1}^N b(X_{r-}^i) \partial_{x^i}\br*{ \frac{1}{N} \bigoplus_{j=1}^N \psi }^2 (\bm{X}_{r-})               \\
+       & = \frac{1}{N^2} \sum_{i=1}^N b(X_{r-}^i) \cdot 2 \br*{ \sum_{j=1}^N \psi(X_{r-}^j) } \cdot \partial_x \psi(X_{r-}^i) \\
+       & = \frac{2}{N^2} \sum_{j=1}^N \psi(X_{r-}^j) \sum_{i=1}^N b(X_{r-}^i) \partial_x \psi(X_{r-}^i)                       \\
+       & = 2 \int_\potspace \psi \odif{\mu_{r-}^N} \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x})            \\
+       & = 2 S_{r-}^N \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x}).
     \end{split}
   \end{equation}
 
   Finally, similar to \zcref{eq:kappa-to-mean-kappa},
   \begin{equation}
     \begin{split}
-      (L_{\cJ}^{\lambda, N} \varphi) (\bm{X}_r)
-       & = \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_r^j) }^2 } \lambda \kappa(\bm{X}_r,\odif{\bm{y}})                                                                   \\
-       & = \sum_{i=1}^N \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_r^j) }^2 } \lambda \delta_{\jtarg^i(\bm{X}_r)}(\odif{y^i}) \prod_{k \neq i} \delta_{X_r^k}(\odif{y^k}) \\
+      (L_{\cJ}^{\lambda, N} \varphi) (\bm{X}_{r-})
+       & = \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_{r-}^j) }^2 } \lambda \kappa(\bm{X}_{r-},\odif{\bm{y}})                                                                   \\
+       & = \sum_{i=1}^N \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_{r-}^j) }^2 } \lambda \delta_{\jtarg^i(\bm{X}_{r-})}(\odif{y^i}) \prod_{k \neq i} \delta_{X_{r-}^k}(\odif{y^k}) \\
       %
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{  \sum_{\substack{j=1                                                                                                                                                                 \\ j \neq i}}^N \psi(X_r^j) + \psi(\jtarg^i(\bm{X}_r)) }^2 - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_r^j) + \psi(X_r^i) }^2 }  \\
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{  \sum_{\substack{j=1                                                                                                                                                                 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(\jtarg^i(\bm{X}_{r-})) }^2 - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(X_{r-}^i) }^2 }  \\
       %
-      %  & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_r^j) }^2 + 2 \psi(\jtarg^i(\bm{X}_r)) \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_r^i) + \psi^2(\jtarg^i(\bm{X}_r)) - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_r^j) + \psi(X_r^i) }^2 }^2 } \\
+      %  & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) }^2 + 2 \psi(\jtarg^i(\bm{X}_{r-})) \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^i) + \psi^2(\jtarg^i(\bm{X}_{r-})) - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(X_{r-}^i) }^2 }^2 } \\
       %
       % Simply using (a + b)^2 - (a + c)^2 = a^2 + 2 a b + b^2 - ( a^2 + 2 a c + c^2 ) = 2 (b - c) a + b^2 - c^2
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\jtarg^i(\bm{X}_r)) - \psi(X_r^i)) \br*{\sum_{\substack{j=1                                                                                                                        \\ j \neq i}}^N \psi(X_r^j)} + \psi^2(\jtarg^i(\bm{X}_r)) - \psi^2(X_r^i) } \\
-      % Using the identity \jtarg^i(\bm{X}_r) = \ol{\jtarg}_{\mu_r^N}(X_r^i), which holds due to the uniform, scaled weight choice
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\ol{\jtarg}_{\mu_r^N}(X_r^i)) - \psi(X_r^i)) \br*{\sum_{j=1}^N \psi(X_r^j) - \psi(X_r^i)} + \psi^2(\ol{\jtarg}_{\mu_r^N}(X_r^i)) - \psi^2(X_r^i) }                                 \\
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\jtarg^i(\bm{X}_{r-})) - \psi(X_{r-}^i)) \br*{\sum_{\substack{j=1                                                                                                                        \\ j \neq i}}^N \psi(X_{r-}^j)} + \psi^2(\jtarg^i(\bm{X}_{r-})) - \psi^2(X_{r-}^i) } \\
+      % Using the identity \jtarg^i(\bm{X}_{r-}) = \ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i), which holds due to the uniform, scaled weight choice
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi^2(X_{r-}^i) }                                 \\
       %
-       & = \frac{1}{N^2} \sum_{i=1}^N \int_\potspace \sbr*{ 2 (\psi(y) - \psi(X_r^i)) \br*{\sum_{j=1}^N \psi(X_r^j) - \psi(X_r^i)} + \psi^2(y) - \psi^2(X_r^i) } \lambda \ol{\kappa}_{\mu_r^N}(X_r^i, \odif{y})                               \\
+       & = \frac{1}{N^2} \sum_{i=1}^N \int_\potspace \sbr*{ 2 (\psi(y) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(y) - \psi^2(X_{r-}^i) } \lambda \ol{\kappa}_{\mu_{r-}^N}(X_{r-}^i, \odif{y})                               \\
       %
-       & = \frac{1}{N} \int_\potspace \int_\potspace \sbr*{ 2 (\psi(y) - \psi(x)) \br*{\sum_{j=1}^N \psi(X_r^j)} - 2 (\psi(y) - \psi(x)) \psi(x) + \psi^2(y) - \psi^2(x) } \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) \mu_r^N(\odif{x}).
+       & = \frac{1}{N} \int_\potspace \int_\potspace \sbr*{ 2 (\psi(y) - \psi(x)) \br*{\sum_{j=1}^N \psi(X_{r-}^j)} - 2 (\psi(y) - \psi(x)) \psi(x) + \psi^2(y) - \psi^2(x) } \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x}).
     \end{split}
   \end{equation}
-  Recall that \( \psi \) is bounded, so that in particular \( (x,y) \mapsto - 2 (\psi(y) - \psi(x)) \psi(x) + \psi^2(y) - \psi^2(x) \) is bounded, and that \( \ol{\kappa}_{\mu_r^N} \) and \( \mu_r^N \) are both finite (probability) measures.
+  Recall that \( \psi \) is bounded, so that in particular \( (x,y) \mapsto - 2 (\psi(y) - \psi(x)) \psi(x) + \psi^2(y) - \psi^2(x) \) is bounded, and that \( \ol{\kappa}_{\mu_{r-}^N} \) and \( \mu_{r-}^N \) are both finite (probability) measures.
   This implies that
   \begin{equation}
     \begin{split}
-      (L_{\cJ}^{\lambda, N} \varphi) (\bm{X}_r)
-       & = \frac{2}{N} \br*{\sum_{j=1}^N \psi(X_r^j)}  \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) \mu_r^N(\odif{x}) + \bigO{N^{-1}} \\
-       & = 2 \int_\potspace \psi \odif{\mu_r^N} \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) \mu_r^N(\odif{x})  + \bigO{N^{-1}}       \\
-       & = 2 S_r^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) \mu_r^N(\odif{x})  + \bigO{N^{-1}},
+      (L_{\cJ}^{\lambda, N} \varphi) (\bm{X}_{r-})
+       & = \frac{2}{N} \br*{\sum_{j=1}^N \psi(X_{r-}^j)}  \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x}) + \bigO{N^{-1}} \\
+       & = 2 \int_\potspace \psi \odif{\mu_{r-}^N} \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x})  + \bigO{N^{-1}}       \\
+       & = 2 S_{r-}^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x})  + \bigO{N^{-1}},
     \end{split}
   \end{equation}
   for \( N \to \infty \).
@@ -141,21 +141,21 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \begin{equation}
     \begin{split}
       M_t^{\lambda, N}[\varphi]
-                                         & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}_r) \odif{r}                                                                                                                                             \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t \cbr*{ S_r^N \int_\potspace b(x) \partial_x \psi (x) \mu_r^N(\odif{x}) + S_r^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) \mu_r^N(\odif{x})  + \bigO{N^{-1}} }  \odif{r} \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \int_\potspace \cbr*{ b(x) \partial_x \psi (x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_r^N}(x, \odif{y}) } \mu_r^N(\odif{x})  \odif{r} + \bigO{N^{-1}}                                         \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \int_\potspace \ol{L}_r^{\lambda, N} [\psi] \odif{\mu_r^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                  \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \odv{A_r^N}{r} \odif{r} + \bigO{N^{-1}}                                                                                                                                                                              \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \odif{\br*{S_r^N - S_0^N - \ol{M}_r^N}} + \mathcal{O}(N^{-1})                                                                                                                                                        \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_r^N \odif{S_r^N} + 2 \int_0^t S_r^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1})                                                                                                                                              \\
-                                        % TODO I do not have r- in the integrand, but I need it :(
-      \overset{\eqref{eq:S^2-q-var-rel}} & {=} \sbr{S^N}_t + 2 \int_0^t S_r^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}),
+                                         & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}{r-}) \odif{r}                                                                                                                                             \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t \cbr*{ S_{r-}^N \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x}) + S_{r-}^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x})  + \bigO{N^{-1}} }  \odif{r} \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \cbr*{ b(x) \partial_x \psi (x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) } \mu_{r-}^N(\odif{x})  \odif{r} + \bigO{N^{-1}}                                         \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \ol{L}_{\mu_{r-}^N}^{N} [\psi] \odif{\mu_{r-}^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                  \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odv{A_{r-}^N}{r} \odif{r} + \bigO{N^{-1}}                                                                                                                                                                              \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_{r-}^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\   % A^N is (absolutely) continuous
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{\br*{S_r^N - S_0^N - \ol{M}_r^N}} + \mathcal{O}(N^{-1})                                                                                                                                                        \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{S_r^N} + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1})                                                                                                                                              \\
+      \overset{\eqref{eq:S^2-q-var-rel}} & {=} \sbr{S^N}_t + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}),
     \end{split}
   \end{equation}
 
   Now, note that the first term equals \(\sbr{\ol{M}^N}_t\) because \(A\) is of bounded variation (so its quadratic variation is zero).
-  The second term is a martingale so it vanishes in expectation.    % TODO why martingale?
+  The second term is a martingale so it vanishes in expectation.    % TODO explain more on why martingale? Note that S^N is bounded, and that both Klebaner and Jacod and Sirjaev say that the integrator being a local martingale implies that the integral is also a local martingale. As we are on [0,T], local martingales are just martingales I think
   Hence
   \begin{equation}
     \Var{\lawmu^{\lambda,N}}{\ol{M}_t^N}

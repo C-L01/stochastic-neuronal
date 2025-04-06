@@ -157,7 +157,7 @@ We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of 
   X_t(\omega) \coloneqq \omega_t, \quad \omega \in D_E[0,\infty), t \geq 0,
 \end{equation}
 defined on the probability space \((D_E[0,\infty), \mathscr{S}_E, P)\), it holds that for all test functions \(f \in D(A)\)
-\begin{equation}
+\begin{equation}\label{eq:mart-problem}
   t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
 \end{equation}
 is a martingale with respect to the filtration \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
@@ -168,3 +168,12 @@ If additionally \( (X_0)_\# P = P X_0^{-1} = \mu \) for a prescribed initial dis
 Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
 The martingale problem for \((A,\mu)\) is well-posed if (i) a solution exists and (ii) it is unique.
 If this holds for all \(\mu \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.
+
+Also, because the canonical coordinate process is càdlàg it has at most countably many discontinuities.
+% See https://math.stackexchange.com/questions/441721/the-set-of-jumps-of-a-c%C3%A0dl%C3%A0g-function-is-countable
+This implies that
+\begin{equation}\label{eq:mart-problem-s-}
+  t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
+  = f(X_t) - f(X_0) - \int_0^t (Af)(X_{s-}) \odif{s},
+\end{equation}
+which is thus an equivalent formulation of the martingale problem.
