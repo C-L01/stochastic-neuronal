@@ -43,9 +43,10 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \begin{equation}
     S_s^N \coloneqq \int_\potspace \psi \odif{\mu_s^N},
     \quad
-    A_s^N \coloneqq \int_0^s \int_\potspace \ol{L}_{\mu_r^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T],
+    A_s^{\lambda, N} \coloneqq \int_0^s \int_\potspace \ol{L}_{\mu_r^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T].
   \end{equation}
-  such that
+  Just as for the empirical martingale, we will write \( A_s^N \coloneqq A_s^{\lambda, N} \) in this proof since \( \lambda \) is fixed.
+  Then we have
   \begin{equation}\label{eq:M=S-A}
     \ol{M}_t^N = S_t^N - S_0^N - A_t^N.
   \end{equation}
@@ -132,7 +133,7 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
                                          & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}{r-}) \odif{r}                                                                                                                                             \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t \cbr*{ S_{r-}^N \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x}) + S_{r-}^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x})  + \bigO{N^{-1}} }  \odif{r} \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \cbr*{ b(x) \partial_x \psi (x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) } \mu_{r-}^N(\odif{x})  \odif{r} + \bigO{N^{-1}}                                         \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \ol{L}_{\mu_{r-}^N}^{N} [\psi] \odif{\mu_{r-}^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                  \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \ol{L}_{\mu_{r-}^N}^{\lambda} [\psi] \odif{\mu_{r-}^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                  \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odv{A_{r-}^N}{r} \odif{r} + \bigO{N^{-1}}                                                                                                                                                                              \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_{r-}^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\   % A^N is (absolutely) continuous
