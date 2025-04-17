@@ -147,6 +147,53 @@ One can substitute either the CCC or the MCC (not both) with such a weaker condi
 
 % TODO: list the conditions I actually end up using
 
+\subsection{(Semi)martingales}
+
+In \zcref{sec:} we will use various concepts and tools from stochastic calculus, which we will briefly enumerate here.
+A more detailed explanation can be found in~\cite{klebanerIntroductionStochasticCalculus2012}.
+
+\begin{definition}
+  A stochastic process \(\Set{M_t}_{t}\) is a \textit{martingale} if it is adapted to a filtration \(\Set{\cF_t}_t\), \( M_t \) is integrable for every \(t\), and for each \( s < t \) it satisfies
+  \begin{equation}
+    \Exp{}{M_t \given \cF_s} = M_s \quad \text{a.s.}
+  \end{equation}
+  It is a \texit{local martingale} if there exists an a.s.\ increasing sequence of stopping times \( \tau_n \) with \( \tau_n \uparrow \infty \) a.s.\ such that the stopped process \( M_{t \land \tau_n} \) is a martingale for all \( n \in \bN \). % NOTE: Klebaner 2012 requires uniform integrability, but by Proposition 4.4 in the Stochastic Integration lecture notes this is equivalent
+\end{definition}
+
+Of course, a martingale is also a local martingale.
+This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped martingale is still a martingale.
+
+\begin{definition}
+  The \textit{variation} of a real-valued function \( g \) that is defined on an interval \( [a,b] \) is equal to
+  \begin{equation}
+    V_g([a,b]) \coloneqq \sup \sum_{i=1}^n \abs{ g(t_i^n) - g(t_{i-1}) }
+  \end{equation}
+  where we take the supremum over all possible partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\) of the interval \( [a,b] \).
+  % NOTE: Klebaner 2012 defines finite variation and bounded variation as follows. I decided to only define BV relative to finite intervals to avoid confusion.
+  % The function \( g \) is of \textit{finite variation} if \( V_g([0,t]) < \infty \) for all \( t \).
+  % It is of \textit{bounded variation} if \( \sup_t V_g([0,t]) < \infty \).
+  If \( V_g([a,b]) < \infty \) we say that \( g \) is of \textit{bounded variation} on the interval \( [a,b] \).
+\end{definition}
+
+\begin{definition}
+  A stochastic process \(\Set{S_t}_{t}\) with càdlàg sample paths adapted to a filtration \(\Set{\cF_t}_t\) is called a \textit{semimartingale} if it can be decomposed as
+  \begin{equation}
+    S_t = S_0 + M_t + A_t,
+  \end{equation}
+  where \( \Set{M_t}_{t} \) is a local martingale w.r.t. \(\Set{\cF_t}_t\) and \( \Set{A_t}_{t} \) is a process whose paths are a.s. of bounded variation on finite intervals, and \( M_0 = A_0 = 0 \) a.s.
+\end{definition}
+
+\begin{definition}
+  If it exists, the \textit{quadratic variation} of a stochastic process \(\Set{X_t}_{t}\) equals
+  \begin{equation}
+    [X]_t \coloneqq \lim \sum_{i=1}^n (X_{t_i}^n - X_{t_{i-1}}^n)^2
+  \end{equation}
+  where limit is a limit in probability over shrinking partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\).
+\end{definition}
+
+% TODO: It exists for semimartingales by Klebaner p.220
+
+
 \subsection{Martingale problem on \texorpdfstring{\(D_E[0,\infty)\)}{D([0,infinity), E)}}\label{sec:martingale-problem}
 
 Problems involving stochastic dynamics are often formulated as a \textit{martingale problem}.
