@@ -10,9 +10,9 @@ We will assume that \((E,d)\) is both separable and complete, because we will ex
   \item \(M_b(E) \subset M(E)\) is the space of functions which are additionally bounded.
   \item \(M_0(E) \subset M(E)\) is the space of functions which are additionally vanishing at infinity.
   \item \(M_c(E) \subset M(E)\) is the space of functions which are additionally compactly supported.
-  \item \(C_*(E) \subset M_*(E)\), \( * \in \Set{b, 0, c} \) is the space of function which are (additionally) continuous.
-  \item \(C_*^{1-}(E) \subset C_*(E)\), \( * \in \Set{b, 0, c} \) is the space of function which are (additionally) locally Lipschitz continuous.
-  \item \(C_*^{k}(E) \subset C_*^{1-}(E)\), \( * \in \Set{b, 0, c} \), \( k \in \bN \) is the space of function which are (additionally) \(k\)-times continuously differentiable.
+  \item \(C_*(E) \subset M_*(E)\), \( * \in \Set{b, 0, c} \) is the space of functions which are (additionally) continuous.
+  \item \(C_*^{1-}(E) \subset C_*(E)\), \( * \in \Set{b, 0, c} \) is the space of functions which are (additionally) locally Lipschitz continuous.
+  \item \(C_*^{k}(E) \subset C_*^{1-}(E)\), \( * \in \Set{b, 0, c} \), \( k \in \bN \) is the space of functions which are (additionally) \(k\)-times continuously differentiable.
   \item \(\cB(E)\) denotes the Borel \( \sigma \)-algebra on \(E\).
   \item \(\cP(E)\) is the space of Borel probability measures on \(E\).
 \end{itemize}
@@ -100,7 +100,10 @@ This requirement is formalized through the following concept.
   \end{equation}
 \end{definition}
 
-Tightness is not just a necessary condition for convergence; it also implies the existence of a converging subsequence.
+Due to completeness and separability of \((E,d)\), a set consisting of a single probability measure is tight by Theorem 1.3 in~\cite{billingsleyConvergenceProbabilityMeasures1999}.
+By extension, any finite \(\Pi \subseteq \cP(E)\) is tight as well (since a finite union of compact sets is compact).
+
+Tightness is not just a necessary condition for convergence: it also implies the existence of a converging subsequence.
 This is the subject of Prokhorov's theorem~\cite[57-65]{billingsleyConvergenceProbabilityMeasures1999}.
 
 \begin{theorem}[Prokhorov]
@@ -109,32 +112,35 @@ This is the subject of Prokhorov's theorem~\cite[57-65]{billingsleyConvergencePr
 
 \subsubsection{Tightness in Skorokhod spaces}
 
-We want to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in \(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\).}
+We want to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in~\(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\).}
 To this end, we will make use of a characterization of tightness specific to probability measures on Skorokhod spaces by Kouritzin~\cite{kouritzinTightnessProbabilityMeasures2015}.
-There, the setting is very general, with \(E\) being a completely regular topological space.
-We will restrict Kouritzin's result to our context, in which \((E,d)\) is a Polish metric space and the tight set is always a sequence.
+
+There, the results are provided on the level of processes, but we will instead formulate them for the laws of those processes (which is entirely equivalent).
+Kouritzin's setting is also very general, with \( E \) being a completely regular topological space.
+We will restrict Kouritzin's results to our context, in which \((E,d)\) is a Polish metric space.
 
 \begin{definition}[CCC]
-  Let \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \).
-  Then \(\Pi\) satisfies the \textit{compact containment condition} if
+  Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
+  Then \( \Pi \) satisfies the \textit{compact containment condition} if
   \begin{equation}
-    \forall \eps > 0 : \exists K \Subset E : \inf_{n\in\bN} \mu_n(\Set{x \in D_E[0,T] \given \forall t \in [0,T] : x_t \in K}) \geq 1 - \eps.
+    \forall \eps > 0 : \exists K \Subset E : \inf_{\mu \in \Pi} \mu(\Set{x \in D_E[0,T] \given \forall t \in [0,T] : x_t \in K}) \geq 1 - \eps.
   \end{equation}
 \end{definition}
 
 \begin{definition}[MCC]
-  Let \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \).
-  Then \(\Pi\) satisfies the \textit{modulus of continuity condition} if
-  \begin{equation}
-    \forall \eta > 0 : \exists \delta > 0 : \sup_{n\in\bN} \mu_n(\Set{x \in D_E[0,T] \given w'(x,\delta) \geq \eta}) \leq \eta.
+  Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
+  Then \( \Pi \) satisfies the \textit{modulus of continuity condition} if
+  \begin{equation}\label{eq:MCC}
+    \forall \eta > 0 : \exists \delta > 0 : \sup_{\mu \in \Pi} \mu(\Set{x \in D_E[0,T] \given w'(x,\delta) \geq \eta}) \leq \eta.
   \end{equation}
+  It satisfies the \textit{asymptotic modulus of continuity condition} (AMCC) if for every \( \eta > 0 \) there exists a \( \delta > 0 \) and a finite set \( \Pi_0 \subset \Pi \) such that the statement in \zcref{eq:MCC} holds with \( \Pi \) replaced by \( \Pi \setminus \Pi_0 \).
 \end{definition}
 
 Note how these two conditions relate to the two conditions in \zcref{prelim:thm:rel-compact-in-SK}.
 The following result is therefore not surprising.
 
 \begin{theorem}
-  Suppose \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \) satisfies both the CCC and the MCC.\@ Then \( \Pi \) is tight.
+  Suppose \( \Pi \subseteq \cP(D_{E}[0,T]) \) satisfies both the CCC and the MCC.\@ Then \( \Pi \) is tight.
 \end{theorem}
 
 \begin{proof}
@@ -143,9 +149,26 @@ The following result is therefore not surprising.
 
 However, verifying the CCC and/or the MCC can be difficult.
 To that end, Kouritzin introduces weaker alternative conditions.
-One can substitute either the CCC or the MCC (not both) with such a weaker condition, and still preserve the result.
+One can replace either the CCC or the MCC (not both) with such a weaker condition, and still preserve the tightness result.
+We will only require the substitution of the MCC by a weaker alternative, which we will provide after defining a separation property for collections of functions.
 
-% TODO: list the conditions I actually end up using
+\begin{definition}
+  A set \( \cG \subseteq M(E) \) \textit{separates points} if for every pair of distinct points \( x, y \in E \) there exists a \( g \in \cG \) such that \( g(x) \neq g(y) \).
+\end{definition}
+
+\begin{definition}[WMCC]
+  Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
+  Then \( \Pi \) satisfies the \textit{weak modulus of continuity condition} if there exists a \( \cG \subseteq C(E) \) that separates points\footnote{Kouritzin only requires this to hold on compact sets, but as we are working in a metric space this is equivalent to global separation of points (since any set \( \Set{x,y} \subseteq E \) is compact).}, and the set of pushforward measures \( \Set{g_\# \mu \given \mu \in \Pi} \subseteq \cP(D_\bR[0,T]) \)\footnote{Here we identify \( g : E \to \bR \) with the map \( D_E[0,T] \mapsto D_\bR[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
+  (The metric on \( \bR \) is induced by the usual Euclidean norm \( \abs{\cdot} \).)
+  % and \( \Set{g \circ X^\alpha} \) satisfies the AMCC on \( (\bR, \abs{\cdot}) \) for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
+\end{definition}
+
+By Theorem 20 from Kourizin \cite{kouritzinTightnessProbabilityMeasures2015}, we can still achieve tightness with this weaker condition.
+
+\begin{theorem}
+  If \( \Pi \subseteq \cP(D_{E}[0,T]) \) satisfies the CCC and the WMCC, then it is tight.
+\end{theorem}
+% NOTE: Theorem 20 in Kouritzin is (again) formulated for processes, and it yields tightness only for indistinguishable processes. But indistinguishable processes have the same law, so I don't understand why that is different from just X^alpha being tight?
 
 \subsection{(Semi)martingales}
 
@@ -157,7 +180,7 @@ A more detailed explanation can be found in~\cite{klebanerIntroductionStochastic
   \begin{equation}
     \Exp{}{M_t \given \cF_s} = M_s \quad \text{a.s.}
   \end{equation}
-  It is a \texit{local martingale} if there exists an a.s.\ increasing sequence of stopping times \( \tau_n \) with \( \tau_n \uparrow \infty \) a.s.\ such that the stopped process \( M_{t \land \tau_n} \) is a martingale for all \( n \in \bN \). % NOTE: Klebaner 2012 requires uniform integrability, but by Proposition 4.4 in the Stochastic Integration lecture notes this is equivalent
+  It is a \textit{local martingale} if there exists an a.s.\ increasing sequence of stopping times \( \tau_n \) with \( \tau_n \uparrow \infty \) a.s.\ such that the stopped process \( M_{t \land \tau_n} \) is a martingale for all \( n \in \bN \). % NOTE: Klebaner 2012 requires uniform integrability, but by Proposition 4.4 in the Stochastic Integration lecture notes this is equivalent
 \end{definition}
 
 Of course, a martingale is also a local martingale.
@@ -180,7 +203,7 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
   \begin{equation}
     S_t = S_0 + M_t + A_t,
   \end{equation}
-  where \( \Set{M_t}_{t} \) is a local martingale w.r.t. \(\Set{\cF_t}_t\) and \( \Set{A_t}_{t} \) is a process whose paths are a.s. of bounded variation on finite intervals, and \( M_0 = A_0 = 0 \) a.s.
+  where \( \Set{M_t}_{t} \) is a local martingale w.r.t. \(\Set{\cF_t}_t\) and \( \Set{A_t}_{t} \) is a process whose paths are a.s. of bounded variation on bounded intervals, and \( M_0 = A_0 = 0 \) a.s.
 \end{definition}
 
 \begin{definition}
@@ -188,7 +211,7 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
   \begin{equation}
     [X]_t \coloneqq \lim \sum_{i=1}^n (X_{t_i}^n - X_{t_{i-1}}^n)^2
   \end{equation}
-  where limit is a limit in probability over shrinking partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\).
+  where the limit is a limit in probability over shrinking partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\).
 \end{definition}
 
 % TODO: It exists for semimartingales by Klebaner p.220
