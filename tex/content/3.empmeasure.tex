@@ -216,6 +216,7 @@ We will show that the empirical martingale is still a martingale when we interpr
 \end{proof}
 
 % TODO decide what to do with the following
-If the empirical measure \(\mu^N\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \bar{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from \cite{ethierMarkovProcessesCharacterization1985} that it would converge pointwise at the continuity points of \( \bar{\mu}^\lambda \).
-This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.   % TODO would it?
-But unfortunately this will not apply; at most \(\lawmu^{\lambda,N}\) will converge narrowly due to being tight.  % TODO why?
+If the empirical measure \(\mu^N\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \ol{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from~\cite{ethierMarkovProcessesCharacterization1985} that \(\mu^N\) would also converge pointwise at the continuity points of \( \ol{\mu}^\lambda \).
+% This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.   % TODO would it?
+But unfortunately this form of convergence is out of reach.  % TODO why?
+Instead, we will focus on obtaining narrow convergence of \(\lawmu^{\lambda,N}\) by means of tightness.

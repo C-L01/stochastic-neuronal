@@ -2,10 +2,14 @@
 - [ ] Write one
 
 ## Preliminaries
-- [ ] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$. If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
+- [ ] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$.
+    - [ ] If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
+    - [ ] And clarify that w'(x,delta) := w'(x,delta,T).
 - [ ] Add Arzèla-Ascoli for comparison
-- [ ] Add the specific Kouritzin result(s) I end up using.
-- [ ] Justify the martingale problem's connection with SDE's.
+- [x] Add the specific Kouritzin result(s) I end up using.
+    - [ ] Figure out the reason for indistinguishability in Theorem 20 in Kouritzin.
+- [x] Add some stochastic calculus background
+- [ ] Justify the martingale problem's connection with SDEs.
 - [x] Change to $s-$ in the martingale problem integrand (and update subsequent sections accordingly)
 
 ## Model
