@@ -2,8 +2,21 @@
 
 In future sections the empirical martingale from \zcref{subsec:emp-mart} will be our workhorse to study limiting behavior of the neuronal process.  % TODO will it?
 First however we will derive some of its properties.
-
 We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.    % TODO does that imply that? Maybe Klebaner Corollary 7.30 is relevant (although our martingale is not continuous, and we are talking about the quadratic variation, so probably not directly)
+
+Define
+\begin{equation}
+  S_s^N[\psi] \coloneqq \int_\potspace \psi \odif{\mu_s^N},
+  \quad
+  A_s^{\lambda, N}[\psi] \coloneqq \int_0^s \int_\potspace \ol{L}_{\mu_r^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T].
+\end{equation}
+Then we have
+\begin{equation}\label{eq:M=S-A}
+  \ol{M}_t^{\lambda,N}[\psi] = S_t^N[\psi] - S_0^N[\psi] - A_t^{\lambda,N}[\psi].
+\end{equation}
+Note that \((A_s^{\lambda, N}[\psi])_{s\in[0,T]}\) is a process of finite variation, because it is absolutely continuous.
+(This absolute continuity follows directly from the defining expression of \((A_s^N)\).) % which is of "fundamental theorem of calculus"-form.
+Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale.
 
 \begin{proposition}\label{prop:vanishing-variance}  % TODO make clear that both the variance, second moment and quad var go to zero (as they are all equal)
   For all \(\psi \in C_c^1(\potspace)\), \(\lambda > 0\), \(t \in [0,T]\),
@@ -12,49 +25,30 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \end{equation}
 \end{proposition}
 \begin{proof}
-  Throughout this proof we suppress the dependence of the empirical martingale on \( \psi \) and \( \lambda \), as both are fixed.
+  Throughout this proof we suppress the dependence of \( \ol{M} \), \( S \) and \( A \) on \( \psi \) and \( \lambda \), as both are fixed.
   Recall that \((\ol{M}_s^N)_{s\in[0,T]}\) is a martingale by \zcref{prop:emp-M-mart}.
   In particular,
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{\ol{M}_t^N} = \Exp{\lawmu^{\lambda,N}}{\ol{M}_0^N}
     = \Exp{\lawmu^{\lambda,N}}{0} = 0.    % the second-to-last step is obvious from \zcref{eq:M-def}
   \end{equation}
-  Note also that \({(\ol{M}_s^N)}_{s\in[0,T]}\) is bounded, so in particular square integrable.
+  Because both \( \psi \) and \( \ol{L}_{\mu_{r}}^\lambda[\psi] \) are bounded (for fixed \( \lambda \)), \({(\ol{M}_s^N)}_{s\in[0,T]}\) is bounded so in particular square integrable.
   Hence the variance exists and equals the second moment.
-  We can relate the second moment to the expectation of the quadratic variation using Theorem 7.27 from~\cite[201]{klebanerIntroductionStochasticCalculus2012}.
-  Namely, since \(\ol{M}_0^N = 0\),
-  \begin{equation}
-    \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^N)^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}.
-  \end{equation}
+
+  % TODO: what was the idea here? Mentioning the predictability of M here already (or further above) might be good though
   % \begin{equation}
   %     (\ol{M}_t^N)^2 = \abr{\ol{M}^N}_t + 2 \int_0^t \ol{M}_{s-}^N \odif{\ol{M}_s^N}
   % \end{equation}
   % Note that \((\ol{M}_s^N)_{s\in[0,T]}\) is càdlàg by \zcref{eq:M-def} and adapted, so \((\ol{M}_{s-}^N)_{s\in[0,T]}\) is left-continuous and adapted.
   % This means that it is predictable (see e.g. Definition 8.3 \cite{klebanerIntroductionStochasticCalculus2012}), so as \((\ol{M}_s^N)_{s\in[0,T]}\) is bounded the stochastic integral is well-defined.
-  % NOTE comment on "bounded" above:
-  % Cor de Leeuw
-  % 29 November, 1:32 am
-  % Add assumptions on b and domain of L and hat{L} to ensure this holds
-  % Cor de Leeuw
-  % 29 November, 1:38 am
-  % Add above that this boundedness also implies that M is square integrable, so the second moment we are after exists
 
-  Now define
+  We can relate the second moment to the expectation of the quadratic variation using Theorem 7.27 from~\cite[201]{klebanerIntroductionStochasticCalculus2012}.
+  Namely, since \(\ol{M}_0^N = 0\),
   \begin{equation}
-    S_s^N \coloneqq \int_\potspace \psi \odif{\mu_s^N},
-    \quad
-    A_s^{\lambda, N} \coloneqq \int_0^s \int_\potspace \ol{L}_{\mu_r^N}^{\lambda} [\psi] \odif{\mu_{r}^N} \odif{r}, \quad s \in [0,T].
+    \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^N)^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}.
   \end{equation}
-  Just as for the empirical martingale, we will write \( A_s^N \coloneqq A_s^{\lambda, N} \) in this proof since \( \lambda \) is fixed.
-  Then we have
-  \begin{equation}\label{eq:M=S-A}
-    \ol{M}_t^N = S_t^N - S_0^N - A_t^N.
-  \end{equation}
-  Note that \((A_s^N)_{s\in[0,T]}\) is a process of finite variation, because it is absolutely continuous.
-  (This absolute continuity follows directly from the defining expression of \((A_s^N)\).) % which is of "fundamental theorem of calculus"-form.
-  % Because \((A_s)\) is, in particular, continuous and adapted it is also predictable~\cite[215]{klebanerIntroductionStochasticCalculus2012}. % NOTE do I need this?
-  Thus, \((S_s^N)_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale.
-  By Theorem 8.6 in~\cite[221]{klebanerIntroductionStochasticCalculus2012} it now follows that
+
+  By Theorem 8.6 in~\cite[221]{klebanerIntroductionStochasticCalculus2012} it follows that
   \begin{equation}\label{eq:S^2-q-var-rel}
     \begin{split}
       \sbr{S^N}_t & = \sbr{S^N - S_0^N}_t                                                                                \\   % this is clear from the definition of covariation: constants don't vary
@@ -139,17 +133,32 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\   % A^N is (absolutely) continuous
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{\br*{S_r^N - S_0^N - \ol{M}_r^N}} + \mathcal{O}(N^{-1})                                                                                                                                                        \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{S_r^N} + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1})                                                                                                                                              \\
-      \overset{\eqref{eq:S^2-q-var-rel}} & {=} \sbr{S^N}_t + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}),
+      \overset{\eqref{eq:S^2-q-var-rel}} & {=} \sbr{S^N}_t + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}).
     \end{split}
   \end{equation}
 
-  Now, note that the first term equals \(\sbr{\ol{M}^N}_t\) because \(A\) is of bounded variation (so its quadratic variation is zero).
-  The second term is a martingale so it vanishes in expectation.    % TODO explain more on why martingale? Note that S^N is bounded, and that both Klebaner and Jacod and Sirjaev say that the integrator being a local martingale implies that the integral is also a local martingale. As we are on [0,T], local martingales are just martingales I think
-  Hence
+  By the polarization identity for quadratic variation, we have
+  \begin{equation}
+    \sbr{S^N}_t
+    = \sbr{S^N - S_0^N}_t
+    = \sbr{\ol{M}^N + A^N}_t
+    = \sbr{\ol{M}^N}_t + 2 \sbr{ \ol{M}^N, A^N }_t + \sbr{ A^N }_t
+    = \sbr{\ol{M}^N}_t
+  \end{equation}
+  Here the covariation in the second term vanished because \( \ol{M}^N \) is a càdlàg (semi)martingale and \( A^N \) is continuous and of finite variation~\cite[Cor. 8.5]{klebanerIntroductionStochasticCalculus2012}. % also https://math.stackexchange.com/questions/4974191/clarification-on-covariation-between-semimartingale-and-finite-variation-process
+  The latter also explains why the quadratic variation of \( A^N \) in the last term vanished~\cite[Th. 1.10]{klebanerIntroductionStochasticCalculus2012}.
+  Thus,
+  \begin{equation}
+    \sbr{\ol{M}^N}_t = \sbr{S^N}_t = M_t^{\lambda, N}[\varphi] - 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}).
+  \end{equation}
+  Because \( ( S_{r-}^N )_r \) is predictable and \( ( \ol{M}_r^N )_r \) is a (local) martingale, the stochastic integral \( ( \int_0^s S_{r-}^N \odif{\ol{M}_r^N} )_s \) is a local martingale~\cite[218]{klebanerIntroductionStochasticCalculus2012}.
+  In fact, since \( (S_{r-}^N)_r \) is uniformly bounded (by \( \norm{\psi}_\infty \)) and \( \ol{M}_t^N \) is also bounded, % as argued before
+  it is a martingale~\cite[Cor. 7.22]{klebanerIntroductionStochasticCalculus2012}.
+  It follows that
   \begin{equation}
     \Var{\lawmu^{\lambda,N}}{\ol{M}_t^N}
     = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}
-    = \Exp*{\lawmu^{\lambda,N}}{M_t^{\lambda, N}\sbr*{ \br*{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2 }} + \mathcal{O}(N^{-1})
+    = \Exp*{\lawmu^{\lambda,N}}{M_t^{\lambda, N}\sbr*{ \varphi }} - 2 \Exp*{\lawmu^{\lambda,N}}{\int_0^t S_{r-}^N \odif{\ol{M}_r^N}} + \mathcal{O}(N^{-1})
     = \mathcal{O}(N^{-1}) \overset{N\to\infty}{\to} 0.
   \end{equation}
 \end{proof}
