@@ -195,10 +195,8 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
     V_g([a,b]) \coloneqq \sup \sum_{i=1}^n \abs{ g(t_i^n) - g(t_{i-1}) }
   \end{equation}
   where we take the supremum over all possible partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\) of the interval \( [a,b] \).
-  % NOTE: Klebaner 2012 defines finite variation and bounded variation as follows. I decided to only define BV relative to finite intervals to avoid confusion.
-  % The function \( g \) is of \textit{finite variation} if \( V_g([0,t]) < \infty \) for all \( t \).
-  % It is of \textit{bounded variation} if \( \sup_t V_g([0,t]) < \infty \).
-  If \( V_g([a,b]) < \infty \) we say that \( g \) is of \textit{bounded variation} on the interval \( [a,b] \).
+  The function \( g \) is of \textit{finite variation} if its variation over any bounded interval is finite.
+  % It is of \textit{bounded variation} if \( \sup_t V_g([0,t]) < \infty \).    % Only define this if needed (otherwise confusing)
 \end{definition}
 
 \begin{definition}
@@ -206,7 +204,7 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
   \begin{equation}
     S_t = S_0 + M_t + A_t,
   \end{equation}
-  where \( \Set{M_t}_{t} \) is a local martingale w.r.t. \(\Set{\cF_t}_t\) and \( \Set{A_t}_{t} \) is a process whose paths are a.s. of bounded variation on bounded intervals, and \( M_0 = A_0 = 0 \) a.s.
+  where \( \Set{M_t}_{t} \) is a local martingale w.r.t. \(\Set{\cF_t}_t\) and \( \Set{A_t}_{t} \) is a process whose paths are a.s. of finite variation, and \( M_0 = A_0 = 0 \) a.s.
 \end{definition}
 
 \begin{definition}

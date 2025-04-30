@@ -50,10 +50,10 @@ We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) v
   \begin{equation}\label{eq:M=S-A}
     \ol{M}_t^N = S_t^N - S_0^N - A_t^N.
   \end{equation}
-  Note that \((A_s)_{s\in[0,T]}\) is a process of bounded variation, because it is absolutely continuous. % NOTE if we follow Klebaner's terminology and had [0,\infty] instead of [0,T], then I think it would only imply "finite variation" instead of "bounded variation"
-  (This absolute continuity follows directly from the defining expression of \((A_s)\).) % which is of "fundamental theorem of calculus"-form.
+  Note that \((A_s^N)_{s\in[0,T]}\) is a process of finite variation, because it is absolutely continuous.
+  (This absolute continuity follows directly from the defining expression of \((A_s^N)\).) % which is of "fundamental theorem of calculus"-form.
   % Because \((A_s)\) is, in particular, continuous and adapted it is also predictable~\cite[215]{klebanerIntroductionStochasticCalculus2012}. % NOTE do I need this?
-  Thus, \((S_s)_{s\in[0,T]}\) is the sum of a martingale and a process of bounded variation, making it a semimartingale.
+  Thus, \((S_s^N)_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale.
   By Theorem 8.6 in~\cite[221]{klebanerIntroductionStochasticCalculus2012} it now follows that
   \begin{equation}\label{eq:S^2-q-var-rel}
     \begin{split}
