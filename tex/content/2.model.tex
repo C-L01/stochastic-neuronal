@@ -7,13 +7,13 @@ We will start by treating these parts separately.
 \subsection{The drift generator}
 
 Let \( N \in \bN \) be the number of neurons.
-Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)\) with \(D(L_{\cD}^N) \coloneqq C_0^1(\potspace^N)\) as
+Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)\) with \(D(L_{\cD}^N) \coloneqq C_c^1(\potspace^N)\) as
 \begin{equation}
   L_{\cD}^{N}\varphi \coloneqq \bm{b} \cdot \nabla_{\bm{x}} \varphi,
 \end{equation}
 % TODO domain L-drift: I don't think that L-drift maps to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity. So assume compact support I guess? (Or do that for b...)
-where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), where \(b \in C_b^{1-}(\potspace)\) is the physical driving force.
-% TODO b conditions: The boundedness could be dropped and the growth condition that follows this could be sufficient (for L mapping to B), if we assume the test functions to be compactly supported
+where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), where \(b \in C^{1-}(\potspace)\) is the physical driving force.
+% NOTE b conditions: The growth condition that follows this is sufficient for L mapping to M_b, because we assumed the test functions to be compactly supported
 We will assume that \(b\) satisfies the following linear growth assumption:
 \begin{equation}
   \forall x \in \potspace : \abs{b(x)} \leq C (1 + \abs{x}),
@@ -46,7 +46,7 @@ Because \(b\) is locally Lipschitz continuous and satisfies the linear growth co
 
 Now choose \(P \coloneqq \delta_{\bm{x}} \in \cP(D_{\potspace^N}[0,\infty))\).
 By construction we then have \(\bm{X} = \bm{X}(\bm{\omega}) = \bm{x}\) \(P\)-a.s.
-Therefore, for any \(\varphi \in D(L_{\cD}^N)\),
+Therefore, for any~\(\varphi \in D(L_{\cD}^N)\),
 \begin{equation}
   \begin{split}
     \cD_t^{N}[\varphi] & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t \bm{b}(\bm{X}_r) \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r} \\
@@ -60,11 +60,11 @@ As \(\cD_t^{N}[\varphi]\) is almost surely constant, it is trivially an \(\Set{\
 
 \subsection{Jump generator}
 Let \(\lambda > 0\) be the rate of both the reset jumps and the postsynaptic increments.
-The jump-generator \(L_{\cJ}^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) is defined as
+The jump-generator \(L_{\cJ}^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) with \( D( L_{\cJ}^{\lambda, N} ) \coloneqq M_b(\potspace^N) \) is defined as
 \begin{equation}
   (L_{\cJ}^{\lambda, N}\varphi) (\bm{x}) \coloneqq \lambda \int_{\potspace^N} \br{\varphi(\bm{y}) - \varphi(\bm{x})} \kappa(\bm{x}, \odif{\bm{y}})
 \end{equation}
-where kernel \(\kappa\) is given by
+where kernel \( \kappa \) is given by
 \begin{equation}
   % \kappa(x,\bm{z},\odif{y}) \coloneqq \indE{[V_F,+\infty)}(x) \delta_{V_R}(\odif{y}) + \indE{(-\infty,V_F)}(x) \delta_{x + \sum_{j=1}^N \omega^{ij} \indE{z^j \geq V_F}}(\odif{y}).
   \kappa(\bm{x},\odif{\bm{y}}) \coloneqq \sum_{i=1}^N \delta_{\bm{\jtarg}^i(\bm{x})}(\odif{\bm{y}}).
@@ -103,14 +103,14 @@ The full generator \(L^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) of
 \begin{equation}
   L^{\lambda, N} = \ol{L_{\cD}^{N}} + L_{\cJ}^{\lambda, N}.
 \end{equation}
-Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true / if I want to use and argue this
+Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true / if I want to use and argue this. The idea would be to use EK Theorem 4.4.1 and/or Corollary 4.4.4 as suggested on bottom of p.255
 
 % By Theorem 1 from Dempster \cite{dempster_martingale_1998},\footnote{Which follows from a combination of perturbation results from \cite{ethier_markov_1985}.} we have the following result.
 
 \begin{theorem}\label{thm:mart-problem-sol}
-  Let \(\lambda > 0\), \(N \in \bN\), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
+  Let \(\lambda > 0\), \( N \in \bN \), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
   Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution.% TODO \textit{unique} solution.
-  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_0^1(\potspace^N)\),
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_c^1(\potspace^N)\), % TODO this should be the domain of L, so if I keep (/ work out how to use) the closure of L_drift it might be larger
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}

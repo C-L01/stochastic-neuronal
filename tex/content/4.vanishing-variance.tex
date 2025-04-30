@@ -1,12 +1,12 @@
 \section{Vanishing variance}    % TODO make subsection of previous section? Then the zcref below is unnecessary
 
-In future sections the empirical martingale from \zcref{subsec:emp-mart} will be our workhorse to study limiting behavior of the neuronal process.
+In future sections the empirical martingale from \zcref{subsec:emp-mart} will be our workhorse to study limiting behavior of the neuronal process.  % TODO will it?
 First however we will derive some of its properties.
 
 We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.    % TODO does that imply that? Maybe Klebaner Corollary 7.30 is relevant (although our martingale is not continuous, and we are talking about the quadratic variation, so probably not directly)
 
-\begin{proposition}\label{prop:vanishing-variance}  % TODO could remove variance, and just show quad. var. goes to zero as that is all I need, right?
-  For all \(\psi \in C_0^1(\potspace)\), \(\lambda > 0\), \(t \in [0,T]\),
+\begin{proposition}\label{prop:vanishing-variance}  % TODO make clear that both the variance, second moment and quad var go to zero (as they are all equal)
+  For all \(\psi \in C_c^1(\potspace)\), \(\lambda > 0\), \(t \in [0,T]\),
   \begin{equation}
     \lim_{N\to\infty} \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}[\psi]} = 0.
   \end{equation}
