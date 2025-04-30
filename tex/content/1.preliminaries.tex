@@ -49,7 +49,7 @@ To characterize relative compactness under the Skorokhod metric a result similar
 It also makes use of a modulus of continuity, but then one that can avoid the discontinuities that càdlàg functions can have.
 Let \( \cC_T^\delta \) be the collection of \( \delta \)-sparse partitions \(\Set{t_i}_{i=0}^n\), which satisfy \(0 = t_0 < t_1 < \cdots < t_n = T\) and \( \min_{i=1,\dots,n} t_i - t_{i-1} > \delta \).
 Then define
-\begin{equation}
+\begin{equation}\label{eq:w-w'-def}
   \begin{split}
     w(x, [c,d))      & \coloneqq \sup_{c \leq s < t < d} d(x_t,x_s),                            \\
     w'(x, \delta, T) & \coloneqq \inf_{\Set{t_i} \in \cC_T^\delta} \max_i w(x, [t_{i-1}, t_i)).
