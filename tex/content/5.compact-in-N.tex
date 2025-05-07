@@ -9,50 +9,103 @@
 \end{theorem}
 
 \begin{proof}
-  By Prokhorov's Theorem \cite[Theorem 5.1]{billingsleyConvergenceProbabilityMeasures1999}, it suffices to show that \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN}\) is tight.
-  Recall that \(\lawmu^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
-  Because \((\cP(\potspace), \pi)\) is a (complete, separable) metric space with \(\pi\) the standard Prokhorov metric that metrizes weak convergence \cite[Theorem 6.8]{billingsleyConvergenceProbabilityMeasures1999}, Corollary 21 of Kouritzin \cite{kouritzinTightnessProbabilityMeasures2015} tells us that it suffices to show that the compact containment condition (CCC) and the weak modulus of continuity condition (WMCC) hold.
+  By Prokhorov's Theorem~\cite[Theorem 5.1]{billingsleyConvergenceProbabilityMeasures1999}, it suffices to show that \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN}\) is tight.
+  Because \((\cP(\potspace), \pi)\) is a (complete, separable) metric space with \( \pi \) the standard Prokhorov metric that metrizes weak convergence~\cite[Theorem 6.8]{billingsleyConvergenceProbabilityMeasures1999}, we can apply \zcref{thm:ccc+wmcc=tight}.
+  It thus suffices to show that the compact containment condition from \zcref{def:CCC} and the weak modulus of continuity condition from \zcref{def:WMCC} hold for \( \Set{ \lawmu^{\lambda, N} }_{N\in\bN} \).
 
-  To verify the CCC we have to show that
-  \begin{equation}
-    \forall \eps > 0 : \exists \cK_\eps \Subset \cP(\potspace) :
-    \inf_{N\in\bN} P^{\lambda, N} (\mu_t^N \in \cK_\eps,\ 0 \leq t \leq T) \geq 1 - \eps.
-  \end{equation}
-  Let \(\eps > 0\), and simply define
-  \begin{equation}
-    \cK_\eps \coloneqq \Set{ \mu_t^N \given t \in [0,T],\  }
-  \end{equation}
+  \textbf{CCC:}
+  To verify the CCC we have to show that\dots
+  % \begin{equation}
+  %   \forall \eps > 0 : \exists \cK_\eps \Subset \cP(\potspace) :
+  %   \inf_{N\in\bN} P^{\lambda, N} (\mu_t^N \in \cK_\eps,\ 0 \leq t \leq T) \geq 1 - \eps.
+  % \end{equation}
+  % Let \(\eps > 0\), and simply define
+  % \begin{equation}
+  %   \cK_\eps \coloneqq \Set{ \mu_t^N \given t \in [0,T],\  }
+  % \end{equation}
 
   % As \(\potspace\) is compact, complete and separable, \(\cP(\potspace)\) is compact w.r.t. the weak topology by Prokhorov's Theorem.
   % Therefore, it is clear that the family of processes \(\{\mu^N\}_{N\in\bN} \subset \cP(\potspace)\) satisfies CCC.
 
   \bigskip
 
+  \textbf{WMCC:}
   To verify that the WMCC holds, we define the following collection of functions on \(\cP(\potspace)\):
   \begin{equation}
-    \cG \coloneqq \Set{\nu \mapsto \int_\potspace \psi \odif{\nu} \given \psi \in C^1(\potspace) \cap C_0(\potspace)}.
+    \cG \coloneqq \Set{\nu \mapsto \int_\potspace \psi \odif{\nu} \given \psi \in C_c^1(\potspace)}.
   \end{equation}
-  Because we are using the topology of weak convergence on \(\cP(\potspace)\), it follows from \(C^1(\potspace) \cap C_0(\potspace) \subset C_b(\potspace)\) that \(\cG \subset C(\cP(\potspace))\).
-  Furthermore, \(\cG\) is closed under addition and it separates points (on compacts).
+  Because we are using the topology of weak convergence on \(\cP(\potspace)\), it follows from \(C_c^1(\potspace) \subset C_b(\potspace)\) that \(\cG \subset C_b(\cP(\potspace))\).
+  Furthermore, \( \cG \) is closed under addition, and it separates points as in \zcref{def:s.p.} due to the Riesz representation theorem~\cite[Thm. 2.14]{rudinRealComplexAnalysis2013} and the density of \( C_c^1(\potspace) \) in \( C_c(\potspace) \) (under the uniform norm).
+  % TODO Maybe explain this use of Riesz in more detail. It relies on the uniqueness of the measure provided by the theorem (which yields a C_c function on which two distinct measures integrate differently), and an approximation by a C_c^1 function.
 
-  Let \(g = g_\psi \in \cG\).
-  It now suffices to show that \(\{g \circ \mu^N\}_{N\in\bN}\) satisfies the asymptotic modulus of continuity condition (AMCC).
-  Let \(\eta > 0\).
-  % By taking \(\mathcal{J} \coloneqq \{\Id\} \subset C_b(\cP(\potspace))\), which clearly strongly separates points, in Proposition 14 b)
-  Let \(N_0 \in \bN\) such that \(\Exp{}{[M_T^{\lambda, N}]} < \), which is possible by \zcref{prop:vanishing-variance}, and let \(N \geq N_0\).
-  Now observe that
+  It now suffices to show that \( \Set{g \# \lawmu^{\lambda, N}}_{N\in\bN} \subset \cP(D_{\potspace}[0,T])\)\footnote{Still abusing notation to identify \( g : \cP(\potspace) \to \bR \) with the map \( D_{\cP(\potspace)}[0,T] \mapsto D_{\bR}[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC from \zcref{def:MCC} for any \( g \in \cG \).
+  Let \( g = g_\psi \in \cG \) and \( \eta > 0 \).
+  Set \( C_{\psi, \lambda} \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty \) as in the proof of \zcref{lem:emp-mart-bounded} (such that \( \ol{L}_{\mu_t^N}^{\lambda,N} [\psi] (x) \leq C_{\psi, \lambda} \) for all \( t \), \( x \)), and define \(\delta \coloneqq \frac{\eta}{4C_{\psi, \lambda}}\).
+
+  Now choose \( N_0 \in \bN \) such that \(\Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 } < \frac{\eta^4}{16}\), which is possible by \zcref{prop:vanishing-variance}, and let \(N \geq N_0\).
+  We have to show that
   \begin{equation}
-    g \circ \mu^N = \int_\potspace \psi \odif{\mu^N} = S^{\lambda, N} = M^{\lambda, N} - A^{\lambda, N}.
+    g \# \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta }) \leq \eta.
   \end{equation}
-  It follows that for \(C_\lambda^\psi \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty\) (such that \(\ol{L}^{\lambda,N}_t [\psi] (x) \leq C_\lambda^\psi\) for all \(t\), \(x\)) and \(\delta \coloneqq \frac{1}{2C_\lambda^\psi}\) and a \( \delta \)-sparse partition \(\{t_i\}\) such that \(t_i - t_{i-1} < \frac{1}{C_\lambda^\psi}\), we have
+  Recall that \(\lawmu^{\lambda, N} = \Theta_N \# P^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
+  Hence,
+  \begin{equation}
+    \begin{split}
+      g \# \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta })
+       & = \lawmu^{\lambda, N}(\Set{ \mu \in D_{\cP(\potspace)}[0,T] \given w'(g \circ \mu,\delta) \geq \eta })              \\
+       & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \Theta_N \circ \bm{x},\delta) \geq \eta }) \\
+      %  & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \mu^N,\delta) \geq \eta }).
+      & = P^{\lambda, N}( w'(g \circ \mu^N,\delta) \geq \eta ).
+    \end{split}
+  \end{equation}
+  Observe that
+  \begin{equation}
+    g \circ \mu^N = \int_\potspace \psi \odif{\mu^N} = S^{\lambda, N}[\psi] = \ol{M}^{\lambda, N}[\psi] - A^{\lambda, N}[\psi].
+  \end{equation}
+  Let \( \{t_i\} \) be a \( \delta \)-sparse partition of \( [0,T] \) such that \(\delta < t_i - t_{i-1} < \frac{\eta}{2C_{\psi, \lambda}}\) for all \( i \).
+  Recalling \zcref{eq:w-w'-def}, we then obtain % TODO check if the eq cited defines w' with or without T
   \begin{equation}
     \begin{split}
       P^{\lambda, N} (w'(g \circ \mu^N, \delta) \geq \eta)
-       & \leq P^{\lambda, N}( \max_i w(M^{\lambda, N}, [t_{i-1}, t_i)) + w(A^{\lambda, N}, [t_{i-1}, t_i) \geq \eta)                                     \\
-       & \leq P^{\lambda, N}( \max_i w(M^{\lambda, N}, [t_{i-1}, t_i)) \geq \frac{\eta}{2}) + P^{\lambda, N}(w(A^{\lambda, N}, [t_{i-1}, t_i) \geq \eta)
+       & \leq P^{\lambda, N}( \max_i w(\ol{M}^{\lambda, N}[\psi], [t_{i-1}, t_i)) + w(A^{\lambda, N}[\psi], [t_{i-1}, t_i) \geq \eta)                                                        \\
+       & \leq P^{\lambda, N}( \max_i w(\ol{M}^{\lambda, N}[\psi], [t_{i-1}, t_i)) \geq \frac{\eta}{2}) + P^{\lambda, N}( \max_i w(A^{\lambda, N}[\psi], [t_{i-1}, t_i) \geq \frac{\eta}{2}).
     \end{split}
   \end{equation}
-
+  The first term can be bounded using the bound on the second moment of the empirical martingale.
+  Namely, using Doob's inequality~\cite[64]{ethierMarkovProcessesCharacterization1985} followed by Jensen's inequality,
+  \begin{equation}
+    \begin{split}
+      P^{\lambda, N}( \max_i w(\ol{M}^{\lambda, N}[\psi], [t_{i-1}, t_i)) \geq \frac{\eta}{2} )
+       & = P^{\lambda, N}( \max_i \sup_{t_{i-1} \leq s < t < t_i} \abs{ \ol{M}_t^{\lambda, N}[\psi] - \ol{M}_s^{\lambda, N}[\psi] } \geq \frac{\eta}{2} ) \\
+      % &\leq P^{\lambda, N}( \max_i \sup_{t_{i-1} \leq s < t < t_i} \abs{ \ol{M}_t^{\lambda, N} } + \abs{ \ol{M}_s^{\lambda, N} } \geq \frac{\eta}{2} ) \\
+       & \leq P^{\lambda, N}( 2 \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{2} )                                                  \\
+       & = P^{\lambda, N}( \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{4} )                                                       \\
+       & \leq \frac{4}{\eta} \Exp{}{\abs{ \ol{M}_T^{\lambda, N}[\psi] }}                                                                            \\
+       & \leq \frac{4}{\eta} \Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 }^{1/2}
+      % = \frac{4}{\eta} \Exp{}{ [\ol{M}^{\lambda, N}[\psi]]_T }^{1/2}
+      < \frac{4}{\eta} \sqrt{\frac{\eta^4}{16}}
+      = \eta.
+    \end{split}
+  \end{equation}
+  The second term can be bounded using \( t_i - t_{i-1} < \frac{\eta}{2C_{\psi, \lambda}} \), because \( A^{\lambda, N}[\psi] \) is absolutely continuous.
+  In fact, because for any \( t - s < \frac{\eta}{2C_{\psi, \lambda}} \),
+  \begin{equation}
+    \abs{ A_t^{\lambda, N}[\psi] - A_s^{\lambda, N}[\psi] }
+    = \abs*{ \int_s^t \int_{\potspace} \ol{L}_{\mu_r^N}[\psi] \odif{\mu_r^N} \odif{r} }
+    \leq C_{\psi,\lambda} (t - s)
+    < \frac{\eta}{2}.
+  \end{equation}
+  we even have
+  \begin{equation}
+    P^{\lambda, N}( \max_i w(A^{\lambda, N}[\psi], [t_{i-1}, t_i) \geq \frac{\eta}{2}) = 0.
+  \end{equation}
+  We conclude that
+  \begin{equation}
+    P^{\lambda, N} (w'(g \circ \mu^N, \delta) \geq \eta)
+    < \eta + 0 = \eta,
+  \end{equation}
+  meaning that \( \Set{g \# \lawmu^{\lambda,N}}_{N \in \bN} \) satisfies the AMCC.\
+  As \( g \in \cG \) was arbitrary, \( \Set{\lawmu^{\lambda,N}}_{N \in \bN} \) satisfies the WMCC.
 
   % Since for any \(\psi \in C_b(\potspace)\),
   % \begin{equation}
