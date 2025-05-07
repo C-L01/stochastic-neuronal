@@ -18,22 +18,30 @@ Note that \((A_s^{\lambda, N}[\psi])_{s\in[0,T]}\) is a process of finite variat
 (This absolute continuity follows directly from the defining expression of \((A_s^N)\).) % which is of "fundamental theorem of calculus"-form.
 Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale.
 
-\begin{proposition}\label{prop:vanishing-variance}  % TODO make clear that both the variance, second moment and quad var go to zero (as they are all equal)
+\begin{proposition}\label{prop:vanishing-variance}
   For all \(\psi \in C_c^1(\potspace)\), \(\lambda > 0\), \(t \in [0,T]\),
+  \begin{equation}
+    \forall N \in \bN : \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}[\psi]} = \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^N)^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t},
+  \end{equation}
+  and
   \begin{equation}
     \lim_{N\to\infty} \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}[\psi]} = 0.
   \end{equation}
 \end{proposition}
 \begin{proof}
   Throughout this proof we suppress the dependence of \( \ol{M} \), \( S \) and \( A \) on \( \psi \) and \( \lambda \), as both are fixed.
+  We will vary \( N \in \bN \), but fix it for now.
   Recall that \((\ol{M}_s^N)_{s\in[0,T]}\) is a martingale by \zcref{prop:emp-M-mart}.
   In particular,
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{\ol{M}_t^N} = \Exp{\lawmu^{\lambda,N}}{\ol{M}_0^N}
     = \Exp{\lawmu^{\lambda,N}}{0} = 0.    % the second-to-last step is obvious from \zcref{eq:M-def}
   \end{equation}
-  Because both \( \psi \) and \( \ol{L}_{\mu_{r}}^\lambda[\psi] \) are bounded (for fixed \( \lambda \)), \({(\ol{M}_s^N)}_{s\in[0,T]}\) is bounded so in particular square integrable.
-  Hence the variance exists and equals the second moment.
+  Due to \zcref{lem:emp-mart-bounded} \( \ol{M}_t^N \) is bounded, so in particular square integrable.
+  Hence
+  \begin{equation}
+    \Var{\lawmu^{\lambda,N}}{\ol{M}_t^{\lambda,N}[\psi]} = \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^N)^2}.
+  \end{equation}
 
   % TODO: what was the idea here? Mentioning the predictability of M here already (or further above) might be good though
   % \begin{equation}
@@ -47,8 +55,9 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{(\ol{M}_t^N)^2} = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}.
   \end{equation}
+  This establishes the first claim we had to show.
 
-  By Theorem 8.6 in~\cite[221]{klebanerIntroductionStochasticCalculus2012} it follows that
+  By Theorem 8.6 in~\cite[221]{klebanerIntroductionStochasticCalculus2012} we have
   \begin{equation}\label{eq:S^2-q-var-rel}
     \begin{split}
       \sbr{S^N}_t & = \sbr{S^N - S_0^N}_t                                                                                \\   % this is clear from the definition of covariation: constants don't vary
@@ -58,7 +67,6 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
                   & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{S_r^N}.
     \end{split}
   \end{equation}
-
   Now we are going to reuse the original martingale from \zcref{thm:mart-problem-sol}, but we will choose \(\varphi \coloneqq \br{ \frac{1}{N} \bigoplus_{i=1}^N \psi }^2\) as the test function this time.
   Recall \zcref{eq:M-def} and \zcref{eq:mart-problem-s-}, which together yield
   \begin{equation}
