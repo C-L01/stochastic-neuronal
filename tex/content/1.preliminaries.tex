@@ -122,7 +122,7 @@ There, the results are provided on the level of processes, but we will instead f
 Kouritzin's setting is also very general, with \( E \) being a completely regular topological space.
 We will restrict Kouritzin's results to our context, in which \((E,d)\) is a Polish metric space.
 
-\begin{definition}[CCC]
+\begin{definition}[CCC]\label{def:CCC}
   Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
   Then \( \Pi \) satisfies the \textit{compact containment condition} if
   \begin{equation}
@@ -130,7 +130,7 @@ We will restrict Kouritzin's results to our context, in which \((E,d)\) is a Pol
   \end{equation}
 \end{definition}
 
-\begin{definition}[MCC]
+\begin{definition}[MCC]\label{def:MCC}
   Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
   Then \( \Pi \) satisfies the \textit{modulus of continuity condition} if
   \begin{equation}\label{eq:MCC}
@@ -155,20 +155,22 @@ To that end, Kouritzin introduces weaker alternative conditions.
 One can replace either the CCC or the MCC (not both) with such a weaker condition, and still preserve the tightness result.
 We will only require the substitution of the MCC by a weaker alternative, which we will provide after defining a separation property for collections of functions.
 
-\begin{definition}
+\begin{definition}\label{def:s.p.}
   A set \( \cG \subseteq M(E) \) \textit{separates points} if for every pair of distinct points \( x, y \in E \) there exists a \( g \in \cG \) such that \( g(x) \neq g(y) \).
 \end{definition}
 
-\begin{definition}[WMCC]
+\begin{definition}[WMCC]\label{def:WMCC}
   Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
-  Then \( \Pi \) satisfies the \textit{weak modulus of continuity condition} if there exists a \( \cG \subseteq C(E) \) that separates points\footnote{Kouritzin only requires this to hold on compact sets, but as we are working in a metric space this is equivalent to global separation of points (since any set \( \Set{x,y} \subseteq E \) is compact).}, and the set of pushforward measures \( \Set{g_\# \mu \given \mu \in \Pi} \subseteq \cP(D_\bR[0,T]) \)\footnote{Here we identify \( g : E \to \bR \) with the map \( D_E[0,T] \mapsto D_\bR[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
+  Then \( \Pi \) satisfies the \textit{weak modulus of continuity condition} if there exists a \( \cG \subseteq C(E) \) that separates points,\footnote{Kouritzin only requires separation of points to hold on compact sets, but this is equivalent to global separation of points (since any set \( \Set{x,y} \subseteq E \) is compact (in any topological space)).}
+  % NOTE So the weakening to "on compacts" added by Kouritzin seems to be meaningless?
+  and the set of pushforward measures \( \Set{g_\# \mu \given \mu \in \Pi} \subseteq \cP(D_\bR[0,T]) \)\footnote{We abuse notation to identify \( g : E \to \bR \) with the map \( D_E[0,T] \mapsto D_\bR[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
   (The metric on \( \bR \) is induced by the usual Euclidean norm \( \abs{\cdot} \).)
   % and \( \Set{g \circ X^\alpha} \) satisfies the AMCC on \( (\bR, \abs{\cdot}) \) for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
 \end{definition}
 
 By Theorem 20 from Kourizin \cite{kouritzinTightnessProbabilityMeasures2015}, we can still achieve tightness with this weaker condition.
 
-\begin{theorem}
+\begin{theorem}\label{thm:ccc+wmcc=tight}
   If \( \Pi \subseteq \cP(D_{E}[0,T]) \) satisfies the CCC and the WMCC, then it is tight.
 \end{theorem}
 % NOTE: Theorem 20 in Kouritzin is (again) formulated for processes, and it yields tightness only for indistinguishable processes. But indistinguishable processes have the same law, so I don't understand why that is different from just X^alpha being tight?
