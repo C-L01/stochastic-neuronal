@@ -117,6 +117,26 @@ Substituting this into \zcref{eq:emp-M-derivation-start} yields
 If we identify test functions with functions\footnote{Not functionals, because as \( \phi \) is not necessarily continuous as a test function, it is also not necessarily (narrowly) continuous as a function on measures.} on measures, i.e.\ \( \phi(\nu) \coloneqq \int_\potspace \phi \odif{\nu} \) for \(\phi \in M_b(\potspace)\), \( \nu \in \cP(\potspace) \), we observe that this expression for \(\ol{M}^{\lambda,N}\) seems very similar to the martingale problem from \zcref{sec:martingale-problem} if we interpret it as a function of \(\mu^N\) instead of \(\bm{X}\).
 However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependence on the empirical measure, so it is not actually of this form.
 
+\begin{lemma}\label{lem:emp-mart-bounded}
+  For fixed \( \lambda > 0 \) and \( \psi \in C_c^1(\potspace) \), \( \ol{M}_t^{\lambda, N}[\psi] \) is bounded uniformly in \( N \).
+\end{lemma}
+
+\begin{proof}
+  This follows directly from the compact support of \( \psi \), the continuity of \( b \) and the fact that the measures involved are probability measures.
+  Namely, for all \( r \geq 0 \), \( x \in \potspace \),
+  \begin{equation}
+    \abs{ \ol{L}_{\mu_{r}^N}^{\lambda} [\psi](x) }
+    = \abs{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) }
+    \leq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2 \lambda \norm{\psi}_\infty
+    \eqqcolon C_{\psi, \lambda}, \quad x \in \potspace,
+  \end{equation}
+  which implies for \( t \geq 0 \),
+  \begin{equation}
+    \abs{ \ol{M}_t^{\lambda, N}[\psi] }
+    \overset{\eqref{eq:emp-M-expression}}{\leq} 2 \norm{\psi}_\infty + t C_{\psi, \lambda}.
+  \end{equation}
+\end{proof}
+
 \subsection{The empirical martingale is a martingale}
 
 The empirical martingale is a martingale, in two ways.

@@ -16,7 +16,7 @@
 - [x] Go through Overleaf comments
 - [ ] Get solution existence for drift for non-Dirac initial conditions, using conditional distributions probably
 - [ ] Check / elaborate on solution existence theorem (proof), for full generator mainly
-- [ ] Upgrade to unique solution for the martingale problems
+- [ ] Upgrade to unique solution for the martingale problems (EK Th. 4.10.3?)
 
 ## Connection to empirical measure
 - [x] Go through Overleaf comments
