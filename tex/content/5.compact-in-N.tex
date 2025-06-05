@@ -1,4 +1,52 @@
-\section{Compactness for fixed \texorpdfstring{\(\lambda\)}{lambda}}
+\section{Compactness for fixed \texorpdfstring{\( \lambda \)}{lambda}}
+
+\red{TODO: text about this section}
+
+We start with a small utility lemma.
+
+\begin{lemma}\label{lem:K-set-compact}
+  Let \( M > 0 \).
+  The set
+  \begin{equation}
+    \cK \coloneqq \Set{ \mu \in \cP(\bR) \given \int_\bR \abs{x} \mu(\odif{x}) \leq M }
+  \end{equation}
+  is (narrowly) compact.
+\end{lemma}
+
+\begin{proof}
+  We begin by noting that the absolute value function has compact sublevel sets.
+  \zcref[S]{lem:tightness-char-coercive-function} therefore gives us that \( \cK \) is tight, and thus relatively compact by \zcref{thm:prokhorov}.
+
+  It remains to be shown that \( \cK \) is closed.
+  To demonstrate this, suppose \( \Set{\mu_n}_{n\in\bN} \subset \cK \) converges narrowly to some \( \mu \in \cP(\potspace) \).
+  It suffices to show that also \( \mu \in \cK \).
+  Define for each \( R > 0 \) the function \( \phi_R : \bR \to \bR \) as
+  \begin{equation}
+    \phi_R(x) \coloneqq \min(\abs{x}, R).
+  \end{equation}
+  Then \( \phi_R \in C_b(\bR) \) for all \( R > 0 \).
+  Hence, the narrow convergence implies
+  \begin{equation}\label{eq:mu_n->mu-consequence}
+    \lim_{n\to\infty} \int_\bR \phi_R(x) \mu_n(\odif{x}) = \int_\bR \phi_R(x) \mu(\odif{x}).
+  \end{equation}
+  Since for each \( n \in \bN \) we have \( \mu_n \in \cK \), we have
+  \begin{equation}
+    \int_\bR \phi_R(x) \mu_n(\odif{x}) \leq \int_\bR \abs{x} \mu_n(\odif{x}) \leq M.
+  \end{equation}
+  Combined with~\eqref{eq:mu_n->mu-consequence} this yields
+  \begin{equation}\label{eq:mu(phiR)<=M}
+    \int_\bR \phi_R(x) \mu(\odif{x}) \leq M \quad \forall R > 0.
+  \end{equation}
+
+  Now, observe that \( \phi_R \) is monotonically increasing and converges pointwise to the absolute value function for \( R \to \infty \).
+  The monotone convergence theorem thus implies
+  \begin{equation}
+    \int_\bR \abs{x} \mu(\odif{x})
+    = \lim_{R\to\infty} \int_\bR \phi_R(x) \mu(\odif{x})
+    \overset{\eqref{eq:mu(phiR)<=M}}{\leq} M.
+  \end{equation}
+  Therefore \( \mu \in \cK \), showing that \( \cK \) is narrowly closed.
+\end{proof}
 
 \begin{theorem}
   For fixed \(\lambda > 0\), \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN} \subset \cP(D_{\cP(\potspace)}[0,T])\) is relatively compact.
@@ -14,18 +62,46 @@
   It thus suffices to show that the compact containment condition from \zcref{def:CCC} and the weak modulus of continuity condition from \zcref{def:WMCC} hold for \( \Set{ \lawmu^{\lambda, N} }_{N\in\bN} \).
 
   \textbf{CCC:}
-  To verify the CCC we have to show that\dots
-  % \begin{equation}
-  %   \forall \eps > 0 : \exists \cK_\eps \Subset \cP(\potspace) :
-  %   \inf_{N\in\bN} P^{\lambda, N} (\mu_t^N \in \cK_\eps,\ 0 \leq t \leq T) \geq 1 - \eps.
-  % \end{equation}
-  % Let \(\eps > 0\), and simply define
-  % \begin{equation}
-  %   \cK_\eps \coloneqq \Set{ \mu_t^N \given t \in [0,T],\  }
-  % \end{equation}
+  To verify the CCC we have to show that
+  \begin{equation}
+    \forall \eps > 0 : \exists \cK_\eps \Subset \cP(\potspace) :
+    \inf_{N\in\bN} \lawmu^{\lambda, N} ( \Set{ \mu \in D_{\cP(\potspace)}[0,T] \given \mu_t \in \cK_\eps\ \forall t \in [0,T] } ) \geq 1 - \eps.
+    % \inf_{N\in\bN} P^{\lambda, N} (\mu_t^N \in \cK_\eps,\ 0 \leq t \leq T) \geq 1 - \eps.
+  \end{equation}
+  Let \(\eps > 0\), and define
+  \begin{equation}
+    \cK_\eps \coloneqq \Set{ \mu \in \cP(\potspace) \given \int_\potspace \abs{x} \mu(\odif{x}) \leq M_\eps }.
+  \end{equation}
+  Note that \( \cK_\eps \) is compact by \zcref{lem:K-set-compact}.
 
-  % As \(\potspace\) is compact, complete and separable, \(\cP(\potspace)\) is compact w.r.t. the weak topology by Prokhorov's Theorem.
-  % Therefore, it is clear that the family of processes \(\{\mu^N\}_{N\in\bN} \subset \cP(\potspace)\) satisfies CCC.
+  Recall that \(\lawmu^{\lambda, N} = \Theta_N \sharp P^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
+  Hence,
+  \begin{equation}
+    \begin{split}
+      \lawmu^{\lambda, N} ( \Set{ \mu \in D_{\cP(\potspace)}[0,T] \given \mu_t \in \cK_\eps\ \forall t \in [0,T] } )
+       & = P^{\lambda, N}( \Set{ \bm{x} \in D_{\potspace^N}[0,T] \given (\Theta_N \circ \bm{x})_t \in \cK_\eps\ \forall t \in [0,T] } ) \\
+       & = P^{\lambda, N} (\mu_t^N \in \cK_\eps,\ 0 \leq t \leq T).
+    \end{split}
+  \end{equation}
+
+  Define
+  \begin{equation}
+    \tau \coloneqq \inf\Set{ t > 0 \given \int_\potspace \abs{x} \mu_t^N(\odif{x}) > M_\eps }.
+  \end{equation}
+  \red{We claim that \( \tau_m \) is measurable and a stopping time\dots}
+
+  Markov's inequality yields
+  \begin{equation}
+    P^{\lambda, N} (\mu_\tau^N \notin \cK_\eps)
+    = P^{\lambda, N} \br*{ \int_\potspace \abs{x} \mu_\tau^N(\odif{x}) > M_\eps }
+    \leq \frac{1}{M_\eps} \Exp*{P^{\lambda, N}}{\int_\potspace \abs{x} \mu_\tau^N(\odif{x})}
+  \end{equation}
+
+  Define
+  \begin{equation}
+    \abs{x}_n \coloneqq \rho(\tfrac{x}{n}) \cdot \frac{1}{n} \log(\cosh(n x)),    % NOTE: credits to Gemini 2.5 Pro
+  \end{equation}
+  where \( \rho \) is a smooth indicator of \( [-1,1] \).
 
   \bigskip
 
@@ -55,7 +131,7 @@
        & = \lawmu^{\lambda, N}(\Set{ \mu \in D_{\cP(\potspace)}[0,T] \given w'(g \circ \mu,\delta) \geq \eta })              \\
        & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \Theta_N \circ \bm{x},\delta) \geq \eta }) \\
       %  & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \mu^N,\delta) \geq \eta }).
-      & = P^{\lambda, N}( w'(g \circ \mu^N,\delta) \geq \eta ).
+       & = P^{\lambda, N}( w'(g \circ \mu^N,\delta) \geq \eta ).
     \end{split}
   \end{equation}
   Observe that
@@ -78,9 +154,9 @@
       P^{\lambda, N}( \max_i w(\ol{M}^{\lambda, N}[\psi], [t_{i-1}, t_i)) \geq \frac{\eta}{2} )
        & = P^{\lambda, N}( \max_i \sup_{t_{i-1} \leq s < t < t_i} \abs{ \ol{M}_t^{\lambda, N}[\psi] - \ol{M}_s^{\lambda, N}[\psi] } \geq \frac{\eta}{2} ) \\
       % &\leq P^{\lambda, N}( \max_i \sup_{t_{i-1} \leq s < t < t_i} \abs{ \ol{M}_t^{\lambda, N} } + \abs{ \ol{M}_s^{\lambda, N} } \geq \frac{\eta}{2} ) \\
-       & \leq P^{\lambda, N}( 2 \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{2} )                                                  \\
-       & = P^{\lambda, N}( \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{4} )                                                       \\
-       & \leq \frac{4}{\eta} \Exp{}{\abs{ \ol{M}_T^{\lambda, N}[\psi] }}                                                                            \\
+       & \leq P^{\lambda, N}( 2 \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{2} )                                                        \\
+       & = P^{\lambda, N}( \sup_{t} \abs{ \ol{M}_t^{\lambda, N}[\psi] } \geq \frac{\eta}{4} )                                                             \\
+       & \leq \frac{4}{\eta} \Exp{}{\abs{ \ol{M}_T^{\lambda, N}[\psi] }}                                                                                  \\
        & \leq \frac{4}{\eta} \Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 }^{1/2}
       % = \frac{4}{\eta} \Exp{}{ [\ol{M}^{\lambda, N}[\psi]]_T }^{1/2}
       < \frac{4}{\eta} \sqrt{\frac{\eta^4}{16}}
