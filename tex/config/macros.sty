@@ -2,6 +2,8 @@
 
 \RequirePackage{amsmath,amssymb,amsthm,mathtools,bbm}
 
+\newcommand*{\red}[1]{\textcolor{red}{(#1)}}     % for comments
+
 %%% Renew commands
 \renewcommand{\qedsymbol}{\(\blacksquare\)}
 
@@ -198,10 +200,19 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}    % same counter as theorem
+\newtheorem{assumption}[theorem]{Assumption}    % same counter as theorem
 \newtheorem{example}[theorem]{Example}          % same counter as theorem
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}            % same counter as theorem
+
+% Set-up reference types that are not built-in to zref-clever
+\zcRefTypeSetup{assumption}{
+    Name-sg = Assumption,
+    name-sg = assumption,
+    Name-pl = Assumptions,
+    name-pl = assumptions,
+}
 
 % Tell zref-clever how to reference the above, by locally pairing the 'theorem'-counter with the appropriate reference type
 % Note that we are making use of built-in reference types from zref-clever here (namely corollary, proposition, etc.).
@@ -209,6 +220,7 @@
 \AddToHook{env/corollary/begin}{\zcsetup{countertype={theorem=corollary}}}
 \AddToHook{env/proposition/begin}{\zcsetup{countertype={theorem=proposition}}}
 \AddToHook{env/definition/begin}{\zcsetup{countertype={theorem=definition}}}
+\AddToHook{env/assumption/begin}{\zcsetup{countertype={theorem=assumption}}}
 \AddToHook{env/example/begin}{\zcsetup{countertype={theorem=example}}}
 \AddToHook{env/lemma/begin}{\zcsetup{countertype={theorem=lemma}}}
 \AddToHook{env/remark/begin}{\zcsetup{countertype={theorem=remark}}}
