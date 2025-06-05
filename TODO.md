@@ -1,4 +1,8 @@
+## Notation
+- [ ] Choose between $\infty$ and $+\infty$.
+
 ## Introduction
+- [ ] Come up with a title
 - [ ] Write one
 
 ## Preliminaries
@@ -29,6 +33,6 @@
 - [x] Rewrite / update
 
 ## Compactness for fixed $\lambda$
-- [ ] Go through Overleaf comments
+- [x] Go through Overleaf comments
 - [ ] Finish result
-- [ ] Say something about the consequences of the convergence (see meeting notes)
+- [ ] Say something about the consequences of the convergence / whether the limit point also satisfies the MP (see meeting notes)
