@@ -38,20 +38,20 @@
   Furthermore, \( \cG \) is closed under addition, and it separates points as in \zcref{def:s.p.} due to the Riesz representation theorem~\cite[Thm. 2.14]{rudinRealComplexAnalysis2013} and the density of \( C_c^1(\potspace) \) in \( C_c(\potspace) \) (under the uniform norm).
   % TODO Maybe explain this use of Riesz in more detail. It relies on the uniqueness of the measure provided by the theorem (which yields a C_c function on which two distinct measures integrate differently), and an approximation by a C_c^1 function.
 
-  It now suffices to show that \( \Set{g \# \lawmu^{\lambda, N}}_{N\in\bN} \subset \cP(D_{\potspace}[0,T])\)\footnote{Still abusing notation to identify \( g : \cP(\potspace) \to \bR \) with the map \( D_{\cP(\potspace)}[0,T] \mapsto D_{\bR}[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC from \zcref{def:MCC} for any \( g \in \cG \).
+  It now suffices to show that \( \Set{g \sharp \lawmu^{\lambda, N}}_{N\in\bN} \subset \cP(D_{\potspace}[0,T])\)\footnote{Still abusing notation to identify \( g : \cP(\potspace) \to \bR \) with the map \( D_{\cP(\potspace)}[0,T] \mapsto D_{\bR}[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC from \zcref{def:MCC} for any \( g \in \cG \).
   Let \( g = g_\psi \in \cG \) and \( \eta > 0 \).
   Set \( C_{\psi, \lambda} \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty \) as in the proof of \zcref{lem:emp-mart-bounded} (such that \( \ol{L}_{\mu_t^N}^{\lambda,N} [\psi] (x) \leq C_{\psi, \lambda} \) for all \( t \), \( x \)), and define \(\delta \coloneqq \frac{\eta}{4C_{\psi, \lambda}}\).
 
   Now choose \( N_0 \in \bN \) such that \(\Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 } < \frac{\eta^4}{16}\), which is possible by \zcref{prop:vanishing-variance}, and let \(N \geq N_0\).
   We have to show that
   \begin{equation}
-    g \# \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta }) \leq \eta.
+    g \sharp \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta }) \leq \eta.
   \end{equation}
-  Recall that \(\lawmu^{\lambda, N} = \Theta_N \# P^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
+  Recall that \(\lawmu^{\lambda, N} = \Theta_N \sharp P^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
   Hence,
   \begin{equation}
     \begin{split}
-      g \# \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta })
+      g \sharp \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta })
        & = \lawmu^{\lambda, N}(\Set{ \mu \in D_{\cP(\potspace)}[0,T] \given w'(g \circ \mu,\delta) \geq \eta })              \\
        & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \Theta_N \circ \bm{x},\delta) \geq \eta }) \\
       %  & = P^{\lambda, N}(\Set{ \bm{x} \in D_{\potspace^N}[0,T] \given w'(g \circ \mu^N,\delta) \geq \eta }).
@@ -104,7 +104,7 @@
     P^{\lambda, N} (w'(g \circ \mu^N, \delta) \geq \eta)
     < \eta + 0 = \eta,
   \end{equation}
-  meaning that \( \Set{g \# \lawmu^{\lambda,N}}_{N \in \bN} \) satisfies the AMCC.\
+  meaning that \( \Set{g \sharp \lawmu^{\lambda,N}}_{N \in \bN} \) satisfies the AMCC.\
   As \( g \in \cG \) was arbitrary, \( \Set{\lawmu^{\lambda,N}}_{N \in \bN} \) satisfies the WMCC.
 
   % Since for any \(\psi \in C_b(\potspace)\),

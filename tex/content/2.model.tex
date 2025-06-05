@@ -28,8 +28,8 @@ where \(V_\mathrm{rest} \in (V_R, V_F)\) is the equilibrium potential.
 
 \subsection{Martingale problem of the drift generator}
 
-We will show that the \(D_{\potspace^N}[0,\infty)\) martingale problem for \(L_{\cD}^N\) always has a solution.
-Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu \in \cP(\potspace^N)\) there exists a unique \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \( (\bm{X}_0)_\# P = \mu \) and for any test function \(\varphi \in D(L_{\cD}^N)\),
+We will show that the \(D_{\potspace^N}[0,\infty)\) martingale problem for \(L_{\cD}^N\) always has a solution.   % TODO: unique?
+Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu \in \cP(\potspace^N)\) there exists a unique \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \( \bm{X}_0 \sharp P = \mu \) and for any test function \(\varphi \in D(L_{\cD}^N)\),
 \begin{equation}
   \cD_t^{N}[\varphi]
   \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L_{\cD}^{N} \varphi(\bm{X}_r) \odif{r}
@@ -110,7 +110,7 @@ Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure
 \begin{theorem}\label{thm:mart-problem-sol}
   Let \(\lambda > 0\), \( N \in \bN \), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
   Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution.% TODO \textit{unique} solution.
-  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the stochastic process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) and each \(\varphi \in C_c^1(\potspace^N)\), % TODO this should be the domain of L, so if I keep (/ work out how to use) the closure of L_drift it might be larger
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the canonical coordinate process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) we have \( \bm{X}_0 \sharp P^{\lambda, N} = \nu \), and for each \(\varphi \in C_c^1(\potspace^N)\), % TODO this should be the domain of L, so if I keep (/ work out how to use) the closure of L_drift it might be larger
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}

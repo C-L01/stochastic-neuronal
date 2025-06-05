@@ -163,7 +163,7 @@ We will only require the substitution of the MCC by a weaker alternative, which 
   Let \( \Pi \subseteq \cP(D_{E}[0,T]) \).
   Then \( \Pi \) satisfies the \textit{weak modulus of continuity condition} if there exists a \( \cG \subseteq C(E) \) that separates points,\footnote{Kouritzin only requires separation of points to hold on compact sets, but this is equivalent to global separation of points (since any set \( \Set{x,y} \subseteq E \) is compact (in any topological space)).}
   % NOTE So the weakening to "on compacts" added by Kouritzin seems to be meaningless?
-  and the set of pushforward measures \( \Set{g_\# \mu \given \mu \in \Pi} \subseteq \cP(D_\bR[0,T]) \)\footnote{We abuse notation to identify \( g : E \to \bR \) with the map \( D_E[0,T] \mapsto D_\bR[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
+  and the set of pushforward measures \( \Set{g \sharp \mu \given \mu \in \Pi} \subseteq \cP(D_\bR[0,T]) \)\footnote{We abuse notation to identify \( g : E \to \bR \) with the map \( D_E[0,T] \mapsto D_\bR[0,T] \) that applies \( g \) pointwise.} satisfies the AMCC for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
   (The metric on \( \bR \) is induced by the usual Euclidean norm \( \abs{\cdot} \).)
   % and \( \Set{g \circ X^\alpha} \) satisfies the AMCC on \( (\bR, \abs{\cdot}) \) for all \( g \in \cG \cup \Set{f + h \given f, h \in \cG} \).
 \end{definition}
@@ -237,7 +237,7 @@ is a martingale with respect to the filtration \(\Set{\cF_t^X}_{t\geq0} \coloneq
 This eponymous condition is what makes the problem relevant in the study of stochastic processes.
 It is satisfied whenever \(A\) is the generator of a Markov process \(X\)~\cite[161-162]{ethierMarkovProcessesCharacterization1985}.
 
-If additionally \( (X_0)_\# P = P X_0^{-1} = \mu \) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
+If additionally \( X_0 \sharp P = P X_0^{-1} = \mu \) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
 Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
 The martingale problem for \((A,\mu)\) is well-posed if (i) a solution exists and (ii) it is unique.
 If this holds for all \(\mu \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.

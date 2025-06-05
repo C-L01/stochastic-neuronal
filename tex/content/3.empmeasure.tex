@@ -150,17 +150,17 @@ The empirical martingale is a martingale, in two ways.
 However, \(\ol{M}_t^{\lambda,N}[\psi]\) depends on \( \bm{X} \) only through the empirical measure.
 The law of the empirical measure curve \(\mu^N = \Theta_N(\bm{X})\) is given by
 \begin{equation}
-  \lawmu^{\lambda,N} \coloneqq \Theta_N \# P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
+  \lawmu^{\lambda,N} \coloneqq \Theta_N \sharp P^{\lambda, N} = P^{\lambda, N} \circ \Theta_N^{-1} \in \cP(D_{\cP(\potspace)}[0,T]),
 \end{equation}
 which is defined on the (pushforward) \( \sigma \)-algebra
 \begin{equation}
-  \ol{\cF} \coloneqq \Theta_N \# \mathscr{S}_{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_{\potspace^N}}.
+  \ol{\cF} \coloneqq \Theta_N \sharp \mathscr{S}_{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_{\potspace^N}}.
 \end{equation}
 It is easily verified that this indeed defines a \( \sigma \)-algebra.
 We will show that the empirical martingale is still a martingale when we interpret it as a random variable on~\((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\), i.e.\ when we interpret it as a function in \(\mu^N\) instead of \(\bm{X}\).\footnote{We will not distinguish between \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\potspace^N}[0,T] \to \bR \) and \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\cP(\potspace)}[0,T] \to \bR \) notationally, except when necessary.}
 
 \begin{proposition}\label{prop:emp-M-mart}
-  \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \# \cF_t^{\bm{X}} \)}.
+  \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \sharp \cF_t^{\bm{X}} \)}.
 \end{proposition}
 \begin{proof}
   In this proof we will write \( \ol{M}_t \) instead of \( \ol{M}_t^{\lambda, N}[\psi] \) to lighten the notational burden.
@@ -204,14 +204,14 @@ We will show that the empirical martingale is still a martingale when we interpr
   \begin{equation}
     \begin{split}
     \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\lawmu^{\lambda,N}}
-    &= \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
-    \overset{(*)}&{=} \int_{\Theta_N(D_{\potspace^N}[0,T])} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
+    &= \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
+    \overset{(*)}&{=} \int_{\Theta_N(D_{\potspace^N}[0,T])} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
     &= \int_{D_{\potspace^N}[0,T]} \abs{\ol{M}_{t} \circ \Theta_N} \odif{P^{\lambda,N}}
     = \int_{D_{\potspace^N}[0,T]} \abs{\widehat{\ol{M}}_{t}} \odif{P^{\lambda,N}} < \infty,
     \end{split}
   \end{equation}
   since \(\widehat{\ol{M}}_{t}\) is integrable (due to \zcref{cor:easy-emp-M-mart}).
-  Note that in step \((*)\) we merely removed a \(\br{\Theta_N \# P^{\lambda,N}}\)-null set.
+  Note that in step \((*)\) we merely removed a \(\br{\Theta_N \sharp P^{\lambda,N}}\)-null set.
 
   \medskip
 
@@ -219,8 +219,8 @@ We will show that the empirical martingale is still a martingale when we interpr
   \begin{equation}
     \begin{split}
       \int_\Gamma \ol{M}_{s} \odif{\lawmu^{\lambda,N}}
-      % &= \int_\Gamma \ol{M}_{s} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\
-      &= \int_{\Theta_N(\Theta_N^{-1}(\Gamma))} \ol{M}_{s} \odif{\br{\Theta_N \# P^{\lambda,N}}} \\ % NOTE that Theta_N is not surjective, so the integral domain shrinks here. But it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
+      % &= \int_\Gamma \ol{M}_{s} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
+      &= \int_{\Theta_N(\Theta_N^{-1}(\Gamma))} \ol{M}_{s} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\ % NOTE that Theta_N is not surjective, so the integral domain shrinks here. But it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
       &= \int_{\Theta_N^{-1}(\Gamma)} \ol{M}_{s} \circ \Theta_N \odif{P^{\lambda,N}} \\
       &= \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{s} \odif{P^{\lambda,N}} \\
       \overset{(*)}&{=} \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{t} \odif{P^{\lambda,N}}
@@ -232,7 +232,7 @@ We will show that the empirical martingale is still a martingale when we interpr
   \begin{equation}
     \Exp{\lawmu^{\lambda,N}}{\ol{M}_{s} \given \ol{\cF}_t} = \ol{M}_t.
   \end{equation}
-  We conclude that \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \# \cF_t^{\bm{X}} \)}.
+  We conclude that \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \sharp \cF_t^{\bm{X}} \)}.
 \end{proof}
 
 % TODO decide what to do with the following
