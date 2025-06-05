@@ -72,14 +72,17 @@ That is, for any such \( \psi \) we define the \textit{empirical martingale} as
     % &\quad - \int_0^t \sum_{i=1}^N \int_\potspace \frac{1}{N} \br*{ \psi(y) + \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r}^j) - \sum_{j=1}^N \psi(X_{r}^j) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) \odif{r} \\
      & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
      & = \int_\potspace \psi \odif{\mu_t^N} - \int_\potspace \psi \odif{\mu_0^N}
-    - \int_0^t \int_\potspace b(x) \partial_{x} \psi(x) \mu_r^N(\odif{x}) \odif{r}                                                                              \\
-     & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}                     \\
+    - \int_0^t \int_\potspace b(x) \partial_{x} \psi(x) \mu_r^N(\odif{x}) \odif{r}                                                                                         \\
+     & \quad - \int_0^t \int_{\potspace^N} \frac{1}{N} \sum_{i=1}^N \br*{ \psi(y^i) - \psi(X_{r}^i) } \lambda \kappa(\bm{X}_r, \odif{\bm{y}}) \odif{r}.
     %
     % &= \frac{1}{N} \sum_{i=1}^N \psi(X_t^i) - \frac{1}{N} \sum_{i=1}^N \psi(X_0^i) \\
     % &\quad - \int_0^t \frac{1}{N} \sum_{i=1}^N \br*{ b(X_{r}^i) \partial_{x} \psi(X_{r}^i) - \int_\potspace \br*{ \psi(y) - \psi(X_{r}^i) } \lambda \kappa(X_{r}^i, \bm{X}_r, \odif{y}) } \odif{r}
   \end{split}
 \end{equation}
-We now assume \(\omega^{ij} = \frac{\omega}{N}\).
+To be able to also express the last term in terms of the empirical measure, we assume that the neurons are fully connected with uniform weights under mean-field scaling. % NOTE: this includes self-connections
+\begin{assumption}
+  For some constant \( \omega \in \bR \), we have \(\omega^{ij} = \frac{\omega}{N}\) for all \( i, j \in \Set{1,\dots,N} \).
+\end{assumption}
 Then, the integrand of the last term can be rewritten as
 \begin{equation}\label{eq:kappa-to-mean-kappa}
   \begin{split}
@@ -91,7 +94,7 @@ Then, the integrand of the last term can be rewritten as
      & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
     + \br*{ \psi(X_{r}^i + \frac{\omega}{N} \sum_{j=1}^N \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
      & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
-    + \br*{ \psi(x + \omega \mu_r^N([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^N(\odif{x})                                                           \\
+    + \br*{ \psi(x + \omega \mu_r^N([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^N(\odif{x})                                                                                 \\
      & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) \mu_{r}^N(\odif{x})
   \end{split}
 \end{equation}
@@ -179,15 +182,15 @@ We will show that the empirical martingale is still a martingale when we interpr
   We will start by proving that \( (\ol{M}_t)_{t\in[0,T]} \) is adapted to \( (\ol{\cF}_t)_{t\in[0,T]} \).
   For an arbitrary \( B \in \cB \), we have to show that
   \mbox{\begin{math}
-    \ol{M}_t^{-1} (B) \in \ol{\cF}_t.
-  \end{math}}
+      \ol{M}_t^{-1} (B) \in \ol{\cF}_t.
+    \end{math}}
   We have
   \begin{equation}
     \begin{split}
       \Theta_N^{-1}(\ol{M}_t^{-1} (B))
        & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \Theta_N(\bm{\omega}) \in \ol{M}_t^{-1} (B) } \\
        & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \ol{M}_t(\Theta_N(\bm{\omega})) \in B }       \\
-       & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \widehat{\ol{M}}_t(\bm{\omega}) \in B } \\
+       & = \Set{ \bm{\omega} \in D_{\potspace^N}[0,T] \given \widehat{\ol{M}}_t(\bm{\omega}) \in B }       \\
        & = \widehat{\ol{M}}_t^{-1}(B) \in \cF_t^{\bm{X}}
     \end{split}
   \end{equation}
@@ -203,11 +206,11 @@ We will show that the empirical martingale is still a martingale when we interpr
   Integrability holds because for all \( t \in [0,T] \)
   \begin{equation}
     \begin{split}
-    \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\lawmu^{\lambda,N}}
-    &= \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
-    \overset{(*)}&{=} \int_{\Theta_N(D_{\potspace^N}[0,T])} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
-    &= \int_{D_{\potspace^N}[0,T]} \abs{\ol{M}_{t} \circ \Theta_N} \odif{P^{\lambda,N}}
-    = \int_{D_{\potspace^N}[0,T]} \abs{\widehat{\ol{M}}_{t}} \odif{P^{\lambda,N}} < \infty,
+      \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\lawmu^{\lambda,N}}
+                    & = \int_{D_{\cP(\potspace)}[0,T]} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}}          \\
+      \overset{(*)} & {=} \int_{\Theta_N(D_{\potspace^N}[0,T])} \abs{\ol{M}_{t}} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
+                    & = \int_{D_{\potspace^N}[0,T]} \abs{\ol{M}_{t} \circ \Theta_N} \odif{P^{\lambda,N}}
+      = \int_{D_{\potspace^N}[0,T]} \abs{\widehat{\ol{M}}_{t}} \odif{P^{\lambda,N}} < \infty,
     \end{split}
   \end{equation}
   since \(\widehat{\ol{M}}_{t}\) is integrable (due to \zcref{cor:easy-emp-M-mart}).
@@ -220,10 +223,10 @@ We will show that the empirical martingale is still a martingale when we interpr
     \begin{split}
       \int_\Gamma \ol{M}_{s} \odif{\lawmu^{\lambda,N}}
       % &= \int_\Gamma \ol{M}_{s} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\
-      &= \int_{\Theta_N(\Theta_N^{-1}(\Gamma))} \ol{M}_{s} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\ % NOTE that Theta_N is not surjective, so the integral domain shrinks here. But it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
-      &= \int_{\Theta_N^{-1}(\Gamma)} \ol{M}_{s} \circ \Theta_N \odif{P^{\lambda,N}} \\
-      &= \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{s} \odif{P^{\lambda,N}} \\
-      \overset{(*)}&{=} \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{t} \odif{P^{\lambda,N}}
+                    & = \int_{\Theta_N(\Theta_N^{-1}(\Gamma))} \ol{M}_{s} \odif{\br{\Theta_N \sharp P^{\lambda,N}}} \\ % NOTE that Theta_N is not surjective, so the integral domain shrinks here. But it is okay because we are integrating against a measure whose support is a subset of the range of Theta_N. And maybe the fact that Theta_N is injective is important too. Think on this some more, and explain if necessary.
+                    & = \int_{\Theta_N^{-1}(\Gamma)} \ol{M}_{s} \circ \Theta_N \odif{P^{\lambda,N}}                 \\
+                    & = \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{s} \odif{P^{\lambda,N}}                      \\
+      \overset{(*)} & {=} \int_{\Theta_N^{-1}(\Gamma)} \widehat{\ol{M}}_{t} \odif{P^{\lambda,N}}
       = \int_\Gamma \ol{M}_t \odif{\lawmu^{\lambda,N}},
     \end{split}
   \end{equation}
