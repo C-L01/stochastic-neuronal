@@ -109,9 +109,23 @@ By extension, any finite \(\Pi \subseteq \cP(E)\) is tight as well (since a fini
 Tightness is not just a necessary condition for convergence: it also implies the existence of a converging subsequence.
 This is the subject of Prokhorov's theorem~\cite[57-65]{billingsleyConvergenceProbabilityMeasures1999}.
 
-\begin{theorem}[Prokhorov]
+\begin{theorem}[Prokhorov]\label{thm:prokhorov}
   \( \Pi \subseteq \cP(E) \) is relatively compact if and only if it is tight.
 \end{theorem}
+
+There is another equivalent condition to tightness that is often useful.
+
+\begin{lemma}\label{lem:tightness-char-coercive-function}
+  \( \Pi \subseteq \cP(E) \) is tight if and only if there exists a function \( \phi : E \to [0,\infty] \) with compact sublevel sets such that
+  \begin{equation}
+    \sup_{\mu \in \Pi} \int_E \phi \odif{\mu} < \infty.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  \red{TODO: find reference, or copy proof from OT}
+  % TODO: also, I would like to call phi coercive, but that only means relatively compact I think. Which is maybe sufficient anyways?
+\end{proof}
 
 \subsubsection{Tightness in Skorokhod spaces}
 
@@ -225,7 +239,7 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
 Problems involving stochastic dynamics are often formulated as a \textit{martingale problem}.
 For our definition of the martingale problem, we will follow Ethier and Kurz~\cite[p.174]{ethierMarkovProcessesCharacterization1985}.
 Let \((A, D(A)) : M_b(E) \to M_b(E)\) be a linear operator.\footnote{The definition can be extended to multivalued, nonlinear operators, but we will not require such generality.}
-We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of the martingale problem for \(A\) if for the canonical coordinate process
+We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of the martingale problem for \( A \) if for the canonical coordinate process
 \begin{equation}
   X_t(\omega) \coloneqq \omega_t, \quad \omega \in D_E[0,\infty), t \geq 0,
 \end{equation}
