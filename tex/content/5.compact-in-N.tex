@@ -48,6 +48,8 @@ We start with a small helper lemma.
   Therefore \( \mu \in \cK \), showing that \( \cK \) is narrowly closed.
 \end{proof}
 
+We are now ready to prove the main result.
+
 \begin{theorem}
   For fixed \(\lambda > 0\), \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN} \subset \cP(D_{\cP(\potspace)}[0,T])\) is relatively compact.
   % \begin{equation}
@@ -74,6 +76,7 @@ We start with a small helper lemma.
   \end{equation}
   Note that \( \cK_\eps \) is compact by \zcref{lem:K-set-compact}.
 
+  Let \( N \in \bN \).
   Recall that \(\lawmu^{\lambda, N} = \Theta_N \sharp P^{\lambda, N}\) is the law of the empirical measure process \(\mu^N\).
   Hence,
   \begin{equation}
@@ -86,22 +89,127 @@ We start with a small helper lemma.
 
   Define
   \begin{equation}
-    \tau \coloneqq \inf\Set{ t > 0 \given \int_\potspace \abs{x} \mu_t^N(\odif{x}) > M_\eps }.
+    \tau \coloneqq  \inf\Set{ t \geq 0 \given \mu_t^N \notin \cK_\eps } \land T
+    = \inf\Set{ t \geq 0 \given \int_\potspace \abs{x} \mu_t^N(\odif{x}) > M_\eps } \land T,
   \end{equation}
-  \red{We claim that \( \tau_m \) is measurable and a stopping time\dots}
+  where the minimum with \( T \) only serves to set \( \tau = T \) if \( \mu_t^N \in \cK_\eps \) for all \( t \in [0, T] \).
+  We do this to ensure that~\( \tau \in [0,T] \).
 
-  Markov's inequality yields
+  Because the (canonical) process \( \bm{X} \) is right-continuous, \( t \mapsto \int_\potspace \abs{x} \mu_t^N(\odif{x}) = \sum_{i=1}^N \abs{X_i^t} \) is as well.
+  Since the set~\( (M_\eps, +\infty) \) is open, and the filtration is right-continuous by virtue of satisfying the usual conditions \red{TODO: not sure about this, see text below \zcref{thm:mart-problem-sol}}, Theorem 2.36 from~\cite{klebanerIntroductionStochasticCalculus2012} implies that the infimum, which is a hitting time, is a stopping time.
+  As \( T \) is a constant it is trivially a stopping time, so Theorem 2.37 from~\cite{klebanerIntroductionStochasticCalculus2012} implies that \( \tau \) is a stopping time as well.
+
+  % \red{We claim that \( \tau \) is a stopping time.
+  % Let \( t \in [0,T) \), and consider the event \( \Set{\tau \leq t} \).
+  % Then
+  % \begin{equation}
+  %   \Set{\tau \leq t} = \bigcup_{s \leq t} \Set*{ \int_\potspace \abs{x} \mu_s^N(\odif{x}) > M_\eps }
+  % \end{equation}
+  % }
+
+  Due to right-continuity, we have
   \begin{equation}
-    P^{\lambda, N} (\mu_\tau^N \notin \cK_\eps)
-    = P^{\lambda, N} \br*{ \int_\potspace \abs{x} \mu_\tau^N(\odif{x}) > M_\eps }
+    \exists t \in [0,T] : \mu_t^N \notin \cK_\eps \implies \int_\potspace \abs{x} \mu_\tau^N(\odif{x}) \geq M_\eps,
+  \end{equation}
+  so Markov's inequality yields
+  \begin{equation}
+    P^{\lambda, N} (\exists t \in [0,T] : \mu_t^N \notin \cK_\eps)
+    \leq P^{\lambda, N} \br*{ \int_\potspace \abs{x} \mu_\tau^N(\odif{x}) \geq M_\eps }
     \leq \frac{1}{M_\eps} \Exp*{P^{\lambda, N}}{\int_\potspace \abs{x} \mu_\tau^N(\odif{x})}
   \end{equation}
-
-  Define
+  Define the curve
   \begin{equation}
-    \abs{x}_n \coloneqq \rho(\tfrac{x}{n}) \cdot \frac{1}{n} \log(\cosh(n x)),    % NOTE: credits to Gemini 2.5 Pro
+    [0,T] \ni t \mapsto Y_t \coloneqq \Exp*{P^{\lambda, N}}{\int_\potspace \abs{x} \mu_t^N(\odif{x})}.
   \end{equation}
-  where \( \rho \) is a smooth indicator of \( [-1,1] \).
+  % \begin{equation}
+  %   [0,T] \ni t \mapsto Y_t \coloneqq \begin{cases}
+  %     \int_\potspace \abs{x} \mu_t^N(\odif{x}) &\text{if } t \leq \tau \\
+  %     0 &\text{if } t > \tau
+  %   \end{cases}
+  % \end{equation}
+  We would like to bound \( Y_\tau \) using \( \ol{M}_\tau^{\lambda, N}[\abs{\cdot}] \).
+  However, the absolute value function is not an element of \( C_c^1(\potspace) \).
+  To remedy this, we let \( \Set{\psi_n}_{b\in\bN} \subset C_c^1(\potspace)\) be a sequence of nonnegative functions such that \( \psi_n \overset{n\to\infty}{\to} \abs{\cdot} \) pointwise and from below, and \( \partial_x \psi_n(x) \overset{n\to\infty}{\to} \sgn(x) \) for all \( x \in \potspace \).
+  % For example that satisfies everything except for the derivative bound (but that should be fixable)
+  % \begin{equation}
+  %   \psi_n(x) \coloneqq \rho(\tfrac{x}{n}) \cdot \frac{1}{n} \log(\cosh(n x)),    % NOTE: credits to Gemini 2.5 Pro / the asker on https://math.stackexchange.com/questions/1284946/soft-absolute-value
+  % \end{equation}
+  % where \( \rho \) is a smooth, compactly supported, indicator function of \( [-1,1] \).
+  Now define, for each \( n \in \bN \), the approximation curve
+  \begin{equation}
+    [0,T] \ni t \mapsto Y_t^n \coloneqq \Exp*{P^{\lambda, N}}{\int_\potspace \psi_n \odif{\mu_t^N}}.
+  \end{equation}
+  By the monotone convergence theorem we have
+  \begin{equation}
+    Y_t = \lim_{n\to\infty} Y_t^n \quad \forall t \in [0,T].
+  \end{equation}
+  For any \( n \in \bN \), \( t \in [0,T] \), it follows by~\zcref{cor:easy-emp-M-mart} that
+  \begin{equation}
+    \begin{split}
+    Y_t^n
+    &= \Exp*{P^{\lambda, N}}{\ol{M}_t^{\lambda, N}[\psi_n] + \int_\potspace \psi_n \odif{\mu_0^N} + \int_0^t \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} } \\
+    &= \Exp*{P^{\lambda, N}}{\ol{M}_0^{\lambda, N}[\psi_n]} + \Exp*{P^{\lambda, N}}{\int_\potspace \psi_n \odif{\mu_0^N} + \int_0^t \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} } \\
+    &= Y_0^n + \Exp*{P^{\lambda, N}}{\int_0^t \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} }.
+    \end{split}
+  \end{equation}
+  % and the optional stopping theorem~\cite[Theorem 7.15]{klebanerIntroductionStochasticCalculus2012}
+  % \begin{equation}
+  %   \begin{split}
+  %   \Exp*{P^{\lambda, N}}{\int_\potspace \psi_n \odif{\mu_\tau^N}}
+  %   &= \Exp*{P^{\lambda, N}}{\ol{M}_\tau^{\lambda, N}[\psi_n] + \int_\potspace \psi_n \odif{\mu_0^N} + \int_0^\tau \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} } \\
+  %   &= \Exp*{P^{\lambda, N}}{\ol{M}_0^{\lambda, N}[\psi_n]} + \Exp*{P^{\lambda, N}}{\int_\potspace \psi_n \odif{\mu_0^N} + \int_0^\tau \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} } \\
+  %   &= \Exp*{P^{\lambda, N}}{\int_\potspace \psi_n \odif{\mu_0^N}} + \Exp*{P^{\lambda, N}}{\int_0^\tau \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} }.
+  %   \end{split}
+  % \end{equation}
+  Recalling~\eqref{eq:emp-M-expression}, we have for \( x \in \potspace \), \( s \in [0,T] \),
+  \begin{equation}
+    \begin{split}
+    \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n](x)
+    &= b(x) \partial_x \psi_n(x) + \int_\potspace (\psi_n(y) - \psi_n(x)) \lambda \ol{\kappa}_{\mu_{s}^N}(x, \odif{y}) \\
+    &= b(x) \partial_x \psi_n(x) + \lambda (\psi_n(\ol{J}_{\mu_{s}^N}(x)) - \psi_n(x)) \\
+    \overset{n\to\infty}&{\to} b(x) \sgn(x) + \lambda (\abs{\ol{J}_{\mu_{s}^N}(x)} - \abs{x})
+    \end{split}
+  \end{equation}
+  Using the linear growth assumption on the driving force (\zcref{assum:b-linear-growth}) and~\eqref{eq:ol-kappa-ol-J-def}, we also have
+  \begin{equation}
+    \begin{split}
+    \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n](x)
+    &= b(x) \partial_x \psi_n(x) + \lambda (\psi_n(\ol{J}_{\mu_{s}^N}(x)) - \psi_n(x)) \\
+    &\leq C_\mathrm{df} (1 + \abs{x}) \abs{\partial_x \psi_n(x)} + \lambda (\max\Set{ \psi_n(V_R), \psi_n(x + \omega \mu_s^N([V_F, +\infty))) } - \psi_n(x)) \\
+    % &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\psi_n(V_R) + \psi_n(x + \omega \mu_s^N([V_F, +\infty))) - \psi_n(x)) \\
+    &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{x + \omega \mu_s^N([V_F, +\infty))}) \\
+    &\leq (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\omega} + C_\mathrm{df}).
+    \end{split}
+  \end{equation}
+  This is integrable, i.e.,
+  \begin{equation}
+    \begin{split}
+    \Exp*{P^{\lambda, N}}{\int_0^t \int_\potspace \br{ (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\omega} + C_\mathrm{df} } \mu_{s}^N(\odif{x}) \odif{s} }
+    &= \Exp*{P^{\lambda, N}}{\int_0^t \sbr{ (C_\mathrm{df} + \lambda) \int_\potspace \abs{x} \mu_{s}^N(\odif{x}) + \lambda (\abs{V_R} + \abs{\omega}) + C_\mathrm{df} } \odif{s} } \\
+    &\leq
+    \end{split}
+  \end{equation}
+  \red{TODO: this would work for "\( t \leq \tau \)", but due to the expectation I can't really speak of that without turning it into a conditional expectation\dots?}
+  Hence, the dominated convergence theorem yields
+  \begin{equation}
+    Y_t
+    = Y_0 + \Exp*{P^{\lambda, N}}{\int_0^t \int_\potspace \sbr{ b(x) \sgn(x) + \lambda (\abs{\ol{J}_{\mu_{s}^N}(x)} - \abs{x}) } \mu_{s}^N(\odif{x}) \odif{s} }.
+  \end{equation}
+  To bound this, we will employ Grönwall's inequality.
+  Because
+  \begin{equation}
+    \odv{}{t} \int_0^t \int_\potspace \sbr{ b(x) \sgn(x) + \lambda (\abs{\ol{J}_{\mu_{s}^N}(x)} - \abs{x}) } \mu_{s}^N(\odif{x}) \odif{s} = \int_\potspace \sbr{ b(x) \sgn(x) + \lambda (\abs{\ol{J}_{\mu_{s}^N}(x)} - \abs{x}) } \mu_{s}^N(\odif{x}) \odif{s}
+  \end{equation}
+  is uniformly bounded in \( t \in [0,\tau] \) due to \dots, we can take the derivative inside the expectation (or Fubini to interchange the expectation and the time integral) to obtain
+  \begin{equation}
+    \odv{Y_t}{t} = %\Exp*{P^{\lambda, N}}{ \odv{}{t} \int_0^t \int_\potspace \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n] \odif{\mu_{s}^N} \odif{s} }
+    % = \Exp*{P^{\lambda, N}}{ \int_\potspace \ol{L}_{\mu_{t}^N}^{\lambda} [\psi_n] \odif{\mu_{t}^N} }.
+  \end{equation}
+  Hence
+  \begin{equation}
+    \odv{Y_t}{t} = \dots
+    \leq \Exp*{P^{\lambda, N}}{ \int_\potspace \br{ C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{\omega}) } \odif{\mu_{t}^N} }
+  \end{equation}
 
   \bigskip
 
@@ -118,7 +226,7 @@ We start with a small helper lemma.
   Let \( g = g_\psi \in \cG \) and \( \eta > 0 \).
   Set \( C_{\psi, \lambda} \coloneqq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2\lambda \norm{\psi}_\infty \) as in the proof of \zcref{lem:emp-mart-bounded} (such that \( \ol{L}_{\mu_t^N}^{\lambda,N} [\psi] (x) \leq C_{\psi, \lambda} \) for all \( t \), \( x \)), and define \(\delta \coloneqq \frac{\eta}{4C_{\psi, \lambda}}\).
 
-  Now choose \( N_0 \in \bN \) such that \(\Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 } < \frac{\eta^4}{16}\), which is possible by \zcref{prop:vanishing-variance}, and let \(N \geq N_0\).
+  Now choose \( N_0 \in \bN \) such that \(\Exp{}{ ( \ol{M}_T^{\lambda, N}[\psi] )^2 } < \frac{\eta^4}{16}\) for \( N \geq N_0 \), which is possible by \zcref{prop:vanishing-variance}, and let \(N \geq N_0\).
   We have to show that
   \begin{equation}
     g \sharp \lawmu^{\lambda, N}(\Set{ x \in D_{\potspace}[0,T] \given w'(x,\delta) \geq \eta }) \leq \eta.
