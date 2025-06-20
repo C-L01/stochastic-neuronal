@@ -12,14 +12,15 @@ Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)
   L_{\cD}^{N}\varphi \coloneqq \bm{b} \cdot \nabla_{\bm{x}} \varphi,
 \end{equation}
 % TODO domain L-drift: I don't think that L-drift maps to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity. So assume compact support I guess? (Or do that for b...)
-where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), where \(b \in C^{1-}(\potspace)\) is the physical driving force.
+where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), for some physical driving force \(b \in C^{1-}(\potspace)\).
 % NOTE b conditions: The growth condition that follows this is sufficient for L mapping to M_b, because we assumed the test functions to be compactly supported
-We will assume that \(b\) satisfies the following linear growth assumption:
-\begin{equation}
-  \forall x \in \potspace : \abs{b(x)} \leq C (1 + \abs{x}),
-\end{equation}
-for some constant \(C > 0\).
-\newline
+\begin{assumption}\label{assum:b-linear-growth}
+The driving force \( b \) grows at most linearly:
+  \begin{equation}
+    \forall x \in \potspace : \abs{b(x)} \leq C_\mathrm{df} (1 + \abs{x}),
+  \end{equation}
+  for some constant \(C_\mathrm{df} > 0\).
+\end{assumption}
 A typical example of such a driving force is the time-homogeneous \textit{leaky model}:
 \begin{equation}
   b_{\mathrm{leaky}}(x) \coloneqq -(x - V_\mathrm{rest}),
@@ -122,6 +123,9 @@ Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure
   This follows from Proposition 4.10.2 in~\cite{ethierMarkovProcessesCharacterization1985}.
 \end{proof}
 
+Because the process is right-continuous, we can assume that \( \Set{\cF_t}_{t\geq0} \) satisfies the usual conditions without loss of generality.
+\red{TODO: Actually, not sure about the right-continuity assumption, because the natural filtration of a right-continuous process is not necessarily right-continuous. These concepts are very much unrelated, see https://math.stackexchange.com/questions/3316024/mathcal-f-t-mathcal-f-t-iff-x-t-is-right-continuous?rq=1. Could maybe use Chung (1982,
+Theorem 2.3.4., p. 61) as cited by Øksendal, (2003, p. 119)? Although Øksendal uses a \( \mathcal{M}_t \) which is the natural filtration of an `Itô diffusion', which is a solution of an SDE with diffusion...}
 
 % {\Large Insert MP justification / equivalent SDE}
 

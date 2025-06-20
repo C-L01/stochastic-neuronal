@@ -14,7 +14,7 @@ To illustrate the concepts we have introduced so far we will nonetheless quickly
 
 \begin{proof}
   First of all, note that \(\Theta_N(\bm{x})_t\) is a convex combination of (Dirac) probability measures for any \(t \in [0,T]\), so since \(\cP(\potspace)\) is convex \(\Theta_N(\bm{x})_t \in \cP(\potspace)\).
-  By definition \(\bm{x}\) is right-continuous, meaning for any \(t \in [0,T)\)
+  By assumption \(\bm{x}\) is right-continuous, meaning for any \(t \in [0,T)\)
   \begin{equation}
     \forall i \in [N] : \lim_{s \downarrow t} x_s^i = x_t^i.
   \end{equation}
@@ -99,7 +99,7 @@ Then, the integrand of the last term can be rewritten as
   \end{split}
 \end{equation}
 for
-\begin{equation}
+\begin{equation}\label{eq:ol-kappa-ol-J-def}
   \ol{\kappa}_\nu(x, \odif{y}) \coloneqq \delta_{\bar{\jtarg}_\nu(x)}(\odif{y}),
   \quad\text{and}\quad
   \ol{\jtarg}_\nu(x) \coloneqq \begin{cases}
@@ -121,7 +121,7 @@ If we identify test functions with functions\footnote{Not functionals, because a
 However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependence on the empirical measure, so it is not actually of this form.
 
 \begin{lemma}\label{lem:emp-mart-bounded}
-  For fixed \( \lambda > 0 \) and \( \psi \in C_c^1(\potspace) \), \( \ol{M}_t^{\lambda, N}[\psi] \) is bounded uniformly in \( N \).
+  For fixed \( \lambda > 0 \) and \( \psi \in C_c^1(\potspace) \), \( \ol{L}_{\mu_{r}^N}(x) \) is bounded uniformly in \( x \in \potspace \), \( r \geq 0 \) and \( N \in \bN \), and \( \ol{M}_t^{\lambda, N}[\psi] \) is bounded uniformly in \( N \in \bN \) for fixed \( t \geq 0 \).
 \end{lemma}
 
 \begin{proof}
@@ -130,10 +130,10 @@ However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependenc
   \begin{equation}
     \abs{ \ol{L}_{\mu_{r}^N}^{\lambda} [\psi](x) }
     = \abs{ b(x) \partial_x \psi(x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) }
-    \leq \norm{b}_\infty \norm{\partial_x \psi}_\infty + 2 \lambda \norm{\psi}_\infty
+    \leq \norm{b \partial_x \psi}_\infty + 2 \lambda \norm{\psi}_\infty
     \eqqcolon C_{\psi, \lambda}, \quad x \in \potspace,
   \end{equation}
-  which implies for \( t \geq 0 \),
+  which implies that for \( t \geq 0 \),
   \begin{equation}
     \abs{ \ol{M}_t^{\lambda, N}[\psi] }
     \overset{\eqref{eq:emp-M-expression}}{\leq} 2 \norm{\psi}_\infty + t C_{\psi, \lambda}.
