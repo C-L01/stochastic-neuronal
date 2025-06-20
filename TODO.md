@@ -34,5 +34,5 @@
 
 ## Compactness for fixed $\lambda$
 - [x] Go through Overleaf comments
-- [ ] Finish result
+- [x] Finish result
 - [ ] Say something about the consequences of the convergence / whether the limit point also satisfies the MP (see meeting notes)
