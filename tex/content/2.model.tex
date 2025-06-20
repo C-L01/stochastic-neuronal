@@ -14,13 +14,20 @@ Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)
 % TODO domain L-drift: I don't think that L-drift maps to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity. So assume compact support I guess? (Or do that for b...)
 where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), for some physical driving force \(b \in C^{1-}(\potspace)\).
 % NOTE b conditions: The growth condition that follows this is sufficient for L mapping to M_b, because we assumed the test functions to be compactly supported
-\begin{assumption}\label{assum:b-linear-growth}
-The driving force \( b \) grows at most linearly:
+\begin{assumption}\label{assum:b-growth}
+The driving force \( b \) satisfies
   \begin{equation}
-    \forall x \in \potspace : \abs{b(x)} \leq C_\mathrm{df} (1 + \abs{x}),
+    \forall x \in \potspace : b(x) \sgn(x) \leq C_\mathrm{df},
   \end{equation}
   for some constant \(C_\mathrm{df} > 0\).
+  This is equivalent to \( b \) being bounded above on \( (0,\infty) \) and bounded below on \( (-\infty,0) \).
+  We additionally assume linear growth
+  \begin{equation}
+    \abs{b(x)} \leq C_\mathrm{df} (1 + \abs{x})
+  \end{equation}
+  for technical reasons.
 \end{assumption}
+The first assumption implies that the driving force can at most drive the potential away from zero at bounded speed.
 A typical example of such a driving force is the time-homogeneous \textit{leaky model}:
 \begin{equation}
   b_{\mathrm{leaky}}(x) \coloneqq -(x - V_\mathrm{rest}),
@@ -102,16 +109,17 @@ This jump generator models the two kinds of stochastic jumps:
 
 The full generator \(L^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N)\) of our model is defined as
 \begin{equation}
-  L^{\lambda, N} = \ol{L_{\cD}^{N}} + L_{\cJ}^{\lambda, N}.
+  L^{\lambda, N} = L_{\cD}^{N} + L_{\cJ}^{\lambda, N}.
+  % L^{\lambda, N} = \ol{L_{\cD}^{N}} + L_{\cJ}^{\lambda, N}.
 \end{equation}
-Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true / if I want to use and argue this. The idea would be to use EK Theorem 4.4.1 and/or Corollary 4.4.4 as suggested on bottom of p.255
+% Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure: Figure out if this is true / if I want to use and argue this. The idea would be to use EK Theorem 4.4.1 and/or Corollary 4.4.4 as suggested on bottom of p.255
 
 % By Theorem 1 from Dempster \cite{dempster_martingale_1998},\footnote{Which follows from a combination of perturbation results from \cite{ethier_markov_1985}.} we have the following result.
 
 \begin{theorem}\label{thm:mart-problem-sol}
-  Let \(\lambda > 0\), \( N \in \bN \), and let \(\nu \in \cP(\potspace^N)\) be an initial condition.
-  Then the martingale problem for \((L^{\lambda, N}, \nu)\) has a solution.% TODO \textit{unique} solution.
-  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the canonical coordinate process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) we have \( \bm{X}_0 \sharp P^{\lambda, N} = \nu \), and for each \(\varphi \in C_c^1(\potspace^N)\), % TODO this should be the domain of L, so if I keep (/ work out how to use) the closure of L_drift it might be larger
+  Let \(\lambda > 0\), \( N \in \bN \), and let \(\mu_0 \in \cP(\potspace^N)\) be an initial condition.
+  Then the martingale problem for \((L^{\lambda, N}, \mu_0)\) has a solution. % TODO \textit{unique} solution.
+  That means that there exists a probability measure \(P^{\lambda, N} \in \cP(D_{\potspace^N}[0,T])\) such that for the canonical coordinate process \(D_{\potspace^N}[0,T] \ni \bm{\omega} \mapsto \bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) defined on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) we have \( \bm{X}_0 \sharp P^{\lambda, N} = \mu_0 \), and for each \(\varphi \in C_c^1(\potspace^N)\), % TODO this should be the domain of L, so if I keep (/ work out how to use) the closure of L_drift it might be larger
   \begin{equation}\label{eq:M-def}
     M_t^{\lambda, N}[\varphi]
     \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L^{\lambda, N} \varphi(\bm{X}_r) \odif{r}
@@ -124,8 +132,15 @@ Here \(\ol{L_{\cD}^{N}}\) is the (weak) closure of \(L_{\cD}^N\). % TODO closure
 \end{proof}
 
 Because the process is right-continuous, we can assume that \( \Set{\cF_t}_{t\geq0} \) satisfies the usual conditions without loss of generality.
-\red{TODO: Actually, not sure about the right-continuity assumption, because the natural filtration of a right-continuous process is not necessarily right-continuous. These concepts are very much unrelated, see https://math.stackexchange.com/questions/3316024/mathcal-f-t-mathcal-f-t-iff-x-t-is-right-continuous?rq=1. Could maybe use Chung (1982,
-Theorem 2.3.4., p. 61) as cited by Øksendal, (2003, p. 119)? Although Øksendal uses a \( \mathcal{M}_t \) which is the natural filtration of an `Itô diffusion', which is a solution of an SDE with diffusion...}
+\red{TODO: Actually, not sure about the right-continuity assumption, because the natural filtration of a right-continuous process is not necessarily right-continuous. See https://math.stackexchange.com/questions/3316024/mathcal-f-t-mathcal-f-t-iff-x-t-is-right-continuous?rq=1. Could maybe use Chung (1982,
+Theorem 2.3.4., p. 61) as cited by Øksendal, (2003, p. 119)?} % Although Øksendal uses a \( \mathcal{M}_t \) which is the natural filtration of an `Itô diffusion', which is a solution of an SDE with diffusion...}
+
+For simplicity we will assume that the initial distribution \( \mu_0 \) of the potentials is concentrated on a bounded subset of \( \potspace^N \).
+This could for instance be \( [V_R, V_F]^N \).
+
+\begin{assumption}\label{assum:X0-bounded}
+  There exists a constant \( V_0 > 0 \) such that for all \( j \in N \) we have \( X_0^j \leq V_0 \) a.s.
+\end{assumption}
 
 % {\Large Insert MP justification / equivalent SDE}
 
