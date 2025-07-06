@@ -97,7 +97,7 @@ For a sequence of probability measures to converge narrowly, no \enquote{escape 
 This requirement is formalized through the following concept.
 
 \begin{definition}
-  A set of probability measures \(\Pi \subseteq \cP(E)\) is said to be \textit{tight} if
+  A set of probability measures \( \Pi \subseteq \cP(E) \) is said to be \textit{tight} if
   \begin{equation}
     \forall \eps > 0 : \exists K \Subset E : \forall \mu \in \Pi : \mu(K) > 1 - \eps.
   \end{equation}
@@ -113,17 +113,27 @@ This is the subject of Prokhorov's theorem~\cite[57-65]{billingsleyConvergencePr
   \( \Pi \subseteq \cP(E) \) is relatively compact if and only if it is tight.
 \end{theorem}
 
-There is another equivalent condition to tightness that is often useful.
+There is another equivalent condition to tightness that is sometimes useful.
+It is both sufficient and necessary, but for brevity we will only state and prove its sufficiency since that is all we will require.
 
 \begin{lemma}\label{lem:tightness-char-coercive-function}
-  \( \Pi \subseteq \cP(E) \) is tight if and only if there exists a function \( \phi : E \to [0,\infty] \) with compact sublevel sets such that
+  Let \( \Pi \subseteq \cP(E) \), and suppose there exists a function \( \phi : E \to [0,\infty] \) with compact sublevel sets such that
   \begin{equation}
-    \sup_{\mu \in \Pi} \int_E \phi \odif{\mu} < \infty.
+    \norm{\phi}_\Pi \coloneqq \sup_{\mu \in \Pi} \int_E \phi \odif{\mu} < \infty.
   \end{equation}
+  Then \( \Pi \) is tight.
 \end{lemma}
 
 \begin{proof}
-  \red{TODO: find reference, or copy proof from OT}
+  Let \( \eps > 0 \).
+  Define \( K \coloneqq \Set{x \in E \given \phi(x) \leq \frac{\norm{\phi}_\Pi}{\eps}} \), which is compact by assumption.
+  Then for any \( \mu \in \Pi \),
+  \begin{equation}
+    \frac{\norm{\phi}_\Pi}{\eps} \mu(E \setminus K) = \int_{E \setminus K} \frac{\norm{\phi}_\Pi}{\eps} \odif{\mu}
+    \leq \int_{E \setminus K} \phi \odif{\mu}
+    \leq \norm{\phi}_\Pi,
+  \end{equation}
+  which implies that \( \Pi \) is tight.
   % TODO: also, I would like to call phi coercive, but that only means relatively compact I think. Which is maybe sufficient anyways?
 \end{proof}
 
