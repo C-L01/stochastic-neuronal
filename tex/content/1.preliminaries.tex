@@ -1,7 +1,7 @@
 \section{Preliminaries}
 
-Let \((E,d)\) be a metric space.
-We will assume that \((E,d)\) is both separable and complete, because we will exclusively work with such spaces.
+Let \((E, d)\) be a metric space.
+We will assume that \((E, d)\) is both separable and complete, because we will exclusively work with such spaces.
 
 \subsection{Notation}
 \begin{itemize}
@@ -15,35 +15,56 @@ We will assume that \((E,d)\) is both separable and complete, because we will ex
   \item \(C_*^{1-}(E) \subset C_*(E)\), \( * \in \Set{b, 0, c} \) is the space of functions which are (additionally) locally Lipschitz continuous.
   \item \(C_*^{k}(E) \subset C_*^{1-}(E)\), \( * \in \Set{b, 0, c} \), \( k \in \bN \) is the space of functions which are (additionally) \(k\)-times continuously differentiable.
   \item \(\cP(E)\) is the space of Borel probability measures on \(E\).
+  \item \( \land \) and \( \lor \) are minimum and maximum (binary) operators respectively.
 \end{itemize}
 
-\subsection{The Skorokhod space}%, topology, metric and \texorpdfstring{\(\sigma\)}{sigma}-algebra}
-The Skorokhod space \(D_E[0,\infty)\) is defined as the space of functions \(x : [0,\infty) \to E\) which are right-continuous and have existing left-limits.
+\subsection{The Skorokhod space} %, topology, metric and \texorpdfstring{\(\sigma\)}{sigma}-algebra}
+The Skorokhod space \( D_E[0,\infty) \) is defined as the space of functions \(x : [0,\infty) \to E\) which are right-continuous and have existing left-limits (càdlàg).
 That is, for \(x \in D_E[0,\infty)\) we have
 \begin{equation}
   \forall t \in [0,\infty) : x(t+) \coloneqq \lim_{s \downarrow t} x(s) = x(t), \quad\text{and}\quad x(t-) \coloneqq \lim_{s \uparrow t} x(s)\ \text{exists},
 \end{equation}
 where the latter holds by convention for \(t = 0\).
-Often, we will use subscripts to denote evaluation of elements of \(D_E[0,\infty)\), i.e., \(x_t \coloneqq x(t)\).
+Often, we will use subscripts to denote evaluation of elements of \( D_E[0,\infty) \), i.e., \(x_t \coloneqq x(t)\).
 
 % TODO: could simplify to [0,T], and cite the simpler metric from Kouritzin here
-We topologize the Skorokhod space \(D_E[0,\infty)\) using the (J1) Skorokhod metric as defined in~\cite[pp.116-117]{ethierMarkovProcessesCharacterization1985}.
+We topologize the Skorokhod space \( D_E[0,\infty) \) using the (\( J_1 \)) Skorokhod metric as defined in~\cite[pp.116-117]{ethierMarkovProcessesCharacterization1985}.
 This metric is defined as
 \begin{equation}
-  d_\mathrm{SK}(x,y) \coloneqq \inf_{\lambda \in \Lambda} \cbr*{ \norm{\lambda}_\circ \lor \int_0^\infty e^{-s} \widetilde{d}(x,y,\lambda,s) \odif{s} },
+  d_\mathrm{SK}(x,y) \coloneqq \inf_{\lambda \in \Lambda[0,\infty)} \cbr*{ \norm{\lambda}_\circ \lor \int_0^\infty e^{-s} \widetilde{d}(x,y,\lambda,s) \odif{s} }, \quad x, y \in D_E[0,\infty),
 \end{equation}
-where \( \Lambda \) is the set of Lipschitz continuous, strictly increasing bijections that map \([0,\infty)\) onto \([0,\infty)\) for which
+where \( \Lambda[0,\infty) \) is the set of Lipschitz continuous, strictly increasing bijections that map \( [0,\infty) \) onto \([0,\infty)\) for which
 \begin{equation}
-  \norm{\lambda}_\circ \coloneqq \sup_{s > t \geq 0} \abs*{ \log \frac{\lambda(s)-\lambda(t)}{s-t} } < \infty,
+  \norm{\lambda}_\circ \coloneqq \sup_{s > t \geq 0} \abs*{ \log \frac{\lambda(s)-\lambda(t)}{s-t} }
+  % =\esssup_{t \geq 0} \abs{ \log \lambda'(t) }    % NOTE: eq. (3.5.1) in EK. This holds because (i) lambda is a.e. diffable by being Lipschitz, (ii) the supremum over the fraction is >= the derivative by limit def. and (iii) the supremum over derivative is >= the fraction by the fact that lambda is absolutely continuous (as it is Lipschitz)
+  < \infty,
 \end{equation}
+% \begin{lemma}
+%   For \( \lambda \in \Lambda[0,\infty) \) we have
+%   \begin{equation}
+%     \norm{\lambda}_\circ = \esssup_{t \geq 0} \abs{ \log \lambda'(t) }.
+%   \end{equation}
+% \end{lemma}
 and
 \begin{equation}
   \widetilde{d}(x,y,\lambda,s) \coloneqq \sup_{t \geq 0} \cbr{ 1 \land d(x(t \land s), y(\lambda(t) \land s)) }.
 \end{equation}
 Because \((E, d)\) is both complete and separable, so is \((D_E[0,\infty), d_\mathrm{SK})\)~\cite[Theorem 3.5.6]{ethierMarkovProcessesCharacterization1985}.
 
-For an intuitive justification of the machinery involved in this metric, see~\cite{kernSkorokhodTopologiesWhat2024}.
-Other choices of metric are possible but they induce the same topology, see~\cite[pp.166-168]{billingsleyConvergenceProbabilityMeasures1999} and~\cite[p.122-123]{pollardConvergenceStochasticProcesses1984}.
+Here \( \lambda \) should be interpreted as a `change of time', with the degree of change (measured based on \( \lambda \)'s slope) being penalized through \( \norm{\lambda}_\circ \).
+This temporal flexibility ensures that \( x_n(t) \coloneqq x(t + \frac{1}{n}) \) converges to \( x(t) \coloneqq \indE{[0,1]}(t) \) under \( d_\mathrm{SK} \), despite the discontinuity of \( x \) at \( t = 1 \).
+(Crucially, this does not hold under the uniform metric \( d_\infty(x,y) \coloneqq \sup_{t \geq 0} d(x(t), x(t)) \).)
+For more details on and justification of the machinery involved in the Skorokhod topology, see~\cite{kernSkorokhodTopologiesWhat2024}.
+
+\begin{remark}
+  Other choices of metric are possible but they induce the same topology, see~\cite[pp.166-168]{billingsleyConvergenceProbabilityMeasures1999} and~\cite[p.122-123]{pollardConvergenceStochasticProcesses1984}.
+\end{remark}
+
+We define \(\mathscr{S}_{E}\) to be the Borel \( \sigma \)-algebra induced by the Skorokhod topology.
+Because \(E\) is separable, \(\mathscr{S}_{E}\) is generated by the point-evaluation maps~\cite[Proposition 3.7.1]{ethierMarkovProcessesCharacterization1985}.
+
+
+\subsubsection{Relative compactness}
 
 To characterize relative compactness under the Skorokhod metric a result similar to the Arzelà-Ascoli theorem exists.
 It also makes use of a modulus of continuity, but then one that can avoid the discontinuities that càdlàg functions can have.
@@ -71,8 +92,17 @@ Then define
   This is Theorem 3.6.3 modified based on Remark 3.6.4 from Ethier and Kurz~\cite{ethierMarkovProcessesCharacterization1985}.
 \end{proof}
 
-We define \(\mathscr{S}_{E}\) to be the Borel \( \sigma \)-algebra induced by the Skorokhod topology.
-Because \(E\) is separable, \(\mathscr{S}_{E}\) is generated by the point-evaluation maps~\cite[Proposition 3.7.1]{ethierMarkovProcessesCharacterization1985}.
+\subsubsection{On finite time intervals}
+Most of our results will be stated on the space \( D_E[0,T] \) instead, where \( T > 0 \) is a fixed finite time horizon.
+Whenever we have an element of \( D_E[0,\infty) \), we can of course restrict it to be an element of \( D_E[0,T] \).
+On this space we can use a slightly simpler metric:
+\begin{equation}
+  d_\mathrm{SK}^T(x,y) \coloneqq \inf_{\lambda \in \Lambda[0,T]} \br*{ \norm{\lambda}_\circ \lor \sup_{t \in [0,T]} d(x(\lambda(t)), y(t)) }, \quad x, y \in D_E[0,T].
+  % Kouritzin's metric (simplified to using 1 metric d) and Kern's one are surely equivalent and both complete, as they both use the slope of lambda.
+\end{equation}
+We define \(\mathscr{S}_{E}^T\) to be the Borel \( \sigma \)-algebra induced by this metric.
+
+% Say something about compatiblity between [0,T] and [0,infty]?
 
 \subsection{Narrow convergence}
 
