@@ -16,93 +16,165 @@ We will assume that \((E, d)\) is both separable and complete, because we will e
   \item \(C_*^{k}(E) \subset C_*^{1-}(E)\), \( * \in \Set{b, 0, c} \), \( k \in \bN \) is the space of functions which are (additionally) \(k\)-times continuously differentiable.
   \item \(\cP(E)\) is the space of Borel probability measures on \(E\).
   \item \( \land \) and \( \lor \) are minimum and maximum (binary) operators respectively.
+  \item \( \Subset \) denotes compact subset.
 \end{itemize}
 
-\subsection{The Skorokhod space} %, topology, metric and \texorpdfstring{\(\sigma\)}{sigma}-algebra}
-The Skorokhod space \( D_E[0,\infty) \) is defined as the space of functions \(x : [0,\infty) \to E\) which are right-continuous and have existing left-limits (càdlàg).
-That is, for \(x \in D_E[0,\infty)\) we have
-\begin{equation}
-  \forall t \in [0,\infty) : x(t+) \coloneqq \lim_{s \downarrow t} x(s) = x(t), \quad\text{and}\quad x(t-) \coloneqq \lim_{s \uparrow t} x(s)\ \text{exists},
-\end{equation}
-where the latter holds by convention for \(t = 0\).
-Often, we will use subscripts to denote evaluation of elements of \( D_E[0,\infty) \), i.e., \(x_t \coloneqq x(t)\).
 
-% TODO: could simplify to [0,T], and cite the simpler metric from Kouritzin here
-We topologize the Skorokhod space \( D_E[0,\infty) \) using the (\( J_1 \)) Skorokhod metric as defined in~\cite[pp.116-117]{ethierMarkovProcessesCharacterization1985}.
+\subsection{The Skorokhod space} %, topology, metric and \texorpdfstring{\(\sigma\)}{sigma}-algebra}
+Given a fixed time horizon \( T > 0 \), the Skorokhod space \( D_E[0,T] \) is defined as the space of functions \(x : [0,T] \to E\) which are right-continuous and have existing left-limits (càdlàg).
+That is, \(x \in D_E[0,T]\) is equivalent to
+\begin{equation}
+  \forall t \in [0,T) : x(t+) \coloneqq \lim_{s \downarrow t} x(s) = x(t), \quad\text{and}\quad \forall t \in (0,T] : x(t-) \coloneqq \lim_{s \uparrow t} x(s)\ \text{exists}.
+\end{equation}
+Often, we will use subscripts to abbreviate evaluation of such functions, i.e., \(x_t \coloneqq x(t)\).
+
+We topologize the Skorokhod space \( D_E[0,T] \) using the complete (\( J_1 \)) Skorokhod metric as defined in~\cite[125]{billingsleyConvergenceProbabilityMeasures1999}.\footnote{There the metric is formulated for \( E = \bR \), but as they state on page 121 it can be generalized as we do here.}
 This metric is defined as
-\begin{equation}
-  d_\mathrm{SK}(x,y) \coloneqq \inf_{\lambda \in \Lambda[0,\infty)} \cbr*{ \norm{\lambda}_\circ \lor \int_0^\infty e^{-s} \widetilde{d}(x,y,\lambda,s) \odif{s} }, \quad x, y \in D_E[0,\infty),
+\begin{equation}\label{eq:d_T-def}
+  d_T^\mathrm{SK} (x,y) \coloneqq \inf_{\lambda \in \Lambda[0,T]} \br*{ \norm{\lambda}_T^\circ \lor \sup_{t \in [0,T]} d(x(\lambda(t)), y(t)) }, \quad x, y \in D_E[0,T],
+  % Kouritzin's metric (simplified to using 1 metric d) and Kern's one are surely equivalent and both complete, as they both use the slope of lambda.
 \end{equation}
-where \( \Lambda[0,\infty) \) is the set of Lipschitz continuous, strictly increasing bijections that map \( [0,\infty) \) onto \([0,\infty)\) for which
-\begin{equation}
-  \norm{\lambda}_\circ \coloneqq \sup_{s > t \geq 0} \abs*{ \log \frac{\lambda(s)-\lambda(t)}{s-t} }
-  % =\esssup_{t \geq 0} \abs{ \log \lambda'(t) }    % NOTE: eq. (3.5.1) in EK. This holds because (i) lambda is a.e. diffable by being Lipschitz, (ii) the supremum over the fraction is >= the derivative by limit def. and (iii) the supremum over derivative is >= the fraction by the fact that lambda is absolutely continuous (as it is Lipschitz)
-  < \infty,
+where \( \Lambda[0,T] \) is the set of Lipschitz continuous, strictly increasing bijections that map \( [0,T] \) onto itself, and
+\begin{equation}\label{eq:lambda-norm}
+  \norm{\lambda}_T^\circ \coloneqq \sup_{0 \leq s < t \leq T} \abs*{ \log \frac{\lambda(t)-\lambda(s)}{t-s} }
+  = \esssup_{0 \leq t \leq T} \abs{ \log \lambda'(t) }.    % NOTE: eq. (3.5.1) in EK. This holds because (i) lambda is a.e. diffable by being Lipschitz, (ii) the supremum over the fraction is >= the derivative by limit def. and (iii) the supremum over derivative is >= the fraction by the fact that lambda is absolutely continuous (as it is Lipschitz)
 \end{equation}
-% \begin{lemma}
-%   For \( \lambda \in \Lambda[0,\infty) \) we have
-%   \begin{equation}
-%     \norm{\lambda}_\circ = \esssup_{t \geq 0} \abs{ \log \lambda'(t) }.
-%   \end{equation}
-% \end{lemma}
-and
+Here \( \lambda \) should be interpreted as a `change of time', with the degree of change (measured based on \( \lambda \)'s slope) being penalized through \( \norm{\lambda}_\infty^\circ \).
+This temporal flexibility ensures that \( x_n(t) \coloneqq x(t + \frac{1}{n}) \) converges to \( x(t) \coloneqq \indE{[0,1]}(t) \)\footnote{Assuming \( T > 1 \).} under \( d_\infty^\mathrm{SK} \), despite the discontinuity of \( x \) at \( t = 1 \).
+(Crucially, this does not hold under the uniform metric \( d_\mathrm{unif}(x,y) \coloneqq \sup_{t \geq 0} d(x(t), y(t)) \).)
+For more details on and justification of the machinery involved in the Skorokhod metric, see~\cite{kernSkorokhodTopologiesWhat2024}.
+
+\begin{lemma}
+  For any \( \lambda \in \Lambda[0,T] \),~\eqref{eq:lambda-norm} holds.
+\end{lemma}
+\begin{proof}
+  Because \( \lambda \) is Lipschitz continuous and strictly increasing it has a positive derivative almost everywhere, so both expressions are well-defined.
+  It remains to be shown that they are equal, i.e.,
+  \begin{equation}\label{eq:lambda-norm-claim}
+    \sup_{0 \leq s < t \leq T} \abs*{ \log \frac{\lambda(t)-\lambda(s)}{t-s} } = \esssup_{0 \leq r \leq T} \abs{ \log \lambda'(r) }.
+  \end{equation}
+  If \( \lambda'(r) \) exists, we have
+  \begin{equation}
+    \log \lambda'(r) = \log \lim_{t \to r} \frac{\lambda(t)-\lambda(r)}{t-r}
+    \leq \log \sup_{0 \leq s < t \leq T} \frac{\lambda(t)-\lambda(s)}{t-s}
+    % = \sup_{0 \leq s < t \leq T} \log \frac{\lambda(t)-\lambda(s)}{t-s}
+    \leq \sup_{0 \leq s < t \leq T} \abs*{ \log \frac{\lambda(t)-\lambda(s)}{t-s} },
+  \end{equation}
+  by monotonicity of the logarithm.
+  Analogously, it follows that the same upper bound holds for \( -\log \lambda'(r) \), so
+  \begin{equation}\label{eq:lambda-norm-claim-geq}
+    \esssup_{0 \leq r \leq T} \abs{ \log \lambda'(r) } \leq \sup_{0 \leq s < t \leq T} \abs*{ \log \frac{\lambda(t)-\lambda(s)}{t-s} }.
+  \end{equation}
+  Furthermore, as \( \lambda \) is Lipschitz continuous it is in particular absolutely continuous, implying that for \( s < t \)
+  \begin{equation}
+    \log \frac{\lambda(t)-\lambda(s)}{t-s} = \log \br*{ \frac{1}{t-s} \int_s^t \lambda'(\tau) \odif{\tau} }
+    \leq \log \esssup_{0 \leq r \leq T} \lambda'(s)
+    % = \esssup_{0 \leq r \leq T} \log \lambda'(s)
+    \leq \esssup_{0 \leq r \leq T} \abs{ \log \lambda'(s) }.
+  \end{equation}
+  % \begin{equation}
+  %   -\log \frac{\lambda(t)-\lambda(s)}{t-s} = \log \br*{ \frac{t-s}{\int_s^t \lambda'(\tau) \odif{\tau}} }
+  %   \leq \log \frac{1}{\essinf_{0 \leq r \leq T} \lambda'(s)}
+  %   = -\log \essinf_{0 \leq r \leq T} \lambda'(s)
+  %   = \esssup_{0 \leq r \leq T} -\log \lambda'(s).
+  % \end{equation}
+  Again, the same upper bound can be shown to hold for \( -\log \frac{\lambda(t)-\lambda(s)}{t-s} \) in the same way, yielding
+  \begin{equation}
+    \sup_{0 \leq s < t \leq T} \abs*{ \log \frac{\lambda(t)-\lambda(s)}{t-s} } \leq \esssup_{0 \leq r \leq T} \abs{ \log \lambda'(r) },
+  \end{equation}
+  which combined with~\eqref{eq:lambda-norm-claim-geq} implies~\eqref{eq:lambda-norm-claim}.
+\end{proof}
+
+Because \((E, d)\) is both complete and separable, so is \((D_E[0,T], d_T^\mathrm{SK})\)~\cite[Theorem 12.2]{billingsleyConvergenceProbabilityMeasures1999}.
+We define \(\mathscr{S}_T^E\) to be the Borel \( \sigma \)-algebra induced by \( d_T^\mathrm{SK} \).
+
+
+\subsubsection{On unbounded time intervals}
+
+Most of our results will be stated on the space \( D_E[0,T] \), but some intermediate steps will make use of the space \( D_E[0,\infty) \), which consists of the càdlàg functions that are defined for all nonnegative times.
+Whenever we have an element of \( D_E[0,\infty) \), we can of course restrict its domain to obtain an element of \( D_E[0,T] \).
+
+The topology on \( D_E[0,\infty) \) will be the one induced by the metric from~\cite[116-117]{ethierMarkovProcessesCharacterization1986}, which is defined as
+\begin{equation}
+  d_\infty^\mathrm{SK} (x,y) \coloneqq \inf_{\lambda \in \Lambda[0,\infty)} \cbr*{ \norm{\lambda}_\infty^\circ \lor \int_0^\infty e^{-s} \widetilde{d}(x,y,\lambda,s) \odif{s} }, \quad x, y \in D_E[0,\infty),
+\end{equation}
+where \( \Lambda[0,\infty) \) and \( \norm{\cdot}_\infty^\circ \) are straightforward adaptations of \( \Lambda[0,T] \) and \( \norm{\cdot}_T^\circ \), and
 \begin{equation}
   \widetilde{d}(x,y,\lambda,s) \coloneqq \sup_{t \geq 0} \cbr{ 1 \land d(x(t \land s), y(\lambda(t) \land s)) }.
 \end{equation}
-Because \((E, d)\) is both complete and separable, so is \((D_E[0,\infty), d_\mathrm{SK})\)~\cite[Theorem 3.5.6]{ethierMarkovProcessesCharacterization1985}.
+Under the topology induced by this metric, \( x_n \to x \) in \( D_E[0,\infty) \) is more or less (see \zcref{cav:D_T-D_inf-equiv} below) equivalent to \( x_n \to x \) holding in \( D_E[0,T] \) for all \( T > 0 \) at which \( x \) is continuous; see~\cite[Proposition 3.5.2]{ethierMarkovProcessesCharacterization1986} and~\cite[Theorem 16.2]{billingsleyConvergenceProbabilityMeasures1999}.
 
-Here \( \lambda \) should be interpreted as a `change of time', with the degree of change (measured based on \( \lambda \)'s slope) being penalized through \( \norm{\lambda}_\circ \).
-This temporal flexibility ensures that \( x_n(t) \coloneqq x(t + \frac{1}{n}) \) converges to \( x(t) \coloneqq \indE{[0,1]}(t) \) under \( d_\mathrm{SK} \), despite the discontinuity of \( x \) at \( t = 1 \).
-(Crucially, this does not hold under the uniform metric \( d_\infty(x,y) \coloneqq \sup_{t \geq 0} d(x(t), x(t)) \).)
-For more details on and justification of the machinery involved in the Skorokhod topology, see~\cite{kernSkorokhodTopologiesWhat2024}.
+\begin{caveat}\label{cav:D_T-D_inf-equiv}
+  This equivalence holds exactly in~\cite[Theorem 16.2]{billingsleyConvergenceProbabilityMeasures1999}, but it is unclear if their Skorokhod topology on \( D_E[0,\infty) \) (induced by their metric \( d_\infty^\circ \) defined on pages 166-168) is the same as the one used by~\cite{ethierMarkovProcessesCharacterization1986} (which we use here).
+  There is even a third possible definition of the Skorokhod metric on \( D_E[0,\infty) \), which is given in~\cite[p.122-123]{pollardConvergenceStochasticProcesses1984}.
+\end{caveat}
 
-\begin{remark}
-  Other choices of metric are possible but they induce the same topology, see~\cite[pp.166-168]{billingsleyConvergenceProbabilityMeasures1999} and~\cite[p.122-123]{pollardConvergenceStochasticProcesses1984}.
-\end{remark}
-
-We define \(\mathscr{S}_{E}\) to be the Borel \( \sigma \)-algebra induced by the Skorokhod topology.
-Because \(E\) is separable, \(\mathscr{S}_{E}\) is generated by the point-evaluation maps~\cite[Proposition 3.7.1]{ethierMarkovProcessesCharacterization1985}.
+Because \((E, d)\) is both complete and separable, so is \((D_E[0,\infty), d_\infty^\mathrm{SK})\)~\cite[Theorem 3.5.6]{ethierMarkovProcessesCharacterization1986}.
+We define \(\mathscr{S}_\infty^E\) to be the Borel \( \sigma \)-algebra induced by \( d_\infty^\mathrm{SK} \).
+% Because \(E\) is separable, \(\mathscr{S}_\infty^E\) is generated by the point-evaluation maps~\cite[Proposition 3.7.1]{ethierMarkovProcessesCharacterization1986}.
 
 
 \subsubsection{Relative compactness}
 
-To characterize relative compactness under the Skorokhod metric a result similar to the Arzelà-Ascoli theorem exists.
-It also makes use of a modulus of continuity, but then one that can avoid the discontinuities that càdlàg functions can have.
-Let \( \cC_T^\delta \) be the collection of \( \delta \)-sparse partitions \(\Set{t_i}_{i=0}^n\), which satisfy \(0 = t_0 < t_1 < \cdots < t_n = T\) and \( \min_{i=1,\dots,n} t_i - t_{i-1} > \delta \).
-Then define
-\begin{equation}\label{eq:w-w'-def}
-  \begin{split}
-    w(x, [c,d))      & \coloneqq \sup_{c \leq s < t < d} d(x_t,x_s),                            \\
-    w'(x, \delta, T) & \coloneqq \inf_{\Set{t_i} \in \cC_T^\delta} \max_i w(x, [t_{i-1}, t_i)).
-  \end{split}
+Given a sequence of functions, the first step towards showing their convergence is often establishing relative compactness.
+For continuous functions under the uniform metric this can be done with the well-known Arzelà-Ascoli theorem.
+This theorem can be formulated using the \textit{modulus of continuity}, defined as
+\begin{equation}
+  w(x, \delta) \coloneqq \sup_{\abs{t - s} \leq \delta} d(x_t, x_s), \quad x \in C_E[0,T],\ \delta > 0.
 \end{equation}
 
-\begin{theorem}\label{prelim:thm:rel-compact-in-SK}
-  A set of paths \(A \subset D_E[0,\infty)\) is relatively compact (w.r.t.\@ \(d_\mathrm{SK}\)) if and only if
+\begin{theorem}(Arzelà-Ascoli)
+  A set of paths \( A \subseteq C_E[0,T] \) is relatively compact w.r.t.\@ the uniform metric if and only if
   \begin{enumerate}[(i)]
-    \item For all \(T > 0\), there exists a compact set \(\Gamma_T \subset E\) such that \(x_t \in \Gamma_T\) for all \(t \in [0,T]\), \(x \in A\).
-    \item For all \(T > 0\),
-          \begin{equation}
-            \lim_{\delta\to0} \sup_{x \in A} w'(x,\delta,T) = 0.
-          \end{equation}
+    % \item It is pointwise relatively compact: for all \( t \in [0,T] \) it holds that the set \( \Set{x_t \given x \in A} \subseteq E \) is relatively compact.
+    \item there exists a compact set \(K \Subset E\) such that \(x_t \in K\) for all \(t \in [0,T]\), \(x \in A\); and
+    \item it is (uniformly) \textit{equicontinuous}:
+    \begin{equation}
+      \lim_{\delta\to0} \sup_{x \in A} w(x,\delta) = 0.
+    \end{equation}
   \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-  This is Theorem 3.6.3 modified based on Remark 3.6.4 from Ethier and Kurz~\cite{ethierMarkovProcessesCharacterization1985}.
-\end{proof}
-
-\subsubsection{On finite time intervals}
-Most of our results will be stated on the space \( D_E[0,T] \) instead, where \( T > 0 \) is a fixed finite time horizon.
-Whenever we have an element of \( D_E[0,\infty) \), we can of course restrict it to be an element of \( D_E[0,T] \).
-On this space we can use a slightly simpler metric:
-\begin{equation}
-  d_\mathrm{SK}^T(x,y) \coloneqq \inf_{\lambda \in \Lambda[0,T]} \br*{ \norm{\lambda}_\circ \lor \sup_{t \in [0,T]} d(x(\lambda(t)), y(t)) }, \quad x, y \in D_E[0,T].
-  % Kouritzin's metric (simplified to using 1 metric d) and Kern's one are surely equivalent and both complete, as they both use the slope of lambda.
+To characterize relative compactness on \( D_E[0,T] \), a result very similar to the Arzelà-Ascoli theorem exists.
+It uses a modification of the modulus of continuity \( w' \), which is designed to be able to avoid the discontinuities that càdlàg functions can have.
+Let \( \cC_T^\delta \) be the collection of \( \delta \)-sparse partitions \(\Set{t_i}_{i=0}^n\), i.e., partitions that satisfy \(0 = t_0 < t_1 < \cdots < t_n = T\) and \( \min_{i=1,\dots,n} t_i - t_{i-1} > \delta \).
+Then define, for \( x \in D_E[0,T] \),
+\begin{equation}\label{eq:w-w'-def}
+  \begin{split}
+    w(x, [c,d))      & \coloneqq \sup_{c \leq s < t < d} d(x_t,x_s),                            \\
+    w'(x, \delta) & \coloneqq \inf_{\Set{t_i} \in \cC_T^\delta} \max_i w(x, [t_{i-1}, t_i)).
+  \end{split}
 \end{equation}
-We define \(\mathscr{S}_{E}^T\) to be the Borel \( \sigma \)-algebra induced by this metric.
 
-% Say something about compatiblity between [0,T] and [0,infty]?
+\begin{theorem}[Thm. 10 in~\cite{kouritzinTightnessProbabilityMeasures2015}]\label{prelim:thm:rel-compact-in-SK}
+  A set of paths \(A \subseteq D_E[0,T]\) is relatively compact w.r.t.\@ \(d_T^\mathrm{SK}\) if and only if
+  \begin{enumerate}[(i)]
+    \item there exists a compact set \(K \Subset E\) such that \(x_t \in K\) for all \(t \in [0,T]\), \(x \in A\); and
+    \item
+          \begin{math}
+            \displaystyle \lim_{\delta\to0} \sup_{x \in A} w'(x,\delta) = 0.
+          \end{math}
+  \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+  For the space \( D_E[0,\infty) \) a similar characterization of relative compactness exists, which requires the two conditions in \zcref{prelim:thm:rel-compact-in-SK} to hold for all \( T > 0 \); see Theorem 3.6.3 and Remark 3.6.4 in~\cite{ethierMarkovProcessesCharacterization1986}.
+\end{remark}
+
+% \begin{theorem}
+%   A set of paths \(A \subseteq D_E[0,\infty)\) is relatively compact w.r.t.\@ \(d_\infty^\mathrm{SK}\) if and only if
+%   \begin{enumerate}[(i)]
+%     \item For all \(T > 0\), there exists a compact set \(\Gamma_T \subset E\) such that \(x_t \in \Gamma_T\) for all \(t \in [0,T]\), \(x \in A\).
+%     \item For all \(T > 0\),
+%           \begin{equation}
+%             \lim_{\delta\to0} \sup_{x \in A} w'(x,\delta,T) = 0.
+%           \end{equation}
+%   \end{enumerate}
+% \end{theorem}
+% \begin{proof}
+%   This is Theorem 3.6.3 modified based on Remark 3.6.4 from Ethier and Kurz~\cite{ethierMarkovProcessesCharacterization1986}.
+% \end{proof}
+
 
 \subsection{Narrow convergence}
 
@@ -112,7 +184,7 @@ On the level of random variables it corresponds to convergence in distribution.
 
 \begin{definition}\label{def:narrow-conv}
   Let \(\Set{\mu_n}_{n\in\bN} \subset \cP(E)\).
-  This sequence of probability measures converges narrowly to \(\mu \in \cP(E)\), which we denote with \( \mu_n \wto \mu \), if
+  This sequence of probability measures \textit{converges narrowly} to \(\mu \in \cP(E)\), which we denote with \( \mu_n \wto \mu \), if
   \begin{equation}
     \forall \varphi \in C_b(E) : \lim_{n\to\infty} \int_E \varphi \odif{\mu_n} = \int_E \varphi \odif{\mu}.
   \end{equation}
@@ -120,8 +192,34 @@ On the level of random variables it corresponds to convergence in distribution.
 
 \begin{remark}
   This is just one possible definition of narrow convergence; there are several alternative, equivalent definitions.
-  Together these form the Portmanteau theorem, see \cite[16]{billingsleyConvergenceProbabilityMeasures1999}.
+  Together these form the Portmanteau theorem, see~\cite[16]{billingsleyConvergenceProbabilityMeasures1999}.
 \end{remark}
+
+Due to the assumption of separability on \( (E, d) \), the topology of narrow convergence is metrizable.
+Furthermore, both the separability and completeness of \( (E, d) \) are transferred to this metric space of narrow convergence.
+
+\begin{definition}\label{def:prok-metric}
+  The \textit{Prokhorov metric} \( \pi : \cP(E) \times \cP(E) \to [0,1] \) is defined as
+  \begin{equation}
+    \pi(\mu, \nu) \coloneqq \inf\Set{ \eps > 0 \given \forall A \in \cB(E) : \mu(A) \leq \nu(A^\eps) + \eps }, \quad \mu, \nu \in \cP(E),
+  \end{equation}
+  where
+  \begin{equation}
+    A^\eps \coloneqq \Set{ x \in E \given d(x, A) < \eps }.
+  \end{equation}
+\end{definition}
+
+Note how convergence of \( \mu_n \) to \( \mu \) under this metric does not require \( \mu_n(A) \) and \( \mu(A) \) to get close, as would be required for setwise convergence.
+Rather, it allows for an \( \eps \)-margin around the measured set.
+
+\begin{theorem}[Thm. 6.8 in~\cite{billingsleyConvergenceProbabilityMeasures1999}]\label{thm:narrow-metrization}
+  The Prokhorov metric from \zcref{def:prok-metric} is indeed a metric, and it metrizes the narrow topology induced by \zcref{def:narrow-conv}.
+  The metric space \( (\cP(E), \pi) \) is separable and complete.
+\end{theorem}
+
+In \zcref{sec:compactness}, this will allow us to fit the space \( D_{\cP(\potspace)}[0,T] \) into the framework of \zcref{subsec:tight-skorok}, since \zcref{thm:narrow-metrization} implies that \( (\cP(\potspace), \pi) \) is a separable, complete metric space just like \( (E, d) \).
+
+\subsubsection{Tightness}
 
 For a sequence of probability measures to converge narrowly, no \enquote{escape of mass} may occur.
 This requirement is formalized through the following concept.
@@ -164,12 +262,13 @@ It is both sufficient and necessary, but for brevity we will only state and prov
     \leq \norm{\phi}_\Pi,
   \end{equation}
   which implies that \( \Pi \) is tight.
-  % TODO: also, I would like to call phi coercive, but that only means relatively compact I think. Which is maybe sufficient anyways?
+  % NOTE: I would like to call phi coercive, but that only means relatively compact I think. Which is maybe sufficient anyways?
 \end{proof}
 
-\subsubsection{Tightness in Skorokhod spaces}
 
-We want to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in~\(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\).}
+\subsubsection{Tightness in Skorokhod spaces}\label{subsec:tight-skorok}
+
+The goal of \zcref{sec:compactness} will be to apply Prokhorov's theorem to determine the existence of a subsequence in the case where \( \Pi = \Set{\mu_n}_{n\in\bN} \subset \cP(D_{E}[0,T]) \), i.e., a sequence of probability measures on the Skorokhod space consisting of paths in~\(E\).\footnote{In particular, we will consider \(E = \cP(\potspace)\).}
 To this end, we will make use of a characterization of tightness specific to probability measures on Skorokhod spaces by Kouritzin~\cite{kouritzinTightnessProbabilityMeasures2015}.
 
 There, the results are provided on the level of processes, but we will instead formulate them for the laws of those processes (which is entirely equivalent).
@@ -196,18 +295,18 @@ We will restrict Kouritzin's results to our context, in which \((E,d)\) is a Pol
 Note how these two conditions relate to the two conditions in \zcref{prelim:thm:rel-compact-in-SK}.
 The following result is therefore not surprising.
 
-\begin{theorem}
-  Suppose \( \Pi \subseteq \cP(D_{E}[0,T]) \) satisfies both the CCC and the MCC.\@ Then \( \Pi \) is tight.
+\begin{theorem}[Thm. 13 in~\cite{kouritzinTightnessProbabilityMeasures2015}]
+  Suppose \( \Pi \subseteq \cP(D_E[0,T]) \) satisfies both the CCC and the MCC.\@ Then \( \Pi \) is tight.
 \end{theorem}
 
-\begin{proof}
-  See Theorem 13 from~\cite{kouritzinTightnessProbabilityMeasures2015}, or Theorem 3.7.2 plus Remark 3.7.3 from~\cite{ethierMarkovProcessesCharacterization1985}.
-\end{proof}
+\begin{remark}
+  This characterization of tightness can be adapted to \( D_E[0,\infty) \) in a straightforward manner; see Theorem 3.7.2 and Remark 3.7.3 from~\cite{ethierMarkovProcessesCharacterization1986}.
+\end{remark}
 
 However, verifying the CCC and/or the MCC can be difficult.
 To that end, Kouritzin introduces weaker alternative conditions.
 One can replace either the CCC or the MCC (not both) with such a weaker condition, and still preserve the tightness result.
-We will only require the substitution of the MCC by a weaker alternative, which we will provide after defining a separation property for collections of functions.
+We will only require the substitution of the MCC by a weaker alternative, which we will state after defining a separation property for collections of functions.
 
 \begin{definition}\label{def:s.p.}
   A set \( \cG \subseteq M(E) \) \textit{separates points} if for every pair of distinct points \( x, y \in E \) there exists a \( g \in \cG \) such that \( g(x) \neq g(y) \).
@@ -255,7 +354,7 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
   % It is of \textit{bounded variation} if \( \sup_t V_g([0,t]) < \infty \).    % Only define this if needed (otherwise confusing)
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{def:semimart}
   A stochastic process \(\Set{S_t}_{t}\) with càdlàg sample paths adapted to a filtration \(\Set{\cF_t}_t\) is called a \textit{semimartingale} if it can be decomposed as
   \begin{equation}
     S_t = S_0 + M_t + A_t,
@@ -264,20 +363,24 @@ This follows by choosing \( \tau_n \coloneqq n \), and using that a stopped mart
 \end{definition}
 
 \begin{definition}
-  If it exists, the \textit{quadratic variation} of a stochastic process \(\Set{X_t}_{t}\) equals
+  If it exists, the \textit{quadratic variation} of a stochastic process \(\Set{X_t}_{t}\) at time \( t \) equals
   \begin{equation}
-    [X]_t \coloneqq \lim \sum_{i=1}^n (X_{t_i}^n - X_{t_{i-1}}^n)^2
+    [X]_t \coloneqq \lim \sum_{i=1}^n (X_{t_i}^n - X_{t_{i-1}}^n)^2,
   \end{equation}
-  where the limit is a limit in probability over shrinking partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\).
+  where the limit is a limit in probability over shrinking partitions \(\Set{(t_i^n)_{i=1,\dots,n}}_{n\in\bN}\) of the interval \( [0,t] \).
 \end{definition}
 
-% TODO: It exists for semimartingales by Klebaner p.220
+For the type of stochastic process we will consider we will not have to worry about the existence of the quadratic variation, due to the following result.
+
+\begin{lemma}[p.220 in~\cite{klebanerIntroductionStochasticCalculus2012}]
+  If \(\Set{S_t}_{t}\) is a semimartingale according to \zcref{def:semimart}, then its quadratic variation \( [S]_t \) exists for all \( t \).
+\end{lemma}
 
 
-\subsection{Martingale problem on \texorpdfstring{\(D_E[0,\infty)\)}{D([0,infinity), E)}}\label{sec:martingale-problem}
+\subsection{The martingale problem on \texorpdfstring{\(D_E[0,\infty)\)}{D([0,infinity), E)}}\label{sec:martingale-problem}
 
 Problems involving stochastic dynamics are often formulated as a \textit{martingale problem}.
-For our definition of the martingale problem, we will follow Ethier and Kurz~\cite[p.174]{ethierMarkovProcessesCharacterization1985}.
+For our definition of the martingale problem, we will follow Ethier and Kurz~\cite[p.174]{ethierMarkovProcessesCharacterization1986}.
 Let \((A, D(A)) : M_b(E) \to M_b(E)\) be a linear operator.\footnote{The definition can be extended to multivalued, nonlinear operators, but we will not require such generality.}
 We say that a probability measure \(P \in \cP(D_E[0,\infty))\) is a solution of the martingale problem for \( A \) if for the canonical coordinate process
 \begin{equation}
@@ -287,18 +390,18 @@ defined on the probability space \((D_E[0,\infty), \mathscr{S}_E, P)\), it holds
 \begin{equation}\label{eq:mart-problem}
   t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
 \end{equation}
-is a martingale with respect to the filtration\footnote{In general the filtration is more complicated, but as \( X \) is right-continuous it simplifies to this form~\cite[eq. (4.3.2) and below]{ethierMarkovProcessesCharacterization1985}.} \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
+is a martingale with respect to the filtration\footnote{In general the filtration is more complicated, but as \( X \) is right-continuous it simplifies to this form~\cite[bottom of p. 173]{ethierMarkovProcessesCharacterization1986}.} \(\Set{\cF_t^X}_{t\geq0} \coloneqq \Set{\sigma(X_s : s \leq t)}\). % equals \mathscr{S}_E restricted to [0,t], see citation of Prop. 3.7.1 above
 This eponymous condition is what makes the problem relevant in the study of stochastic processes.
-It is satisfied whenever \(A\) is the generator of a Markov process \(X\)~\cite[161-162]{ethierMarkovProcessesCharacterization1985}.
+It is satisfied whenever \(A\) is the generator of a Markov process \(X\)~\cite[161-162]{ethierMarkovProcessesCharacterization1986}.
 
-If additionally \( X_0 \sharp P = P X_0^{-1} = \mu \) for a prescribed initial distribution \(\mu \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu)\).
+If additionally \( X_0 \sharp P = P X_0^{-1} = \mu_0 \) for a prescribed initial distribution \(\mu_0 \in \cP(E)\), we say that \(P\) is a solution of the martingale problem for \((A,\mu_0)\).
 Such a solution is called unique if for any two solutions the finite-dimensional distributions (of \(X\)) are identical.
-The martingale problem for \((A,\mu)\) is well-posed if (i) a solution exists and (ii) it is unique.
-If this holds for all \(\mu \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.
+The martingale problem for \((A,\mu_0)\) is well-posed if (i) a solution exists and (ii) it is unique.
+If this holds for all \(\mu_0 \in \cP(E)\), we say that the martingale problem for \(A\) is well-posed.
 
-Also, because the canonical coordinate process is càdlàg it has at most countably many discontinuities.
+Also, because the canonical coordinate process is càdlàg it has at most countably many discontinuities~\cite[Lemma 3.5.1]{ethierMarkovProcessesCharacterization1986}.
 % See https://math.stackexchange.com/questions/441721/the-set-of-jumps-of-a-c%C3%A0dl%C3%A0g-function-is-countable
-This implies that
+As any countable set is a Lebesgue null set, this implies that
 \begin{equation}\label{eq:mart-problem-s-}
   t \mapsto f(X_t) - f(X_0) - \int_0^t (Af)(X_s) \odif{s}
   = f(X_t) - f(X_0) - \int_0^t (Af)(X_{s-}) \odif{s},
