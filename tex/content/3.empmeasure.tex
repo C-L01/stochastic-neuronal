@@ -81,7 +81,7 @@ That is, for any such \( \psi \) we define the \textit{empirical martingale} as
 \end{equation}
 To be able to also express the last term in terms of the empirical measure, we assume that the neurons are fully connected with uniform weights under mean-field scaling. % NOTE: this includes self-connections
 \begin{assumption}
-  For some constant \( \omega \in \bR \), we have \(\omega^{ij} = \frac{\omega}{N}\) for all \( i, j \in \Set{1,\dots,N} \).
+  For some constant \( \weight \in \bR \), we have \(W^{ij} = \frac{\weight}{N}\) for all \( i, j \in \Set{1,\dots,N} \).
 \end{assumption}
 Then, the integrand of the last term can be rewritten as
 \begin{equation}\label{eq:kappa-to-mean-kappa}
@@ -91,10 +91,10 @@ Then, the integrand of the last term can be rewritten as
      & = \frac{\lambda}{N} \sum_{j=1}^N \sum_{i=1}^N \int_{\potspace^N} \br*{ \psi(y^j) - \psi(X_{r}^j) } \delta_{\jtarg^i(\bm{X}_r)}(\odif{y^i}) \prod_{k \neq i} \delta_{X_r^k}(\odif{y^k}) \\
      & = \frac{\lambda}{N} \sum_{j=1}^N \sum_{i=1}^N \br{ \br*{ \psi(\jtarg^i(\bm{X}_r)) - \psi(X_{r}^j) } \ind{i = j} + (0 - 0) \ind{i \neq j} }                                             \\
      & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \psi(\jtarg^i(\bm{X}_r)) - \psi(X_{r}^j) }                                                                                                      \\
-     & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,+\infty)}(X_{r}^i)
-    + \br*{ \psi(X_{r}^i + \frac{\omega}{N} \sum_{j=1}^N \indE{[V_F,+\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
-     & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,+\infty)}(x)
-    + \br*{ \psi(x + \omega \mu_r^N([V_F,+\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^N(\odif{x})                                                                                 \\
+     & = \frac{\lambda}{N} \sum_{i=1}^N \br*{ \br*{ \psi(V_R) - \psi(X_{r}^i) } \indE{[V_F,\infty)}(X_{r}^i)
+    + \br*{ \psi(X_{r}^i + \frac{\weight}{N} \sum_{j=1}^N \indE{[V_F,\infty)}(X_{r}^j)) - \psi(X_{r}^i) } \indE{(-\infty,V_F)}(X_{r}^i) }                                                     \\
+     & = \lambda \int_\potspace \br*{ \br*{ \psi(V_R) - \psi(x) } \indE{[V_F,\infty)}(x)
+    + \br*{ \psi(x + \weight \mu_r^N([V_F,\infty))) - \psi(x) } \indE{(-\infty,V_F)}(x) } \mu_{r}^N(\odif{x})                                                                                 \\
      & = \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r}^N}(x, \odif{y}) \mu_{r}^N(\odif{x})
   \end{split}
 \end{equation}
@@ -103,7 +103,7 @@ for
   \ol{\kappa}_\nu(x, \odif{y}) \coloneqq \delta_{\bar{\jtarg}_\nu(x)}(\odif{y}),
   \quad\text{and}\quad
   \ol{\jtarg}_\nu(x) \coloneqq \begin{cases}
-    x + \omega \nu([V_F,+\infty)) & \text{if } x < V_F    \\
+    x + \weight \nu([V_F,\infty)) & \text{if } x < V_F    \\
     V_R                           & \text{if } x \geq V_F
   \end{cases}, \quad \nu \in \cP(\potspace).
 \end{equation}
@@ -144,7 +144,7 @@ However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependenc
 
 The empirical martingale is a martingale, in two ways.
 \begin{corollary}\label{cor:easy-emp-M-mart}
-  \(\ol{M}_t^{\lambda,N}[\psi]\) is a martingale on \((D_{\potspace^N}[0,T], \mathscr{S}_{\potspace^N}, P^{\lambda, N})\) adapted to the filtration \( \cF = \Set{\cF_t^\bm{X}}_{t\geq0} \).
+  \(\ol{M}_t^{\lambda,N}[\psi]\) is a martingale on \((D_{\potspace^N}[0,T], \mathscr{S}_T^{\potspace^N}, P^{\lambda, N})\) adapted to the filtration \( \cF = \Set{\cF_t^\bm{X}}_{t\geq0} \).
 \end{corollary}
 \begin{proof}
   This directly holds by definition of \( \ol{M}_t^{\lambda,N}[\psi] \) in~\zcref{eq:emp-M-derivation-start} and \zcref{thm:mart-problem-sol}.
@@ -157,7 +157,7 @@ The law of the empirical measure curve \(\mu^N = \Theta_N(\bm{X})\) is given by
 \end{equation}
 which is defined on the (pushforward) \( \sigma \)-algebra
 \begin{equation}
-  \ol{\cF} \coloneqq \Theta_N \sharp \mathscr{S}_{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_{\potspace^N}}.
+  \ol{\cF} \coloneqq \Theta_N \sharp \mathscr{S}_T^{\potspace^N} \coloneqq \Set{B \subseteq D_{\cP(\potspace)}[0,T] \given \Theta_N^{-1}(B) \in \mathscr{S}_T^{\potspace^N}}.
 \end{equation}
 It is easily verified that this indeed defines a \( \sigma \)-algebra.
 We will show that the empirical martingale is still a martingale when we interpret it as a random variable on~\((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\), i.e.\ when we interpret it as a function in \(\mu^N\) instead of \(\bm{X}\).\footnote{We will not distinguish between \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\potspace^N}[0,T] \to \bR \) and \( \ol{M}_t^{\lambda,N}[\psi] :  D_{\cP(\potspace)}[0,T] \to \bR \) notationally, except when necessary.}

@@ -72,7 +72,7 @@ We are now ready to prove the main result.
   \end{equation}
   Let \(\eps \in (0,1)\), and define
   \begin{equation}
-    M_\eps \coloneqq \frac{V_0 + T ( C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\omega}) )}{\eps},
+    M_\eps \coloneqq \frac{V_0 + T ( C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\weight}) )}{\eps},
     \quad
     \cK_\eps \coloneqq \Set{ \mu \in \cP(\potspace) \given \int_\potspace \abs{x} \mu(\odif{x}) \leq M_\eps }.
   \end{equation}
@@ -157,20 +157,20 @@ We are now ready to prove the main result.
     \begin{split}
     \ol{L}_{\mu_{s}^N}^{\lambda} [\psi_n](x)
     &= b(x) \partial_x \psi_n(x) + \lambda (\psi_n(\ol{J}_{\mu_{s}^N}(x)) - \psi_n(x)) \\
-    &\leq C_\mathrm{df} (1 + \abs{x}) \abs{\partial_x \psi_n(x)} + \lambda (\max\Set{ \psi_n(V_R), \psi_n(x + \omega \mu_s^N([V_F, +\infty))) } - \psi_n(x)) \\
-    % &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\psi_n(V_R) + \psi_n(x + \omega \mu_s^N([V_F, +\infty))) - \psi_n(x)) \\
-    &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{x + \omega \mu_s^N([V_F, +\infty))}) \\
-    &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{x} + \abs{\omega \mu_s^N([V_F, +\infty))}) \\
-    &\leq (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\omega} + C_\mathrm{df}).
+    &\leq C_\mathrm{df} (1 + \abs{x}) \abs{\partial_x \psi_n(x)} + \lambda (\max\Set{ \psi_n(V_R), \psi_n(x + \weight \mu_s^N([V_F, \infty))) } - \psi_n(x)) \\
+    % &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\psi_n(V_R) + \psi_n(x + \weight \mu_s^N([V_F, \infty))) - \psi_n(x)) \\
+    &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{x + \weight \mu_s^N([V_F, \infty))}) \\
+    &\leq C_\mathrm{df} (1 + \abs{x}) + \lambda (\abs{V_R} + \abs{x} + \abs{\weight \mu_s^N([V_F, \infty))}) \\
+    &\leq (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\weight} + C_\mathrm{df}).
     \end{split}
   \end{equation}
   This upper bound does not depend on \( n \), and due to \( s \leq \tau \) we have
   \begin{equation}
     \begin{split}
-    \Exp*{P^{\lambda, N}}{\int_0^\tau \int_\potspace \br{ (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\omega} + C_\mathrm{df} } \mu_{s}^N(\odif{x}) \odif{s} }
-    &= \Exp*{P^{\lambda, N}}{\int_0^\tau \sbr{ (C_\mathrm{df} + \lambda) \int_\potspace \abs{x} \mu_{s}^N(\odif{x}) + \lambda (\abs{V_R} + \abs{\omega}) + C_\mathrm{df} } \odif{s} } \\
-    &\leq \Exp*{P^{\lambda, N}}{\int_0^\tau \sbr{ (C_\mathrm{df} + \lambda) M_\eps + \lambda (\abs{V_R} + \abs{\omega}) + C_\mathrm{df} } \odif{s} } \\
-    &\leq T \sbr{ (C_\mathrm{df} + \lambda) M_\eps + \lambda (\abs{V_R} + \abs{\omega}) + C_\mathrm{df} }
+    \Exp*{P^{\lambda, N}}{\int_0^\tau \int_\potspace \br{ (C_\mathrm{df} + \lambda) \abs{x} + \lambda (\abs{V_R} + \abs{\weight} + C_\mathrm{df} } \mu_{s}^N(\odif{x}) \odif{s} }
+    &= \Exp*{P^{\lambda, N}}{\int_0^\tau \sbr{ (C_\mathrm{df} + \lambda) \int_\potspace \abs{x} \mu_{s}^N(\odif{x}) + \lambda (\abs{V_R} + \abs{\weight}) + C_\mathrm{df} } \odif{s} } \\
+    &\leq \Exp*{P^{\lambda, N}}{\int_0^\tau \sbr{ (C_\mathrm{df} + \lambda) M_\eps + \lambda (\abs{V_R} + \abs{\weight}) + C_\mathrm{df} } \odif{s} } \\
+    &\leq T \sbr{ (C_\mathrm{df} + \lambda) M_\eps + \lambda (\abs{V_R} + \abs{\weight}) + C_\mathrm{df} }
     \end{split}
   \end{equation}
   which is finite.
@@ -190,16 +190,16 @@ We are now ready to prove the main result.
   \begin{equation}
     \begin{split}
     b(x) \sgn(x) + \lambda (\abs{\ol{J}_{\mu_{s}^N}(x)} - \abs{x})
-    &\leq C_\mathrm{df} + \lambda (\abs{V_R} + \abs{x} + \abs{\omega} - \abs{x}) \\
-    &= C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\omega})
+    &\leq C_\mathrm{df} + \lambda (\abs{V_R} + \abs{x} + \abs{\weight} - \abs{x}) \\
+    &= C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\weight})
     \end{split}.
   \end{equation}
   Therefore,
   \begin{equation}
     \begin{split}
     \Exp*{P^{\lambda, N}}{\int_\potspace \abs{x} \mu_\tau^N(\odif{x})}
-    &\leq V_0 + \Exp*{P^{\lambda, N}}{\int_0^\tau \int_\potspace \sbr{ C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\omega}) } \odif{\mu_{s}^N} \odif{s} } \\
-    &\leq V_0 + T ( C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\omega}) ) = \eps M_\eps.
+    &\leq V_0 + \Exp*{P^{\lambda, N}}{\int_0^\tau \int_\potspace \sbr{ C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\weight}) } \odif{\mu_{s}^N} \odif{s} } \\
+    &\leq V_0 + T ( C_\mathrm{df} + \lambda (\abs{V_R} + \abs{\weight}) ) = \eps M_\eps.
     \end{split}
   \end{equation}
   Thus,

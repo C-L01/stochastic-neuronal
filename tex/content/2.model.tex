@@ -114,7 +114,7 @@ The jump-generator \(L_{\cJ}^{\lambda, N} : M_b(\potspace^N) \to M_b(\potspace^N
 \end{equation}
 where kernel \( \kappa \) is given by
 \begin{equation}
-  % \kappa(x,\bm{z},\odif{y}) \coloneqq \indE{[V_F,+\infty)}(x) \delta_{V_R}(\odif{y}) + \indE{(-\infty,V_F)}(x) \delta_{x + \sum_{j=1}^N \omega^{ij} \indE{z^j \geq V_F}}(\odif{y}).
+  % \kappa(x,\bm{z},\odif{y}) \coloneqq \indE{[V_F,\infty)}(x) \delta_{V_R}(\odif{y}) + \indE{(-\infty,V_F)}(x) \delta_{x + \sum_{j=1}^N W^{ij} \indE{z^j \geq V_F}}(\odif{y}).
   \kappa(\bm{x},\odif{\bm{y}}) \coloneqq \sum_{i=1}^N \delta_{\bm{\jtarg}^i(\bm{x})}(\odif{\bm{y}}).
 \end{equation}
 Here
@@ -124,9 +124,9 @@ Here
 where \(\jtarg^i(\bm{x})\) denotes the \enquote{jump target} of the potential of the \(i\)th neuron under state \(\bm{x}\), which is given by
 \begin{equation}
   \jtarg^i(\bm{x})
-  % \coloneqq \indE{[V_F,+\infty)}(x^i) V_R + \indE{(-\infty,V_F)}(x^i) \br{x^i + \sum_{j=1}^N \omega^{ij} \ind{x^j \geq V_F}}
+  % \coloneqq \indE{[V_F,\infty)}(x^i) V_R + \indE{(-\infty,V_F)}(x^i) \br{x^i + \sum_{j=1}^N W^{ij} \ind{x^j \geq V_F}}
   \coloneqq \begin{cases}
-    x^i + \sum_{j=1}^N \omega^{ij} \ind{x^j \geq V_F} & \text{if } x^i < V_F,    \\
+    x^i + \sum_{j=1}^N W^{ij} \ind{x^j \geq V_F} & \text{if } x^i < V_F,    \\
     V_R                                               & \text{if } x^i \geq V_F.
   \end{cases}
 \end{equation}
@@ -141,7 +141,7 @@ Note that \(\frac{\kappa}{N}\) is a transition function, i.e.,
 This jump generator models the two kinds of stochastic jumps:
 \begin{align}
   X_{r-}^i & \to V_R                                                           & \quad\text{at rate } \lambda \text{ if } X_{r-}^i \geq V_F \\
-  X_{r-}^i & \to X_{r-}^i + \sum_{j \in \{j : X_{r-}^j \geq V_F\}} \omega^{ij} & \quad\text{at rate } \lambda \text{ if } X_{r-}^i < V_F.
+  X_{r-}^i & \to X_{r-}^i + \sum_{j \in \{j : X_{r-}^j \geq V_F\}} W^{ij} & \quad\text{at rate } \lambda \text{ if } X_{r-}^i < V_F.
 \end{align}
 
 
@@ -195,7 +195,7 @@ This could for instance be \( [V_R, V_F]^N \).
 
 % \dots
 
-% If we assume \(\omega^{ij} = \omega / N\), and for \(\varphi = \frac{1}{N} \bigoplus_i \psi\), the non-spike jump part simplifies to
+% If we assume \(W^{ij} = \weight / N\), and for \(\varphi = \frac{1}{N} \bigoplus_i \psi\), the non-spike jump part simplifies to
 % \begin{equation}
-%     \lambda \int \partial_x \psi (x) \omega \mu_r^\lambda([V_F, \infty)) \mu_r(\odif{x})
+%     \lambda \int \partial_x \psi (x) \weight \mu_r^\lambda([V_F, \infty)) \mu_r(\odif{x})
 % \end{equation}
