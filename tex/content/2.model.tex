@@ -11,7 +11,7 @@ Define the drift generator \(L_{\cD}^{N} : M_b(\potspace^N) \to M_b(\potspace^N)
 \begin{equation}
   L_{\cD}^{N}\varphi \coloneqq \bm{b} \cdot \nabla_{\bm{x}} \varphi,
 \end{equation}
-% TODO domain L-drift: I don't think that L-drift maps to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity. So assume compact support I guess? (Or do that for b...)
+% NOTE domain L-drift: if we didn't assume compact support, I don't think L-drift would map to M_b... You can vanish at infinity with a rapidly varying derivative as long as the second derivative is unbounded https://math.stackexchange.com/questions/947675/derivatives-vanishing-at-infinity.
 where \(\bm{b} : \potspace^N \to \bR^N\) is defined as \( \bm{b}(\bm{x}) \coloneqq (b(x^1), \dots, b(x^N))^\top \), for some physical driving force \(b \in C^{1-}(\potspace)\).
 % NOTE b conditions: The growth condition that follows this is sufficient for L mapping to M_b, because we assumed the test functions to be compactly supported
 \begin{assumption}\label{assum:b-growth}
@@ -21,11 +21,10 @@ The driving force \( b \) satisfies
   \end{equation}
   for some constant \(C_\mathrm{df} > 0\).
   This is equivalent to \( b \) being bounded above on \( (0,\infty) \) and bounded below on \( (-\infty,0) \).
-  We additionally assume linear growth
+  Furthermore, it satisfies linear growth:
   \begin{equation}
-    \abs{b(x)} \leq C_\mathrm{df} (1 + \abs{x})
+    \abs{b(x)} \leq C_\mathrm{df} (1 + \abs{x}).
   \end{equation}
-  for technical reasons.
 \end{assumption}
 The first assumption implies that the driving force can at most drive the potential away from zero at bounded speed.
 A typical example of such a driving force is the time-homogeneous \textit{leaky model}:
@@ -36,34 +35,75 @@ where \(V_\mathrm{rest} \in (V_R, V_F)\) is the equilibrium potential.
 
 \subsection{Martingale problem of the drift generator}
 
-We will show that the \(D_{\potspace^N}[0,\infty)\) martingale problem for \(L_{\cD}^N\) always has a solution.   % TODO: unique?
-Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu \in \cP(\potspace^N)\) there exists a unique \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \( \bm{X}_0 \sharp P = \mu \) and for any test function \(\varphi \in D(L_{\cD}^N)\),
+We will show that the (\(D_{\potspace^N}[0,\infty)\)) martingale problem for \(L_{\cD}^N\) has a solution for any initial condition.
+Recall from \zcref{sec:martingale-problem} that we have to show that for each \(\mu_0 \in \cP(\potspace^N)\) there exists a \(P \in \cP(D_{\potspace^N}[0,\infty))\) such that \( \bm{X}_0 \sharp P = \mu_0 \) and, for any test function \(\varphi \in D(L_{\cD}^N)\),
 \begin{equation}
   \cD_t^{N}[\varphi]
   \coloneqq \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t L_{\cD}^{N} \varphi(\bm{X}_r) \odif{r}
 \end{equation}
-is an \(\Set{\cF_t^X}\)-martingale.
+is an \(\Set{\cF_t^X}\)-martingale w.r.t. \( P \).
 Here \(\bm{X}_t(\bm{\omega}) \coloneqq \bm{\omega}_t\) is the coordinate process on \(D_{\potspace^N}[0,\infty)\).
+Due to the form of \(L_{\cD}^N\) we will be able to show this explicitly.
 
-Due to the form of \(L_{\cD}^N\), we will be able to do this directly.
-Suppose first \(\mu = \delta_{\bm{x}^0}\) for some \(\bm{x}^0 \in \potspace^N\), and consider the integral initial value problem
-\begin{equation}
-  \bm{x}_t = \bm{x}^0 + \int_0^t \bm{b}(\bm{x}_r) \odif{r}, \quad t \geq 0.
+Suppose first \(\mu_0 = \delta_{\bm{x}_0}\) for some \(\bm{x}_0 \in \potspace^N\), and consider the integral initial value problem
+\begin{equation}\label{eq:int-IVP}
+  \bm{x}_t = \bm{x}_0 + \int_0^t \bm{b}(\bm{x}_r) \odif{r}, \quad t \geq 0.
 \end{equation}
-Because \(b\) is locally Lipschitz continuous and satisfies the linear growth condition, this equation admits a unique global solution \(\bm{x} \in C^1_{\potspace^N}[0,\infty) \subset D_{\potspace^N}[0,\infty)\)~\cite{ode_result}.
+Because \(b\) is locally Lipschitz continuous and grows at most linearly by \zcref{assum:b-growth}, a standard ODE result tells us that this equation admits a unique global solution \(\bm{x} = \bm{x}(\bm{x}_0) \in C^1_{\potspace^N}[0,\infty) \subset D_{\potspace^N}[0,\infty)\).
 
-Now choose \(P \coloneqq \delta_{\bm{x}} \in \cP(D_{\potspace^N}[0,\infty))\).
-By construction we then have \(\bm{X} = \bm{X}(\bm{\omega}) = \bm{x}\) \(P\)-a.s.
-Therefore, for any~\(\varphi \in D(L_{\cD}^N)\),
-\begin{equation}
+Now define \(P^{\bm{x}_0} \coloneqq \delta_{\bm{x}(\bm{x}_0)} \in \cP(D_{\potspace^N}[0,\infty))\).
+Because there is a one-to-one correspondence between \( \bm{x}_0 \) and \( \bm{x}(\bm{x}_0) \), we then have \( \bm{X}_0 \sharp P^{\bm{x}_0} = \delta_{\bm{x}_0} \) (we argue this in more detail for the general case below).
+Also, \(\bm{X} = \bm{X}(\bm{\omega}) = \bm{x}\) holds \(P^{\bm{x}_0}\)-a.s.\ which implies that, for any~\(\varphi \in D(L_{\cD}^N)\),
+\begin{equation}\label{eq:D=0-a.s.}
   \begin{split}
     \cD_t^{N}[\varphi] & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t \bm{b}(\bm{X}_r) \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r} \\
-                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \dot{\bm{x}}_r \cdot \nabla_{\bm{x}} \varphi(\bm{X}_r) \odif{r}   \\
-                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}^0) - \int_0^t \odv{}{r} \varphi(\bm{x}_r) \odif{r}                              \\
-                       & = 0 \quad P\text{-a.s.}
+                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}_0) - \int_0^t \dot{\bm{x}}_r \cdot \nabla_{\bm{x}} \varphi(\bm{x}_r) \odif{r}   \\
+                       & = \varphi(\bm{x}_t) - \varphi(\bm{x}_0) - \int_0^t \odv{}{r} \varphi(\bm{x}_r) \odif{r}                              \\
+                       & = 0 \quad P^{\bm{x}_0}\text{-a.s.}
   \end{split}
 \end{equation}
-As \(\cD_t^{N}[\varphi]\) is almost surely constant, it is trivially an \(\Set{\cF_t^X}\)-martingale.
+As \(\cD_t^{N}[\varphi]\) is almost surely constant, it is trivially an \(\Set{\cF_t^X}\)-martingale w.r.t. \( P^{\bm{x}_0} \).
+
+Suppose now that \( \mu_0 \in \cP(\potspace^N) \) is arbitrary.
+Using the solution for atomic initial conditions we derived above, we define \( P^{\mu_0} \) as the expectation of a conditional probability as follows:
+\begin{equation}\label{eq:P-mu-def}
+  P^{\mu_0}(B) \coloneqq \Exp{\mu_0}{P^{\bm{x}_0}(B)}
+  = \int_{\potspace^N} P^{\bm{z}}(B) \mu_0(\odif{\bm{z}})
+  = \int_{\potspace^N} \indE{B}(\bm{x}(\bm{z})) \mu_0(\odif{\bm{z}}),
+\end{equation}
+for any \( B \in \mathscr{S}_\infty^{\potspace^N} \).
+
+\begin{caveat}
+  For~\eqref{eq:P-mu-def} to be well-defined it is necessary for the integrand to be measurable.
+  To obtain this, it would be sufficient for \( \bm{x} : \potspace^N \to D_{\potspace^N}[0,\infty) \) to be \( (\cB(\potspace^N), \mathscr{S}_\infty^{\potspace^N}) \)-measurable here.
+  When \( \bm{x} : \potspace^N \to D_{\potspace^N}[0,\infty) \) is continuous this holds, but as this continuity is not entirely obvious it should be verified.
+  Maybe this can be done using the continuity of the map \( (t, \bm{z}) \mapsto \bm{x}_t(\bm{z}) \), which is a standard ODE result (continuous dependence on initial data).
+  If not, it might still hold in this specific case due to the stable nature of \( b \) (\zcref{assum:b-growth}).
+  Alternatively, the required measurability of \( \bm{z} \mapsto P^\bm{z}(B) \) could perhaps be established directly using Theorem 4.4.6 from~\cite{ethierMarkovProcessesCharacterization1986}.
+\end{caveat}
+
+For any \( B_0 \in \cB(\potspace^N) \), we have
+\begin{equation}
+  \bm{X}_0 \sharp P^{\mu_0}(B_0) = P^{\mu_0}(\bm{X}_0^{-1} (B_0))
+  = \int_{\potspace^N} \indE{\bm{X}_0^{-1} (B_0)}(\bm{x}(\bm{z})) \mu_0(\odif{\bm{z}})
+  = \int_{\potspace^N} \indE{B_0}(\bm{z}) \mu_0(\odif{\bm{z}})
+  = \mu_0(B_0),
+\end{equation}
+where we used that \( \bm{X}_0^{-1} (B_0) \) (all càdlàg paths starting in \( B_0 \)) contains \( \bm{x}(\bm{z}) \) (the unique, continuously differentiable solution of~\eqref{eq:int-IVP} starting in \( \bm{z} \)) if and only if \( \bm{z} \in B_0 \).
+Therefore, \( \bm{X}_0 \sharp P^{\mu_0} = \mu_0 \).
+
+Finally, for arbitrary~\(\varphi \in D(L_{\cD}^N)\), we have
+\begin{equation}
+    P^{\mu_0}(\cD_t^{N}[\varphi] = 0)
+    = \int_{\potspace^N} P^{\bm{z}}(\cD_t^{N}[\varphi] = 0) \mu_0(\odif{\bm{z}})
+    \overset{\eqref{eq:D=0-a.s.}}{=} \int_{\potspace^N} 0 \mu_0(\odif{\bm{z}})
+    = 0,
+\end{equation}
+from which it again follows that \(\cD_t^{N}[\varphi]\) is an \(\Set{\cF_t^X}\)-martingale w.r.t. \( P^{\mu_0} \).
+
+\smallskip
+
+We conclude that the martingale problem for \(L_{\cD}^N\) has a solution for any initial condition.
 
 
 \subsection{Jump generator}
