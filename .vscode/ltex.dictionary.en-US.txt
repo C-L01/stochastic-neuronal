@@ -2,3 +2,12 @@ infimum
 Grönwall
 Prokhorov
 metrizes
+Skorokhod
+càdlàg
+Arzelà-Ascoli
+Ethier
+Kurz
+topologize
+equibounded
+well-posedness
+measurability
