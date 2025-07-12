@@ -1,4 +1,4 @@
-\section{Compactness for fixed \texorpdfstring{\( \lambda \)}{lambda}}
+\subsection{Relative compactness}\label{sec:compactness}
 
 \red{TODO: text about this section}
 
@@ -48,7 +48,7 @@ We start with a small helper lemma.
   Therefore \( \mu \in \cK \), showing that \( \cK \) is narrowly closed.
 \end{proof}
 
-We are now ready to prove the main result.
+We are now in position to prove the main result.
 
 \begin{theorem}
   For fixed \(\lambda > 0\), \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN} \subset \cP(D_{\cP(\potspace)}[0,T])\) is relatively compact.
@@ -59,8 +59,8 @@ We are now ready to prove the main result.
 \end{theorem}
 
 \begin{proof}
-  By Prokhorov's Theorem~\cite[Theorem 5.1]{billingsleyConvergenceProbabilityMeasures1999}, it suffices to show that \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN}\) is tight.
-  Because \((\cP(\potspace), \pi)\) is a (complete, separable) metric space with \( \pi \) the standard Prokhorov metric that metrizes weak convergence~\cite[Theorem 6.8]{billingsleyConvergenceProbabilityMeasures1999}, we can apply \zcref{thm:ccc+wmcc=tight}.
+  By Prokhorov's Theorem (\zcref{thm:prokhorov}), it suffices to show that \(\Set{ \lawmu^{\lambda, N} }_{N\in\bN}\) is tight.
+  Because \((\cP(\potspace), \pi)\) is a separable, complete metric space by \zcref{thm:narrow-metrization}, we can apply \zcref{thm:ccc+wmcc=tight}.
   It thus suffices to show that the compact containment condition from \zcref{def:CCC} and the weak modulus of continuity condition from \zcref{def:WMCC} hold for \( \Set{ \lawmu^{\lambda, N} }_{N\in\bN} \).
 
   \textbf{CCC:}
@@ -105,7 +105,7 @@ We are now ready to prove the main result.
   We do this to ensure that~\( \tau \in [0,T] \).
 
   Because the (canonical) process \( \bm{X} \) is right-continuous, \( t \mapsto \int_\potspace \abs{x} \mu_t^N(\odif{x}) = \sum_{i=1}^N \abs{X_i^t} \) is as well.
-  Since the set~\( (M_\eps, +\infty) \) is open, and the filtration is right-continuous by virtue of satisfying the usual conditions \red{TODO: not sure about this, see text below \zcref{thm:mart-problem-sol}}, Theorem 2.36 from~\cite{klebanerIntroductionStochasticCalculus2012} implies that the infimum, which is a hitting time, is a stopping time.
+  Since the set~\( (M_\eps, \infty) \) is open, and the filtration is right-continuous (\textbf{assuming} \zcref{cav:right-cont-filtration} is solved), Theorem 2.36 from~\cite{klebanerIntroductionStochasticCalculus2012} implies that the infimum, which is a hitting time, is a stopping time.
   As \( T \) is a constant it is trivially a stopping time, so Theorem 2.37 from~\cite{klebanerIntroductionStochasticCalculus2012} implies that \( \tau \) is a stopping time as well.
 
   Due to right-continuity, we have
@@ -246,7 +246,7 @@ We are now ready to prove the main result.
     g \circ \mu^N = \int_\potspace \psi \odif{\mu^N} = S^{\lambda, N}[\psi] = \ol{M}^{\lambda, N}[\psi] - A^{\lambda, N}[\psi].
   \end{equation}
   Let \( \{t_i\} \) be a \( \delta \)-sparse partition of \( [0,T] \) such that \(\delta < t_i - t_{i-1} < \frac{\eta}{2C_{\psi, \lambda}}\) for all \( i \).
-  Recalling \zcref{eq:w-w'-def}, we then obtain % TODO check if the eq cited defines w' with or without T
+  Recalling \zcref{eq:w-w'-def}, we then obtain
   \begin{equation}
     \begin{split}
       P^{\lambda, N} (w'(g \circ \mu^N, \delta) \geq \eta)
@@ -255,7 +255,7 @@ We are now ready to prove the main result.
     \end{split}
   \end{equation}
   The first term can be bounded using the bound on the second moment of the empirical martingale.
-  Namely, using Doob's inequality~\cite[64]{ethierMarkovProcessesCharacterization1985} followed by Jensen's inequality,
+  Namely, using Doob's inequality~\cite[64]{ethierMarkovProcessesCharacterization1986} followed by Jensen's inequality,
   \begin{equation}
     \begin{split}
       P^{\lambda, N}( \max_i w(\ol{M}^{\lambda, N}[\psi], [t_{i-1}, t_i)) \geq \frac{\eta}{2} )

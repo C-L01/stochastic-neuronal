@@ -6,14 +6,14 @@ It is based on the following function,
   \Theta_N : D_{\potspace^N}[0,T] \to D_{\cP(\potspace)}[0,T]; \quad (x^1,\dots,x^N) \mapsto \frac{1}{N} \sum_{i=1}^N \delta_{x^i},
 \end{equation}
 which compresses the information of all neuron position curves to an (empirical) average curve.
-The fact that \(\Theta_N\) maps to the space of càdlàg probability measure curves, as claimed, follows directly from the definition of narrow convergence.
-To illustrate the concepts we have introduced so far we will nonetheless quickly prove this.
+The fact that \(\Theta_N\) maps to the space of càdlàg probability measure curves, as claimed, follows directly from the definition of narrow convergence (\zcref{def:narrow-conv}).
+
 \begin{lemma}\label{lem:range-of-Theta}
   For \(\bm{x} \in D_{\potspace^N}[0,T]\) we have \(\Theta_N(\bm{x}) \in D_{\cP(\potspace)}[0,T]\).
 \end{lemma}
 
 \begin{proof}
-  First of all, note that \(\Theta_N(\bm{x})_t\) is a convex combination of (Dirac) probability measures for any \(t \in [0,T]\), so since \(\cP(\potspace)\) is convex \(\Theta_N(\bm{x})_t \in \cP(\potspace)\).
+  Note that \(\Theta_N(\bm{x})_t\) is a convex combination of (Dirac) probability measures for any \(t \in [0,T]\), so since \(\cP(\potspace)\) is convex \(\Theta_N(\bm{x})_t \in \cP(\potspace)\).
   By assumption \(\bm{x}\) is right-continuous, meaning for any \(t \in [0,T)\)
   \begin{equation}
     \forall i \in [N] : \lim_{s \downarrow t} x_s^i = x_t^i.
@@ -134,10 +134,10 @@ However, the operator \(\ol{L}_{\mu_{r}^N}^{\lambda}\) has a nonlinear dependenc
     \eqqcolon C_{\psi, \lambda}, \quad x \in \potspace,
   \end{equation}
   which implies that for \( t \geq 0 \),
-  \begin{equation}
+  \begin{equation*}   % starred to prevent error with the \qedhere being in the same spot as the potential eq. label
     \abs{ \ol{M}_t^{\lambda, N}[\psi] }
-    \overset{\eqref{eq:emp-M-expression}}{\leq} 2 \norm{\psi}_\infty + t C_{\psi, \lambda}.
-  \end{equation}
+    \overset{\eqref{eq:emp-M-expression}}{\leq} 2 \norm{\psi}_\infty + t C_{\psi, \lambda}. \qedhere
+  \end{equation*}
 \end{proof}
 
 \subsection{The empirical martingale is a martingale}
@@ -167,7 +167,7 @@ We will show that the empirical martingale is still a martingale when we interpr
 \end{proposition}
 \begin{proof}
   In this proof we will write \( \ol{M}_t \) instead of \( \ol{M}_t^{\lambda, N}[\psi] \) to lighten the notational burden.
-  Furthermore, we will have to distinguish between \( \ol{M}_t \) being a function on \( D_{\cP(\potspace)}[0,T] \) or on \( D_{\potspace^N}[0,T] \), which we will do by writing\footnote{As an exception to the previous footnote.}
+  Furthermore, we will have to distinguish between \( \ol{M}_t \) being a function on \( D_{\cP(\potspace)}[0,T] \) or on \( D_{\potspace^N}[0,T] \), which we will do by writing\footnote{As an immediate exception to the previous footnote.}
   \begin{equation}
     \ol{M}_t(\nu) \coloneqq \int_\potspace \psi \odif{\nu_t} - \int_\potspace \psi \odif{\nu_0}
     - \int_0^t \int_\potspace \ol{L}_{\nu_r}^{\lambda} [\psi] \odif{\nu_r} \odif{r},
@@ -238,8 +238,8 @@ We will show that the empirical martingale is still a martingale when we interpr
   We conclude that \((\ol{M}_t^{\lambda, N}[\psi])_{t\in[0,T]}\) is a martingale on \((D_{\cP(\potspace)}[0,T], \ol{\cF}, \lawmu^{\lambda,N})\) adapted to the filtration \mbox{\( \ol{\cF}_t \coloneqq \Theta_N \sharp \cF_t^{\bm{X}} \)}.
 \end{proof}
 
-% TODO decide what to do with the following
-If the empirical measure \(\mu^N\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \ol{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from~\cite{ethierMarkovProcessesCharacterization1985} that \(\mu^N\) would also converge pointwise at the continuity points of \( \ol{\mu}^\lambda \).
+\red{TODO decide what to do with the following}
+If the empirical measure \(\mu^N\) would converge a.s. for \( N\to\infty \) w.r.t. the Skorokhod topology to some \( \ol{\mu}^\lambda \in D_{\cP(\potspace)}[0,T] \), it would follow by Proposition 3.5.2 from~\cite{ethierMarkovProcessesCharacterization1986} that \(\mu^N\) would also converge pointwise at the continuity points of \( \ol{\mu}^\lambda \).
 % This would make \(\ol{M}_t^{\lambda, N}[\psi]\) converge too.   % TODO would it?
 But unfortunately this form of convergence is out of reach.  % TODO why?
 Instead, we will focus on obtaining narrow convergence of \(\lawmu^{\lambda,N}\) by means of tightness.

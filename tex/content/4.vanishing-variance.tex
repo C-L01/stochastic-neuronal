@@ -1,8 +1,11 @@
-\section{Vanishing variance}    % TODO make subsection of previous section? Then the zcref below is unnecessary
+\section{The limit for fixed \texorpdfstring{\( \lambda \)}{lambda}}
 
-In future sections the empirical martingale from \zcref{subsec:emp-mart} will be our workhorse to study limiting behavior of the neuronal process.  % TODO will it?
-First however we will derive some of its properties.
-We will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.    % TODO does that imply that? Maybe Klebaner Corollary 7.30 is relevant (although our martingale is not continuous, and we are talking about the quadratic variation, so probably not directly)
+\red{TODO: text}
+
+\subsection{Vanishing variance of the empirical martingale}
+The empirical martingale from \zcref{subsec:emp-mart} will be our workhorse to establish relative compactness.
+This will be possible because it satisfies a key property, which we will prove in this section.
+Namely, we will show that the variance of \((\ol{M}_t^{\lambda,N}[\psi])_{t\in[0,T]}\) vanishes for large \(N\), implying that it has a deterministic limit.    % TODO does that imply that? Maybe Klebaner Corollary 7.30 is relevant (although our martingale is not continuous, and we are talking about the quadratic variation, so probably not directly)
 
 Define
 \begin{equation}
@@ -16,7 +19,7 @@ Then we have
 \end{equation}
 Note that \((A_s^{\lambda, N}[\psi])_{s\in[0,T]}\) is a process of finite variation, because it is absolutely continuous.
 (This absolute continuity follows directly from the defining expression of \((A_s^N)\).) % which is of "fundamental theorem of calculus"-form.
-Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale.
+Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of finite variation, making it a semimartingale by \zcref{def:semimart}.
 
 \begin{proposition}\label{prop:vanishing-variance}
   For all \(\psi \in C_c^1(\potspace)\), \(\lambda > 0\), \(t \in [0,T]\),
@@ -88,10 +91,10 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
   \begin{equation}
     \begin{split}
       (L_{\cD}^{N} \varphi) (\bm{X}_{r-})
-       & = \sum_{i=1}^N b(X_{r-}^i) \partial_{x^i}\br*{ \frac{1}{N} \bigoplus_{j=1}^N \psi }^2 (\bm{X}_{r-})               \\
+       & = \sum_{i=1}^N b(X_{r-}^i) \partial_{x^i}\br*{ \frac{1}{N} \bigoplus_{j=1}^N \psi }^2 (\bm{X}_{r-})                  \\
        & = \frac{1}{N^2} \sum_{i=1}^N b(X_{r-}^i) \cdot 2 \br*{ \sum_{j=1}^N \psi(X_{r-}^j) } \cdot \partial_x \psi(X_{r-}^i) \\
        & = \frac{2}{N^2} \sum_{j=1}^N \psi(X_{r-}^j) \sum_{i=1}^N b(X_{r-}^i) \partial_x \psi(X_{r-}^i)                       \\
-       & = 2 \int_\potspace \psi \odif{\mu_{r-}^N} \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x})            \\
+       & = 2 \int_\potspace \psi \odif{\mu_{r-}^N} \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x})               \\
        & = 2 S_{r-}^N \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x}).
     \end{split}
   \end{equation}
@@ -100,19 +103,19 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
   \begin{equation}
     \begin{split}
       (L_{\cJ}^{\lambda, N} \varphi) (\bm{X}_{r-})
-       & = \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_{r-}^j) }^2 } \lambda \kappa(\bm{X}_{r-},\odif{\bm{y}})                                                                   \\
+       & = \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_{r-}^j) }^2 } \lambda \kappa(\bm{X}_{r-},\odif{\bm{y}})                                                                      \\
        & = \sum_{i=1}^N \int_{\potspace^N} \sbr*{ \br*{ \frac{1}{N} \sum_{j=1}^N \psi(y^j) }^2 - \br*{ \frac{1}{N} \sum_{j=1}^N \psi(X_{r-}^j) }^2 } \lambda \delta_{\jtarg^i(\bm{X}_{r-})}(\odif{y^i}) \prod_{k \neq i} \delta_{X_{r-}^k}(\odif{y^k}) \\
       %
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{  \sum_{\substack{j=1                                                                                                                                                                 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(\jtarg^i(\bm{X}_{r-})) }^2 - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(X_{r-}^i) }^2 }  \\
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{  \sum_{\substack{j=1                                                                                                                                                                          \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(\jtarg^i(\bm{X}_{r-})) }^2 - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(X_{r-}^i) }^2 }  \\
       %
       %  & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) }^2 + 2 \psi(\jtarg^i(\bm{X}_{r-})) \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^i) + \psi^2(\jtarg^i(\bm{X}_{r-})) - \br*{ \sum_{\substack{j=1 \\ j \neq i}}^N \psi(X_{r-}^j) + \psi(X_{r-}^i) }^2 }^2 } \\
       %
       % Simply using (a + b)^2 - (a + c)^2 = a^2 + 2 a b + b^2 - ( a^2 + 2 a c + c^2 ) = 2 (b - c) a + b^2 - c^2
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\jtarg^i(\bm{X}_{r-})) - \psi(X_{r-}^i)) \br*{\sum_{\substack{j=1                                                                                                                        \\ j \neq i}}^N \psi(X_{r-}^j)} + \psi^2(\jtarg^i(\bm{X}_{r-})) - \psi^2(X_{r-}^i) } \\
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\jtarg^i(\bm{X}_{r-})) - \psi(X_{r-}^i)) \br*{\sum_{\substack{j=1                                                                                                                           \\ j \neq i}}^N \psi(X_{r-}^j)} + \psi^2(\jtarg^i(\bm{X}_{r-})) - \psi^2(X_{r-}^i) } \\
       % Using the identity \jtarg^i(\bm{X}_{r-}) = \ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i), which holds due to the uniform, scaled weight choice
-       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi^2(X_{r-}^i) }                                 \\
+       & = \frac{\lambda}{N^2} \sum_{i=1}^N \sbr*{ 2 (\psi(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(\ol{\jtarg}_{\mu_{r-}^N}(X_{r-}^i)) - \psi^2(X_{r-}^i) }                  \\
       %
-       & = \frac{1}{N^2} \sum_{i=1}^N \int_\potspace \sbr*{ 2 (\psi(y) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(y) - \psi^2(X_{r-}^i) } \lambda \ol{\kappa}_{\mu_{r-}^N}(X_{r-}^i, \odif{y})                               \\
+       & = \frac{1}{N^2} \sum_{i=1}^N \int_\potspace \sbr*{ 2 (\psi(y) - \psi(X_{r-}^i)) \br*{\sum_{j=1}^N \psi(X_{r-}^j) - \psi(X_{r-}^i)} + \psi^2(y) - \psi^2(X_{r-}^i) } \lambda \ol{\kappa}_{\mu_{r-}^N}(X_{r-}^i, \odif{y})                      \\
       %
        & = \frac{1}{N} \int_\potspace \int_\potspace \sbr*{ 2 (\psi(y) - \psi(x)) \br*{\sum_{j=1}^N \psi(X_{r-}^j)} - 2 (\psi(y) - \psi(x)) \psi(x) + \psi^2(y) - \psi^2(x) } \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x}).
     \end{split}
@@ -132,15 +135,15 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
   \begin{equation}
     \begin{split}
       M_t^{\lambda, N}[\varphi]
-                                         & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}{r-}) \odif{r}                                                                                                                                             \\
+                                         & = \varphi(\bm{X}_t) - \varphi(\bm{X}_0) - \int_0^t (L_{\cD}^{N} + L_{\cJ}^{\lambda, N}) \varphi (\bm{X}{r-}) \odif{r}                                                                                                                                                          \\
                                          & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t \cbr*{ S_{r-}^N \int_\potspace b(x) \partial_x \psi (x) \mu_{r-}^N(\odif{x}) + S_{r-}^N \int_\potspace \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) \mu_{r-}^N(\odif{x})  + \bigO{N^{-1}} }  \odif{r} \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \cbr*{ b(x) \partial_x \psi (x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) } \mu_{r-}^N(\odif{x})  \odif{r} + \bigO{N^{-1}}                                         \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \ol{L}_{\mu_{r-}^N}^{\lambda} [\psi] \odif{\mu_{r-}^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                  \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odv{A_{r-}^N}{r} \odif{r} + \bigO{N^{-1}}                                                                                                                                                                              \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_{r-}^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                         \\   % A^N is (absolutely) continuous
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{\br*{S_r^N - S_0^N - \ol{M}_r^N}} + \mathcal{O}(N^{-1})                                                                                                                                                        \\
-                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{S_r^N} + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1})                                                                                                                                              \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \cbr*{ b(x) \partial_x \psi (x) + \int_\potspace (\psi(y) - \psi(x)) \lambda \ol{\kappa}_{\mu_{r-}^N}(x, \odif{y}) } \mu_{r-}^N(\odif{x})  \odif{r} + \bigO{N^{-1}}                                               \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \int_\potspace \ol{L}_{\mu_{r-}^N}^{\lambda} [\psi] \odif{\mu_{r-}^N} \odif{r} + \bigO{N^{-1}}                                                                                                                                   \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odv{A_{r-}^N}{r} \odif{r} + \bigO{N^{-1}}                                                                                                                                                                                       \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_{r-}^N} + \bigO{N^{-1}}                                                                                                                                                                                                  \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{A_r^N} + \bigO{N^{-1}}                                                                                                                                                                                                     \\   % A^N is (absolutely) continuous
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{\br*{S_r^N - S_0^N - \ol{M}_r^N}} + \mathcal{O}(N^{-1})                                                                                                                                                                    \\
+                                         & = (S_t^N)^2 - (S_0^N)^2 - 2 \int_0^t S_{r-}^N \odif{S_r^N} + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1})                                                                                                                                                       \\
       \overset{\eqref{eq:S^2-q-var-rel}} & {=} \sbr{S^N}_t + 2 \int_0^t S_{r-}^N \odif{\ol{M}_r^N} + \mathcal{O}(N^{-1}).
     \end{split}
   \end{equation}
@@ -164,9 +167,11 @@ Thus, \((S_s^N[\psi])_{s\in[0,T]}\) is the sum of a martingale and a process of 
   it is a martingale~\cite[Cor. 7.22]{klebanerIntroductionStochasticCalculus2012}.
   It follows that
   \begin{equation}
-    \Var{\lawmu^{\lambda,N}}{\ol{M}_t^N}
-    = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}
-    = \Exp*{\lawmu^{\lambda,N}}{M_t^{\lambda, N}\sbr*{ \varphi }} - 2 \Exp*{\lawmu^{\lambda,N}}{\int_0^t S_{r-}^N \odif{\ol{M}_r^N}} + \mathcal{O}(N^{-1})
-    = \mathcal{O}(N^{-1}) \overset{N\to\infty}{\to} 0.
+    \begin{split}
+      \Var{\lawmu^{\lambda,N}}{\ol{M}_t^N}
+       & = \Exp{\lawmu^{\lambda,N}}{\sbr{\ol{M}^N}_t}                                                                                                           \\
+       & = \Exp*{\lawmu^{\lambda,N}}{M_t^{\lambda, N}\sbr*{ \varphi }} - 2 \Exp*{\lawmu^{\lambda,N}}{\int_0^t S_{r-}^N \odif{\ol{M}_r^N}} + \mathcal{O}(N^{-1}) \\
+       & = \mathcal{O}(N^{-1}) \overset{N\to\infty}{\to} 0. \qedhere
+    \end{split}
   \end{equation}
 \end{proof}

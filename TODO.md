@@ -1,15 +1,14 @@
 ## Notation
-- [ ] Choose between $\infty$ and $+\infty$.
+- [x] Choose between $\infty$ and $+\infty$.
 
 ## Introduction
 - [ ] Come up with a title
 - [ ] Write one
 
 ## Preliminaries
-- [ ] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$.
-    - [ ] If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
-    - [ ] And clarify that w'(x,delta) := w'(x,delta,T).
-- [ ] Add Arzèla-Ascoli for comparison
+- [x] Possibly change to Skorokhod space on $[0,T]$ instead of $[0,\infty)$.
+    - [x] If not, make the notation for the $\sigma$-algebra non-ambiguous (as it currently does not distinguish between $[0,T]$ and $[0,\infty)$).
+- [x] Add Arzèla-Ascoli for comparison
 - [x] Add the specific Kouritzin result(s) I end up using.
     - [ ] Figure out the reason for indistinguishability in Theorem 20 in Kouritzin.
 - [x] Add some stochastic calculus background
@@ -18,7 +17,7 @@
 
 ## Model
 - [x] Go through Overleaf comments
-- [ ] Get solution existence for drift for non-Dirac initial conditions, using conditional distributions probably
+- [x] Get solution existence for drift for non-Dirac initial conditions, using conditional distributions probably
 - [ ] Check / elaborate on solution existence theorem (proof), for full generator mainly
 - [ ] Upgrade to unique solution for the martingale problems (EK Th. 4.10.3?)
 
@@ -35,4 +34,4 @@
 ## Compactness for fixed $\lambda$
 - [x] Go through Overleaf comments
 - [x] Finish result
-- [ ] Say something about the consequences of the convergence / whether the limit point also satisfies the MP (see meeting notes)
+- [ ] Say something about the consequences of the convergence / whether the limit point also satisfies the MP
