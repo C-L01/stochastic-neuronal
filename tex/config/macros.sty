@@ -76,25 +76,26 @@
 
 % Shortcuts
 \newcommand{\Sob}{W^{1,p}(\Omega)}       % shortcut for standard Sobolev space
-\newcommand\lawmu{m}                     % the law of the empirical measure mu
-\newcommand\potspace{\bR}                % the space in which the potentials live
-\newcommand\jtarg{J}                     % the jump target
-
+\newcommand{\lawmu}{m}                   % the law of the empirical measure mu
+\newcommand{\potspace}{\bR}              % the space in which the potentials live
+\newcommand{\jtarg}{J}                   % the jump target
+\newcommand{\weight}{\ol{w}}             % the synaptic weight constant (omega is already used in prob. space, and w as modulus of cont.)
 
 \newcommand*{\iid}{\overset{\mathclap{\tiny\mbox{i.i.d.}}}{\:\sim\:}}
 \newcommand{\inprod}[2]{\abr{#1, #2}}
 
 % Operators
-\DeclareMathOperator{\sgn}{sgn}         % sign function
-\DeclareMathOperator{\card}{card}       % cardinality of sets
-\DeclareMathOperator{\dist}{dist}       % distance function
-\DeclareMathOperator{\graph}{graph}     % graph of function
-\DeclareMathOperator{\epi}{epi}         % epigraph of function
-\DeclareMathOperator{\lsc}{lsc}         % l.s.c. envelope
-\DeclareMathOperator{\Int}{Int}         % interior of set
+\DeclareMathOperator{\sgn}{sgn}          % sign function
+\DeclareMathOperator{\card}{card}        % cardinality of sets
+\DeclareMathOperator{\dist}{dist}        % distance function
+\DeclareMathOperator{\graph}{graph}      % graph of function
+\DeclareMathOperator{\epi}{epi}          % epigraph of function
+\DeclareMathOperator{\lsc}{lsc}          % l.s.c. envelope
+\DeclareMathOperator{\Int}{Int}          % interior of set
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
 \DeclareMathOperator{\1}{\mathbbm{1}}       % indicator function
 \DeclareMathOperator{\Id}{Id}               % identity operator
 \DeclareMathOperator{\lspan}{span}          % linear span
@@ -205,6 +206,7 @@
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}            % same counter as theorem
+\newtheorem{caveat}[theorem]{Caveat}            % same counter as theorem
 
 % Set-up reference types that are not built-in to zref-clever
 \zcRefTypeSetup{assumption}{
@@ -212,6 +214,12 @@
     name-sg = assumption,
     Name-pl = Assumptions,
     name-pl = assumptions,
+}
+\zcRefTypeSetup{caveat}{
+    Name-sg = Caveat,
+    name-sg = caveat,
+    Name-pl = Caveats,
+    name-pl = caveats,
 }
 
 % Tell zref-clever how to reference the above, by locally pairing the 'theorem'-counter with the appropriate reference type
@@ -224,3 +232,4 @@
 \AddToHook{env/example/begin}{\zcsetup{countertype={theorem=example}}}
 \AddToHook{env/lemma/begin}{\zcsetup{countertype={theorem=lemma}}}
 \AddToHook{env/remark/begin}{\zcsetup{countertype={theorem=remark}}}
+\AddToHook{env/caveat/begin}{\zcsetup{countertype={theorem=caveat}}}
